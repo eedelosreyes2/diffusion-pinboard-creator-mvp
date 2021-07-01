@@ -25,6 +25,7 @@ export default class Boards extends Component {
 								board={board}
 								content={content}
 								deleteBoard={this.props.deleteBoard}
+								editBoard={this.props.editBoard}
 							/>
 						);
 					}

@@ -265,6 +265,14 @@ export default class PinboardCreator extends Component {
 		}
 	};
 
+	editBoard = (e, boardId) => {
+		if (e.currentTarget.id === 'board-title') {
+			// this.setState({ title: e.currentTarget.innerHTML })
+		} else if (e.currentTarget.id === 'board-story') {
+			// this.setState({ story: e.currentTarget.innerHTML });
+		}
+	};
+
 	render() {
 		const { profileObj, data } = this.props;
 
@@ -298,6 +306,7 @@ export default class PinboardCreator extends Component {
 									>
 										<Boards
 											data={data}
+											editBoard={this.editBoard}
 											deleteBoard={this.deleteBoard}
 										/>
 										{provided.placeholder}

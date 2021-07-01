@@ -70,6 +70,7 @@ const StoryContainer = styled.div`
 const Story = styled.div`
 	height: 75%;
 	padding: 25px 5px;
+	margin: auto;
 	text-align: center;
 `;
 
@@ -90,35 +91,16 @@ export class Board extends Component {
 	constructor() {
 		super();
 		this.state = {
-			title: '',
-			story: '',
 			isFlipped: false,
 		};
 	}
-
-	componentDidMount = () => {
-		let { story } = this.props;
-		if (!story) {
-			story = 'Click here to add a story to this board!';
-		}
-
-		this.setState({ title: this.props.board.title, story });
-	};
-
-	// editBoard = (e) => {
-	// 	if (e.currentTarget.id === 'board-title') {
-	// 		this.setState({ title: e.currentTarget.innerHTML });
-	// 	} else {
-	// 		this.setState({ story: e.currentTarget.innerHTML });
-	// 	}
-	// };
 
 	handleFlip = () => {
 		this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
 	};
 
 	render() {
-		const { id, title } = this.props.board;
+		const { id, title, story } = this.props.board;
 
 		return (
 			<Draggable draggableId={id} index={this.props.index}>
@@ -141,7 +123,7 @@ export class Board extends Component {
 							<Title>
 								<ContentEditable
 									id="board-title"
-									html={this.state.title}
+									html={title}
 									onChange={(e) =>
 										this.props.editBoard(e, id)
 									}
@@ -152,7 +134,7 @@ export class Board extends Component {
 							{this.state.isFlipped ? (
 								<Back
 									boardId={id}
-									story={this.state.story}
+									story={story}
 									editBoard={this.props.editBoard}
 								/>
 							) : (
@@ -218,7 +200,9 @@ class Back extends Component {
 					<ContentEditable
 						id="board-story"
 						html={this.props.story}
-						onChange={this.props.editBoard}
+						onChange={(e) =>
+							this.props.editBoard(e, this.props.boardId)
+						}
 						disabled={false}
 					/>
 				</Story>

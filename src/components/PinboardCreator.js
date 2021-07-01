@@ -153,11 +153,13 @@ export default class PinboardCreator extends Component {
 	};
 
 	createBoard = () => {
-		const title = prompt('What is the title of the board?');
 		const id = uuidv4();
+		const title = prompt('What is the title of the board?');
+		const story = 'Click here to add a story to this board!';
 		const newBoard = {
 			id,
 			title,
+			story,
 			contentIds: [0],
 		};
 		const newBoardOrder = Array.from(this.props.data.boardOrder);
@@ -266,10 +268,12 @@ export default class PinboardCreator extends Component {
 	};
 
 	editBoard = (e, boardId) => {
+		const board = this.props.data.boards[boardId];
+
 		if (e.currentTarget.id === 'board-title') {
-			// this.setState({ title: e.currentTarget.innerHTML })
+			board.title = e.currentTarget.innerHTML;
 		} else if (e.currentTarget.id === 'board-story') {
-			// this.setState({ story: e.currentTarget.innerHTML });
+			board.story = e.currentTarget.innerHTML;
 		}
 	};
 

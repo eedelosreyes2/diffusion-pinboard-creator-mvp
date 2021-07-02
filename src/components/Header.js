@@ -89,7 +89,7 @@ export default class Header extends Component {
 						}}
 					</Droppable>
 				</ButtonsContainer>
-				<H1>{`${givenName}'s Diffusion Pinboard Creator`}</H1>
+				<H1>{`${givenName}'s Diffusion Boards`}</H1>
 				<ButtonsContainer type="logout">
 					<LogOutComponent
 						responseGoogleLogout={this.props.responseGoogleLogout}

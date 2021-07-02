@@ -275,6 +275,7 @@ export default class PinboardCreator extends Component {
 		} else if (e.currentTarget.id === 'board-story') {
 			board.story = e.currentTarget.innerHTML;
 		}
+		this.props.updateBoards(this.state);
 	};
 
 	editCard = (e, contentId) => {
@@ -285,6 +286,7 @@ export default class PinboardCreator extends Component {
 		} else if (e.currentTarget.id === 'card-category') {
 			content.category = e.currentTarget.innerHTML;
 		}
+		this.props.updateBoards(this.state);
 	};
 
 	render() {

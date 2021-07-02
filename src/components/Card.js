@@ -21,7 +21,7 @@ const Handle = styled.div`
 	border-top-right-radius: 4px;
 	height: 7px;
 	left: 0;
-	position: absolute:
+	margin-bottom: 12px;
 	top: 0;
 	width: 100%;
 `;

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	margin: 0 auto 10px auto;
+	min-height: 150px;
 	width: 100%;
 `;
 

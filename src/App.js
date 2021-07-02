@@ -25,7 +25,6 @@ export default class App extends Component {
 	};
 
 	componentDidUpdate() {
-		console.log(this.state.data.boards);
 		this.putBoards();
 	}
 

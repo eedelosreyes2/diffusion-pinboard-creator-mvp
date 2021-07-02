@@ -26,16 +26,16 @@ const Container = styled.div`
 
 const Handle = styled.div`
 	background-color: ${colors.primary};
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 	color: white;
-	height: 0px;
-	margin: auto;
-	padding-bottom: 16px;
+	height: 10px;
+	margin: 0 auto;
+	padding-bottom: 5px;
 	position: absoulte;
 	text-align: center;
 	top: 0;
-	width: 70%;
+	width: 100%;
 `;
 
 const iconStyle = {

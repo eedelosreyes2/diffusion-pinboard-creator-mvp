@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Handle = styled.div`
-	background-color: ${colors.secondary};
+	background-color: #636363;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	height: 10px;

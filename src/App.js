@@ -3,8 +3,14 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
+import styled from 'styled-components';
 import './App.css';
 const DB_URL = 'https://diffusion-web-app-mvp-default-rtdb.firebaseio.com/';
+
+const Container = styled.div`
+	background-color: #1c1c1c;
+	color: white;
+`;
 
 export default class App extends Component {
 	state = { profileObj: null, username: null, data: null };
@@ -15,7 +21,7 @@ export default class App extends Component {
 		window.addEventListener('beforeunload', this.setCache);
 		setInterval(() => {
 			this.fetchNewContent();
-		}, 3000);
+		}, 1000);
 	};
 
 	componentWillUnmount = () => {
@@ -133,14 +139,14 @@ export default class App extends Component {
 		return (
 			<>
 				{profileObj ? (
-					<>
+					<Container>
 						<PinboardCreator
 							profileObj={profileObj}
 							data={data}
 							updateBoards={this.updateBoards}
 							responseGoogleLogout={this.responseGoogleLogout}
 						/>
-					</>
+					</Container>
 				) : (
 					<>
 						<LogInComponent

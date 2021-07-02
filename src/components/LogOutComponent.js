@@ -9,6 +9,7 @@ export class LogOutComponent extends Component {
 				buttonText="Logout"
 				onLogoutSuccess={this.props.responseGoogleLogout}
 				onFailure={this.props.responseGoogleLogout}
+				theme="dark"
 			/>
 		);
 	}

@@ -5,9 +5,8 @@ import styled from 'styled-components';
 import { colors } from '../theme';
 
 const Container = styled.div`
-	background-color: ${(props) =>
-		props.isDragging ? 'lightyellow' : ' white'};
-	border: 1px solid lightgrey;
+	background-color: ${colors.darkBg};
+	border: 1px solid #636363;
 	border-radius: 5px;
 	margin: 5px;
 	min-height: 50px;
@@ -19,7 +18,7 @@ const Handle = styled.div`
 	background-color: ${colors.secondary};
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	height: 7px;
+	height: 10px;
 	left: 0;
 	margin-bottom: 12px;
 	top: 0;
@@ -27,12 +26,13 @@ const Handle = styled.div`
 `;
 
 const Url = styled.div`
+	color: ${colors.primary};
 	margin: 10px;
 	text-decoration: none;
 `;
 
 const QuickThoughts = styled.div`
-	padding: 10px;
+	padding: 20px 10px;
 `;
 
 const Category = styled.div`

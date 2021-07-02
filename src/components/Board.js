@@ -10,12 +10,7 @@ import { FiTrash, FiShare } from 'react-icons/fi';
 import { BsArrowClockwise } from 'react-icons/bs';
 
 const Container = styled.div`
-	background-color: ${(props) =>
-		props.boardId === 'board0'
-			? colors.primary
-			: props.isDragging
-			? 'lightblue'
-			: 'white'};
+	background-color: ${colors.darkBg};
 	border: 2px solid ${colors.primary};
 	border-radius: 15px;
 	display: flex;

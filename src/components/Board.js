@@ -67,6 +67,7 @@ const Story = styled.div`
 	padding: 25px 5px;
 	margin: auto;
 	text-align: center;
+	width: 100%;
 `;
 
 const FooterContainer = styled.div`
@@ -92,6 +93,10 @@ export class Board extends Component {
 
 	handleFlip = () => {
 		this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
+	};
+
+	shareBoard = () => {
+		const { board, content } = this.props;
 	};
 
 	render() {
@@ -146,6 +151,7 @@ export class Board extends Component {
 								isFlipped={this.state.isFlipped}
 								handleFlip={this.handleFlip}
 								deleteBoard={this.props.deleteBoard}
+								shareBoard={this.shareBoard}
 							/>
 						</Container>
 					);
@@ -235,7 +241,7 @@ class Footer extends Component {
 					<BsArrowClockwise onClick={this.props.handleFlip} />
 				</IconContext.Provider>
 				<IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-					<FiShare />
+					<FiShare onClick={this.props.shareBoard} />
 				</IconContext.Provider>
 			</FooterContainer>
 		);

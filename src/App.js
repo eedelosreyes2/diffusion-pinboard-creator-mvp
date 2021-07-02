@@ -4,11 +4,12 @@ import { v4 as uuidv4 } from 'uuid';
 import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import styled from 'styled-components';
+import { colors } from './theme';
 import './App.css';
 const DB_URL = 'https://diffusion-web-app-mvp-default-rtdb.firebaseio.com/';
 
 const Container = styled.div`
-	background-color: #1c1c1c;
+	background-color: ${colors.darkBg};
 	color: white;
 `;
 
@@ -77,7 +78,6 @@ export default class App extends Component {
 			const { data } = res;
 			if (data) {
 				Object.entries(data).map((newContent) => {
-					console.log(newContent[1]);
 					const { url, quickThoughts, category, date } =
 						newContent[1];
 					const id = uuidv4();

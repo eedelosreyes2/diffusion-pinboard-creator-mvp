@@ -109,6 +109,7 @@ export default class App extends Component {
 						},
 					};
 					this.setState(newState);
+					this.putBoards();
 				});
 			}
 		});

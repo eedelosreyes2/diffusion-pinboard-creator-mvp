@@ -13,7 +13,9 @@ export default class App extends Component {
 		this.getCache();
 		window.addEventListener('load', this.getCache);
 		window.addEventListener('beforeunload', this.setCache);
-		setInterval(() => this.fetchNewContent(), 1000);
+		setInterval(() => {
+			this.fetchNewContent();
+		}, 3000);
 	};
 
 	componentWillUnmount = () => {
@@ -22,10 +24,9 @@ export default class App extends Component {
 		window.removeEventListener('beforeunload', this.setCache);
 	};
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.state !== prevState) {
-			this.putBoards();
-		}
+	componentDidUpdate() {
+		console.log(this.state.data.boards);
+		this.putBoards();
 	}
 
 	getCache = () => {
@@ -38,7 +39,6 @@ export default class App extends Component {
 
 	setCache = () => {
 		sessionStorage.setItem('state', JSON.stringify(this.state));
-		this.putBoards();
 	};
 
 	fetchBoads = async () => {

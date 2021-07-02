@@ -26,6 +26,7 @@ export default class Boards extends Component {
 								content={content}
 								deleteBoard={this.props.deleteBoard}
 								editBoard={this.props.editBoard}
+								editCard={this.props.editCard}
 							/>
 						);
 					}

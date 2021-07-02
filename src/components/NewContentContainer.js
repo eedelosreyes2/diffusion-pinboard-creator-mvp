@@ -41,6 +41,7 @@ export default class NewContentContainer extends Component {
 											key={content.id}
 											content={content}
 											index={index}
+											editCard={this.props.editCard}
 										/>
 									) : (
 										''

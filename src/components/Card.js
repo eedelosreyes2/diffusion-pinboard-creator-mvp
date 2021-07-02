@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import ContentEditable from 'react-contenteditable';
 import styled from 'styled-components';
 import { colors } from '../theme';
 
@@ -16,6 +17,8 @@ const Container = styled.div`
 
 const Handle = styled.div`
 	background-color: ${colors.secondary};
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 	height: 7px;
 	left: 0;
 	position: absolute:
@@ -24,7 +27,8 @@ const Handle = styled.div`
 `;
 
 const Url = styled.div`
-	padding: 10px;
+	margin: 10px;
+	text-decoration: none;
 `;
 
 const QuickThoughts = styled.div`
@@ -32,13 +36,25 @@ const QuickThoughts = styled.div`
 `;
 
 const Category = styled.div`
+	border: 1px solid ${colors.secondary};
+	border-radius: 5px;
+	display: inline-block;
 	font-size: 12px;
-	padding: 10px;
+	margin: 10px;
+	padding: 2px 5px;
 `;
 
 export class Card extends Component {
+	setHttp = (link) => {
+		if (link.search(/^http[s]?:\/\//) === -1) {
+			link = 'https://' + link;
+		}
+		return link;
+	};
+
 	render() {
-		const { id, url, quickThoughts, category } = this.props.content;
+		const { id, quickThoughts, category } = this.props.content;
+		const url = this.setHttp(this.props.content.url);
 
 		return (
 			<Draggable draggableId={id} index={this.props.index}>
@@ -50,7 +66,7 @@ export class Card extends Component {
 							isDragging={snapshot.isDragging}
 						>
 							<Handle {...provided.dragHandleProps} />
-							<Url>
+							<Url as="a" href={url} target="__blank">
 								{url
 									? url
 											.replace(
@@ -60,8 +76,22 @@ export class Card extends Component {
 											.split('/')[0]
 									: ''}
 							</Url>
-							<QuickThoughts>{quickThoughts}</QuickThoughts>
-							<Category>{category}</Category>
+							<QuickThoughts>
+								<ContentEditable
+									id="card-quick-thoughts"
+									html={quickThoughts}
+									onChange={(e) => this.props.editCard(e, id)}
+									disabled={false}
+								/>
+							</QuickThoughts>
+							<Category>
+								<ContentEditable
+									id="card-category"
+									html={category}
+									onChange={(e) => this.props.editCard(e, id)}
+									disabled={false}
+								/>
+							</Category>
 						</Container>
 					);
 				}}

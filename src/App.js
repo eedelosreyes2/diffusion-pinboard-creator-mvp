@@ -77,13 +77,16 @@ export default class App extends Component {
 			const { data } = res;
 			if (data) {
 				Object.entries(data).map((newContent) => {
-					const { url, quickThoughts, category } = newContent[1];
+					console.log(newContent[1]);
+					const { url, quickThoughts, category, date } =
+						newContent[1];
 					const id = uuidv4();
 					const newCard = {
 						id,
 						url,
 						quickThoughts,
 						category,
+						date,
 					};
 					const content = {
 						...this.state.data.content,

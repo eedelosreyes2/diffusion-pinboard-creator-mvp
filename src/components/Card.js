@@ -41,6 +41,7 @@ const Category = styled.div`
 	display: inline-block;
 	font-size: 12px;
 	margin: 10px;
+	min-width: 10px;
 	padding: 2px 5px;
 `;
 

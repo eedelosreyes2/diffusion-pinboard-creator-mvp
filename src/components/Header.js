@@ -77,7 +77,7 @@ export default class Header extends Component {
 											size: '1.5em',
 											style: {
 												color: snapshot.isDraggingOver
-													? 'white'
+													? ''
 													: 'red',
 											},
 										}}

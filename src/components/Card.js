@@ -46,8 +46,10 @@ const Category = styled.div`
 
 export class Card extends Component {
 	setHttp = (link) => {
-		if (link.search(/^http[s]?:\/\//) === -1) {
-			link = 'https://' + link;
+		if (link) {
+			if (link.search(/^http[s]?:\/\//) === -1) {
+				link = 'https://' + link;
+			}
 		}
 		return link;
 	};

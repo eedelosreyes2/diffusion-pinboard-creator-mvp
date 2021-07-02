@@ -30,20 +30,20 @@ export default class App extends Component {
 		window.removeEventListener('beforeunload', this.setCache);
 	};
 
-	componentDidUpdate() {
-		this.putBoards();
-	}
-
 	getCache = () => {
 		const state = JSON.parse(sessionStorage.getItem('state'));
 		if (state) {
-			this.setState(state);
-			this.fetchBoads();
+			const { profileObj, username } = state;
+			this.setState({ profileObj, username });
+			setTimeout(() => {
+				this.fetchBoads();
+			}, 1000);
 		}
 	};
 
 	setCache = () => {
 		sessionStorage.setItem('state', JSON.stringify(this.state));
+		this.putBoards();
 	};
 
 	fetchBoads = async () => {
@@ -116,6 +116,7 @@ export default class App extends Component {
 
 	updateBoards = (newState) => {
 		this.setState(newState);
+		this.putBoards();
 	};
 
 	responseGoogleLogin = (response) => {

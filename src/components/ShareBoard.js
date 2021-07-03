@@ -17,13 +17,30 @@ const InnerContainer = styled.div`
 	background-color: ${colors.darkBg};
 	border-radius: 15px;
 	height: 95vh;
+	position: relative;
 	width: 95vw;
+`;
+
+const Title = styled.div`
+	color: white;
+	font-size: 30px;
+	margin: 25px;
+	text-align: center;
+`;
+
+const Author = styled.div`
+	bottom: 0;
+	color: white;
+	margin: 10px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
 `;
 
 export default class ShareBoard extends Component {
 	constructor() {
 		super();
-		this.state = { data: null, board: null, content: null };
+		this.state = { data: null, name: null, board: null, content: null };
 	}
 
 	componentDidMount = () => {
@@ -41,21 +58,30 @@ export default class ShareBoard extends Component {
 			.then((res) => {
 				const { data } = res;
 				if (data) {
+					const { name } = data;
 					const board = data.boards[boardId];
 					const content = board.contentIds.map(
 						(contentId) => data.content[contentId]
 					);
-					this.setState({ data, board, content });
+					this.setState({ data, name, board, content });
 				}
 			})
 			.catch((err) => console.log(err));
 	};
 
 	render() {
-		return (
-			<Container>
-				<InnerContainer>asasd</InnerContainer>
-			</Container>
-		);
+		if (this.state.data) {
+			return (
+				<Container>
+					<InnerContainer>
+						<Title>{this.state.board.title}</Title>
+						<Author>
+							diffused by <b>{this.state.name}</b>
+						</Author>
+					</InnerContainer>
+				</Container>
+			);
+		}
+		return <div></div>;
 	}
 }

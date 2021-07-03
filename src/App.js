@@ -53,13 +53,17 @@ export default class App extends Component {
 	};
 
 	fetchBoads = async () => {
-		let url = DB_URL + this.state.username + '/data.json';
+		const { profileObj } = this.state;
+		const url = DB_URL + this.state.username + '/data.json';
 
 		axios
 			.get(url)
 			.then((res) => {
 				const { data } = res;
 				if (data) {
+					const name =
+						profileObj.givenName + ' ' + profileObj.familyName;
+					data.name = name;
 					this.setState({ data });
 				}
 			})

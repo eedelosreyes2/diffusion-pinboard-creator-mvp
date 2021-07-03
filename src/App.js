@@ -151,7 +151,7 @@ export default class App extends Component {
 		const { profileObj, username, data } = this.state;
 
 		return (
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				<Switch>
 					<Route path="/u">
 						<ShareBoard />

@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { DB_URL } from '../globals';
+import { colors } from '../globals';
+
+const Container = styled.div`
+	align-items: center;
+	background-color: ${colors.primary};
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	width: 100vw;
+`;
+
+const InnerContainer = styled.div`
+	background-color: ${colors.darkBg};
+	border-radius: 15px;
+	height: 95vh;
+	width: 95vw;
+`;
 
 export default class ShareBoard extends Component {
 	constructor() {
@@ -34,6 +52,10 @@ export default class ShareBoard extends Component {
 	};
 
 	render() {
-		return <div>Share board</div>;
+		return (
+			<Container>
+				<InnerContainer>asasd</InnerContainer>
+			</Container>
+		);
 	}
 }

@@ -48,10 +48,9 @@ export default class ShareBoard extends Component {
 	};
 
 	getBoard = () => {
-		const paths = window.location.hash.split('/');
-		console.log(paths);
-		const username = paths[2];
-		const boardId = paths[3];
+		const hashs = window.location.hash.split('/');
+		const username = hashs[2];
+		const boardId = hashs[3];
 		const url = DB_URL + username + '/data.json';
 
 		axios

@@ -186,6 +186,7 @@ export default class PinboardCreator extends Component {
 				`Are you sure you want to delete ${boardTitle} along with all of its content?`
 			)
 		) {
+			delete this.props.data.boards[boardId];
 			const newBoardOrder = Array.from(this.props.data.boardOrder).filter(
 				(e) => e !== boardId
 			);
@@ -200,6 +201,17 @@ export default class PinboardCreator extends Component {
 
 			this.props.updateBoards(newState);
 		}
+	};
+
+	editBoard = (e, boardId) => {
+		const board = this.props.data.boards[boardId];
+
+		if (e.currentTarget.id === 'board-title') {
+			board.title = e.currentTarget.innerHTML;
+		} else if (e.currentTarget.id === 'board-story') {
+			board.story = e.currentTarget.innerHTML;
+		}
+		this.props.updateBoards(this.state);
 	};
 
 	createContent = () => {
@@ -242,11 +254,10 @@ export default class PinboardCreator extends Component {
 				`Are you sure you want to delete content from ${this.props.data.content[draggableId].url} ?`
 			)
 		) {
-			const { content } = this.props.data;
-			content[draggableId] = '';
-
+			delete this.props.data.content[draggableId];
 			const startContentIds = Array.from(start.contentIds);
 			startContentIds.splice(source.index, 1);
+
 			const newStart = {
 				...start,
 				contentIds: startContentIds,
@@ -265,17 +276,6 @@ export default class PinboardCreator extends Component {
 
 			this.props.updateBoards(newState);
 		}
-	};
-
-	editBoard = (e, boardId) => {
-		const board = this.props.data.boards[boardId];
-
-		if (e.currentTarget.id === 'board-title') {
-			board.title = e.currentTarget.innerHTML;
-		} else if (e.currentTarget.id === 'board-story') {
-			board.story = e.currentTarget.innerHTML;
-		}
-		this.props.updateBoards(this.state);
 	};
 
 	editCard = (e, contentId) => {

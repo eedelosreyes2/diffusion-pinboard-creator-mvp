@@ -141,12 +141,12 @@ export default class App extends Component {
 	};
 
 	render() {
-		const { data, profileObj } = this.state;
+		const { profileObj, username, data } = this.state;
 
 		return (
 			<Router>
 				<Switch>
-					<Route path="/board">
+					<Route path="/u">
 						<ShareBoard />
 					</Route>
 					{profileObj ? (
@@ -154,6 +154,7 @@ export default class App extends Component {
 							<Container>
 								<PinboardCreator
 									profileObj={profileObj}
+									username={username}
 									data={data}
 									updateBoards={this.updateBoards}
 									responseGoogleLogout={

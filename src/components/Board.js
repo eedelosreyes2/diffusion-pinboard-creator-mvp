@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
 import Card from './Card';
@@ -95,12 +95,9 @@ export class Board extends Component {
 		this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
 	};
 
-	shareBoard = () => {
-		const { board, content } = this.props;
-	};
-
 	render() {
 		const { id, title, story } = this.props.board;
+		const { username } = this.props;
 
 		return (
 			<Draggable draggableId={id} index={this.props.index}>
@@ -146,6 +143,7 @@ export class Board extends Component {
 							)}
 
 							<Footer
+								username={username}
 								id={id}
 								title={title}
 								isFlipped={this.state.isFlipped}
@@ -219,12 +217,12 @@ class Back extends Component {
 
 class Footer extends Component {
 	render() {
-		const { id, title, isFlipped } = this.props;
+		const { username, id, title, isFlipped } = this.props;
 		const flipIconStyle = {
 			cursor: 'pointer',
 			transform: isFlipped ? 'scaleX(-1)' : '',
 		};
-		const url = '/board/' + id;
+		const url = `u/${username}/${id}`;
 
 		return (
 			<FooterContainer boardId={id}>
@@ -248,7 +246,7 @@ class Footer extends Component {
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							<FiShare onClick={this.props.shareBoard} />
+							<FiShare />
 						</Link>
 					</Router>
 				</IconContext.Provider>

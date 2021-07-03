@@ -3,7 +3,7 @@ import Board from './Board';
 
 export default class Boards extends Component {
 	render() {
-		const { data } = this.props;
+		const { data, username, deleteBoard, editBoard, editCard } = this.props;
 
 		return (
 			<>
@@ -22,11 +22,12 @@ export default class Boards extends Component {
 							<Board
 								index={index}
 								key={board.id}
+								username={username}
 								board={board}
 								content={content}
-								deleteBoard={this.props.deleteBoard}
-								editBoard={this.props.editBoard}
-								editCard={this.props.editCard}
+								deleteBoard={deleteBoard}
+								editBoard={editBoard}
+								editCard={editCard}
 							/>
 						);
 					}

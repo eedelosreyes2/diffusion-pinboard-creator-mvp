@@ -290,7 +290,7 @@ export default class PinboardCreator extends Component {
 	};
 
 	render() {
-		const { profileObj, data } = this.props;
+		const { profileObj, username, data } = this.props;
 
 		if (data) {
 			return (
@@ -322,6 +322,7 @@ export default class PinboardCreator extends Component {
 										{...provided.innerRef}
 									>
 										<Boards
+											username={username}
 											data={data}
 											deleteBoard={this.deleteBoard}
 											editBoard={this.editBoard}

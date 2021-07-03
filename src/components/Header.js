@@ -30,7 +30,7 @@ const ButtonsContainer = styled.div`
 const Button = styled.div`
 	background-color: ${(props) =>
 		props.type === 'board' ? colors.primary : colors.secondary};
-	border-radius: 15px;
+	border-radius: 10px;
 	color: ${colors.darkBg};
 	cursor: pointer;
 	font-weight: bold;
@@ -43,7 +43,7 @@ const Button = styled.div`
 const TrashContainer = styled.div`
 	background-color: ${(props) => (props.isDraggingOver ? 'red' : '')};
 	border: 3px solid red;
-	border-radius: 15px;
+	border-radius: 10px;
 	height: 35px;
 	margin-right: 10px;
 	padding-top: 10px;

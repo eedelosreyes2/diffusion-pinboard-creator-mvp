@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const InnerContainer = styled.div`
 	background-color: ${colors.darkBg};
-	border-radius: 15px;
+	border-radius: 10px;
 	height: 95vh;
 	position: relative;
 	width: 95vw;
@@ -48,7 +48,8 @@ export default class ShareBoard extends Component {
 	};
 
 	getBoard = () => {
-		const paths = window.location.pathname.split('/');
+		const paths = window.location.hash.split('/');
+		console.log(paths);
 		const username = paths[2];
 		const boardId = paths[3];
 		const url = DB_URL + username + '/data.json';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
@@ -151,7 +151,7 @@ export default class App extends Component {
 		const { profileObj, username, data } = this.state;
 
 		return (
-			<Router basename={process.env.PUBLIC_URL}>
+			<Router basename="/">
 				<Switch>
 					<Route path="/u">
 						<ShareBoard />

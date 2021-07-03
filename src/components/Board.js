@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
 import Card from './Card';
@@ -13,7 +13,7 @@ import { colors } from '../globals';
 const Container = styled.div`
 	background-color: ${colors.darkBg};
 	border: 2px solid ${colors.primary};
-	border-radius: 15px;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	margin: 5px;
@@ -22,8 +22,8 @@ const Container = styled.div`
 
 const Handle = styled.div`
 	background-color: ${colors.primary};
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	color: white;
 	height: 10px;
 	margin: 0 auto;
@@ -240,15 +240,9 @@ class Footer extends Component {
 					<BsArrowClockwise onClick={this.props.handleFlip} />
 				</IconContext.Provider>
 				<IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-					<Router>
-						<Link
-							to={url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<FiShare />
-						</Link>
-					</Router>
+					<Link to={url} target="_blank" rel="noopener noreferrer">
+						<FiShare />
+					</Link>
 				</IconContext.Provider>
 			</FooterContainer>
 		);

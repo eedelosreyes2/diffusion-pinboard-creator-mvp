@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
+import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
 import { colors } from './theme';
 import './App.css';
@@ -135,31 +137,38 @@ export default class App extends Component {
 	};
 
 	responseGoogleLogout = (response) => {
-		this.setState({ profileObj: null });
+		this.setState({ profileObj: null, username: null });
 	};
 
 	render() {
 		const { data, profileObj } = this.state;
 
 		return (
-			<>
-				{profileObj ? (
-					<Container>
-						<PinboardCreator
-							profileObj={profileObj}
-							data={data}
-							updateBoards={this.updateBoards}
-							responseGoogleLogout={this.responseGoogleLogout}
-						/>
-					</Container>
-				) : (
-					<>
+			<Router>
+				<Switch>
+					<Route path="/board">
+						<ShareBoard />
+					</Route>
+					{profileObj ? (
+						<Route path="/">
+							<Container>
+								<PinboardCreator
+									profileObj={profileObj}
+									data={data}
+									updateBoards={this.updateBoards}
+									responseGoogleLogout={
+										this.responseGoogleLogout
+									}
+								/>
+							</Container>
+						</Route>
+					) : (
 						<LogInComponent
 							responseGoogleLogin={this.responseGoogleLogin}
 						/>
-					</>
-				)}
-			</>
+					)}
+				</Switch>
+			</Router>
 		);
 	}
 }

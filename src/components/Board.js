@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
-import styled from 'styled-components';
-import { colors } from '../theme';
 import Card from './Card';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { FiTrash, FiShare } from 'react-icons/fi';
 import { BsArrowClockwise } from 'react-icons/bs';
+import styled from 'styled-components';
+import { colors } from '../theme';
 
 const Container = styled.div`
 	background-color: ${colors.darkBg};
@@ -73,7 +74,6 @@ const Story = styled.div`
 const FooterContainer = styled.div`
 	align-items: center;
 	bottom: 0;
-	color: 'black';
 	display: flex;
 	flex-direction: row;
 	height: 35px;
@@ -224,6 +224,7 @@ class Footer extends Component {
 			cursor: 'pointer',
 			transform: isFlipped ? 'scaleX(-1)' : '',
 		};
+		const url = '/board/' + id;
 
 		return (
 			<FooterContainer boardId={id}>
@@ -241,7 +242,15 @@ class Footer extends Component {
 					<BsArrowClockwise onClick={this.props.handleFlip} />
 				</IconContext.Provider>
 				<IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-					<FiShare onClick={this.props.shareBoard} />
+					<Router>
+						<Link
+							to={url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<FiShare onClick={this.props.shareBoard} />
+						</Link>
+					</Router>
 				</IconContext.Provider>
 			</FooterContainer>
 		);

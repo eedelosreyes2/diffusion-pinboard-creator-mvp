@@ -128,8 +128,9 @@ export default class App extends Component {
 	};
 
 	updateBoards = (newState) => {
-		this.setState(newState);
-		this.putBoards();
+		this.setState(newState, () => {
+			this.putBoards();
+		});
 	};
 
 	responseGoogleLogin = (response) => {

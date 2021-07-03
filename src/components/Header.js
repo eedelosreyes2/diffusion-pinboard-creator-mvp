@@ -4,7 +4,7 @@ import LogOutComponent from './LogOutComponent';
 import { IconContext } from 'react-icons/lib';
 import { FiTrash } from 'react-icons/fi';
 import styled from 'styled-components';
-import { colors } from '../theme';
+import { colors } from '../globals';
 
 const Container = styled.div`
 	display: flex;

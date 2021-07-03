@@ -6,9 +6,9 @@ import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
-import { colors } from './theme';
+import { DB_URL } from './globals';
+import { colors } from './globals';
 import './App.css';
-const DB_URL = 'https://diffusion-web-app-mvp-default-rtdb.firebaseio.com/';
 
 const Container = styled.div`
 	background-color: ${colors.darkBg};
@@ -16,7 +16,10 @@ const Container = styled.div`
 `;
 
 export default class App extends Component {
-	state = { profileObj: null, username: null, data: null };
+	constructor() {
+		super();
+		this.state = { profileObj: null, username: null, data: null };
+	}
 
 	componentDidMount = () => {
 		this.getCache();

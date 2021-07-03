@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
-import { colors } from '../theme';
+import { colors } from '../globals';
 
 const Container = styled.div`
 	background-color: ${colors.primary};

@@ -8,7 +8,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { FiTrash, FiShare } from 'react-icons/fi';
 import { BsArrowClockwise } from 'react-icons/bs';
 import styled from 'styled-components';
-import { colors } from '../theme';
+import { colors } from '../globals';
 
 const Container = styled.div`
 	background-color: ${colors.darkBg};

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
 import styled from 'styled-components';
-import { colors } from '../theme';
+import { colors } from '../globals';
 
 const Container = styled.div`
 	background-color: ${colors.darkBg};

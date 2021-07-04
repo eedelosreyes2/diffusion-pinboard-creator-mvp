@@ -40,10 +40,12 @@ export default class App extends Component {
 		const state = JSON.parse(sessionStorage.getItem('state'));
 		if (state) {
 			const { profileObj, username } = state;
-			this.setState({ profileObj, username });
-			setTimeout(() => {
-				this.fetchBoads();
-			}, 1000);
+			if (profileObj) {
+				this.setState({ profileObj, username });
+				setTimeout(() => {
+					this.fetchBoads();
+				}, 1000);
+			}
 		}
 	};
 
@@ -65,6 +67,24 @@ export default class App extends Component {
 						profileObj.givenName + ' ' + profileObj.familyName;
 					data.name = name;
 					this.setState({ data });
+				} else {
+					const board0 = {
+						id: 'board0',
+						title: 'Fresh Content',
+						contentIds: [0],
+					};
+					const boardOrder = ['board0'];
+					const initialState = {
+						data: {
+							content: {},
+							boards: {
+								[board0.id]: board0,
+							},
+							boardOrder,
+						},
+					};
+
+					this.updateBoards(initialState);
 				}
 			})
 			.catch((err) => console.log(err));

@@ -25,28 +25,6 @@ const BoardsContainer = styled.div`
 `;
 
 export default class PinboardCreator extends Component {
-	componentDidMount = () => {
-		if (!this.props.data) {
-			const board0 = {
-				id: 'board0',
-				title: 'Fresh Content',
-				contentIds: [0],
-			};
-			const boardOrder = ['board0'];
-			const initialState = {
-				data: {
-					content: {},
-					boards: {
-						[board0.id]: board0,
-					},
-					boardOrder,
-				},
-			};
-
-			this.props.updateBoards(initialState);
-		}
-	};
-
 	handleDragEnd = (result) => {
 		const { destination, source, draggableId, type } = result;
 

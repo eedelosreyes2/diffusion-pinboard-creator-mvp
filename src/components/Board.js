@@ -11,12 +11,14 @@ import styled from 'styled-components';
 import { colors } from '../globals';
 
 const Container = styled.div`
-	background-color: ${colors.darkBg};
+	background-color: ${colors.primary};
 	border: 2px solid ${colors.primary};
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	margin: 5px;
+	margin-right: 25px;
+	margin-top: 20px;
+	min-height: 255px;
 	position: relative;
 `;
 

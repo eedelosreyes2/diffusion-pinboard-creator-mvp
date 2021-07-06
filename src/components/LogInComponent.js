@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import { IconContext } from 'react-icons/lib';
+import { AiOutlineMediumWorkmark } from 'react-icons/ai';
+import { FaTwitter, FaDiscord } from 'react-icons/fa';
 import styled from 'styled-components';
-import { colors } from '../globals';
+import { socials, colors } from '../globals';
 
 const Container = styled.div`
 	background-color: ${colors.primary};
@@ -17,6 +20,25 @@ const H1 = styled.h1`
 	margin-top: 300px;
 `;
 
+const Footer = styled.div`
+	align-items: center;
+	bottom: 0;
+	color: white;
+	display: flex;
+	height: 10vh;
+	justify-content: center;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+`;
+
+const DiffusionIcon = styled.a`
+	font-size: 50px;
+	font-family: Aleo;
+	padding: 0 20px;
+	text-decoration: none;
+`;
+
 export class LogInComponent extends Component {
 	render() {
 		return (
@@ -29,6 +51,27 @@ export class LogInComponent extends Component {
 					onFailure={this.props.responseGoogleLogin}
 					cookiePolicy={'single_host_origin'}
 				/>
+				<Footer>
+					<IconContext.Provider
+						value={{
+							size: '3em',
+							style: { cursor: 'pointer', padding: '0 30px' },
+						}}
+					>
+						<a target="_blank" href={socials.diffusion}>
+							<DiffusionIcon>D</DiffusionIcon>
+						</a>
+						<a target="_blank" href={socials.twitter}>
+							<FaTwitter />
+						</a>
+						<a target="_blank" href={socials.discord}>
+							<FaDiscord />
+						</a>
+						<a target="_blank" href={socials.medium}>
+							<AiOutlineMediumWorkmark />
+						</a>
+					</IconContext.Provider>
+				</Footer>
 			</Container>
 		);
 	}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
 import styled from 'styled-components';
@@ -46,6 +47,41 @@ const Category = styled.div`
 `;
 
 export class Card extends Component {
+	constructor() {
+		super();
+		this.state = { url: '' };
+	}
+
+	componentDidMount = () => {
+		this.getPageInfo();
+	};
+
+	getPageInfo = () => {
+		const url = this.setHttp(this.props.content.url);
+		this.setState({ url });
+
+		fetch(url, {
+			method: 'POST',
+			mode: 'no-cors',
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Credentials': true,
+			},
+		}).then((res) => console.log(res));
+
+		// axios
+		// 	.get(url, {
+		// 		headers: {
+		// 			'Access-Control-Allow-Origin': '*',
+		// 			'Access-Control-Allow-Methods':
+		// 				'GET, PUT, POST, DELETE, OPTIONS',
+		// 			crossorigin: true,
+		// 		},
+		// 	})
+		// 	.then((res) => console.log(res))
+		// 	.catch((err) => console.log(err));
+	};
+
 	setHttp = (link) => {
 		if (link) {
 			if (link.search(/^http[s]?:\/\//) === -1) {
@@ -57,7 +93,7 @@ export class Card extends Component {
 
 	render() {
 		const { id, quickThoughts, category } = this.props.content;
-		const url = this.setHttp(this.props.content.url);
+		const { url } = this.state;
 
 		return (
 			<Draggable draggableId={id} index={this.props.index}>

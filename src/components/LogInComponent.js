@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { socials, colors } from '../globals';
 
 const Container = styled.div`
-	background-color: ${colors.primary};
 	align-items: center;
+	background-color: ${colors.primary};
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -33,7 +33,7 @@ const Footer = styled.div`
 `;
 
 const DiffusionIcon = styled.a`
-	font-size: 50px;
+	font-size: 35px;
 	font-family: Aleo;
 	padding: 0 20px;
 	text-decoration: none;
@@ -54,20 +54,43 @@ export class LogInComponent extends Component {
 				<Footer>
 					<IconContext.Provider
 						value={{
-							size: '3em',
+							size: '2em',
 							style: { cursor: 'pointer', padding: '0 30px' },
 						}}
 					>
-						<a target="_blank" href={socials.diffusion}>
+						<a
+							target="_blank"
+							href={socials.diffusion}
+							rel="noreferrer"
+						>
 							<DiffusionIcon>D</DiffusionIcon>
 						</a>
-						<a target="_blank" href={socials.twitter}>
+						<a
+							target="_blank"
+							href={socials.twitter}
+							rel="noreferrer"
+						>
 							<FaTwitter />
 						</a>
-						<a target="_blank" href={socials.discord}>
+						<a
+							target="_blank"
+							href={socials.discord}
+							rel="noreferrer"
+						>
 							<FaDiscord />
 						</a>
-						<a target="_blank" href={socials.medium}>
+					</IconContext.Provider>
+					<IconContext.Provider
+						value={{
+							size: '3.5em',
+							style: { cursor: 'pointer', padding: '0 30px' },
+						}}
+					>
+						<a
+							target="_blank"
+							href={socials.medium}
+							rel="noreferrer"
+						>
 							<AiOutlineMediumWorkmark />
 						</a>
 					</IconContext.Provider>

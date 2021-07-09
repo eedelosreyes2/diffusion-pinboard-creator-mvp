@@ -9,6 +9,7 @@ import Logo from '../images/Logo.png';
 const Container = styled.div`
 	align-items: center;
 	background-color: ${colors.primary};
+	color: white;
 	display: flex;
 	height: 100vh;
 	justify-content: center;

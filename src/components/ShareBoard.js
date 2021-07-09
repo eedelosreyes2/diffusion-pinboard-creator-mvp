@@ -94,7 +94,6 @@ const CardsContainer = styled.div`
 	justify-items: center;
 	width: 100%;
 	@media only screen and (max-width: 1400px) {
-		background-color: red;
 		height: 150vh;
 	}
 `;

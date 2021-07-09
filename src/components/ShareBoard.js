@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ShareBoardCard from './ShareBoardCard';
 import styled from 'styled-components';
 import { DB_URL } from '../globals';
 import { colors } from '../globals';
+import Logo from '../images/Logo.png';
 
 const Container = styled.div`
 	align-items: center;
@@ -11,30 +13,104 @@ const Container = styled.div`
 	height: 100vh;
 	justify-content: center;
 	width: 100vw;
+	@media only screen and (max-width: 1400px) {
+		height: 100%;
+		width: 100%;
+	}
 `;
 
-const InnerContainer = styled.div`
+const Background = styled.div`
 	background-color: ${colors.darkBg};
 	border-radius: 10px;
 	height: 95vh;
 	position: relative;
 	width: 95vw;
+	@media only screen and (max-width: 1400px) {
+		height: 90%;
+		padding: 200px 0;
+		width: 90%;
+	}
+`;
+
+const InnerContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	margin: auto;
+	width: 95%;
+	@media only screen and (max-width: 1400px) {
+		flex-direction: column;
+	}
+`;
+
+const Header = styled.div`
+	align-items: center;
+	display: flex;
+	height: 75px;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	width: 100%;
+`;
+
+const LogoImg = styled.img`
+	cursor: pointer;
+	height: 40px;
+`;
+
+const StoryContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 75%;
+	justify-content: space-evenly;
+	margin: auto;
+	width: 100%;
+	@media only screen and (max-width: 1400px) {
+		height: 100vh;
+		justify-content: space-around;
+	}
 `;
 
 const Title = styled.div`
-	color: white;
-	font-size: 30px;
-	margin: 25px;
-	text-align: center;
+	font-size: 60px;
+`;
+
+const TitleUnderline = styled.div`
+	height: 2px;
+	background-color: ${colors.secondary};
+	width: 400px;
+`;
+
+const Story = styled.div``;
+
+const CardsContainer = styled.div`
+	align-content: space-evenly;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	height: 90%;
+	margin: auto;
+	justify-content: space-evenly;
+	justify-items: center;
+	width: 100%;
+	@media only screen and (max-width: 1400px) {
+		background-color: red;
+		height: 150vh;
+	}
+`;
+
+const Footer = styled.div`
+	bottom: 0;
+	align-items: center;
+	display: flex;
+	height: 150px;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
 `;
 
 const Author = styled.div`
-	bottom: 0;
-	color: white;
-	margin: 10px;
-	position: absolute;
-	text-align: center;
-	width: 100%;
+	margin-top: 100px;
 `;
 
 export default class ShareBoard extends Component {
@@ -71,14 +147,46 @@ export default class ShareBoard extends Component {
 
 	render() {
 		if (this.state.data) {
+			let story = this.state.board.story;
+			if (story === 'Click here to add a story to this board!') {
+				story = 'This is a super cool board!';
+			}
+
 			return (
 				<Container>
-					<InnerContainer>
-						<Title>{this.state.board.title}</Title>
-						<Author>
-							diffused by <b>{this.state.name}</b>
-						</Author>
-					</InnerContainer>
+					<Background>
+						<InnerContainer>
+							<Header>
+								<a href="https://diffusion.me" target="_blank">
+									<LogoImg src={Logo}></LogoImg>
+								</a>
+							</Header>
+							<StoryContainer>
+								<div>
+									<Title>{this.state.board.title}</Title>
+									<TitleUnderline />
+								</div>
+								<Story>{story}</Story>
+							</StoryContainer>
+							<CardsContainer>
+								{this.state.content.map((content, index) => {
+									return content ? (
+										<ShareBoardCard
+											key={index}
+											content={content}
+										></ShareBoardCard>
+									) : (
+										''
+									);
+								})}
+							</CardsContainer>
+							<Footer>
+								<Author>
+									diffused by <b>{this.state.name}</b>
+								</Author>
+							</Footer>
+						</InnerContainer>
+					</Background>
 				</Container>
 			);
 		}

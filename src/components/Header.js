@@ -9,6 +9,7 @@ import { colors } from '../globals';
 const Container = styled.div`
 	display: flex;
 	height: 100px;
+	padding-top: 20px;
 	width: 100%;
 `;
 

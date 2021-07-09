@@ -63,7 +63,7 @@ const StoryContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 75%;
-	justify-content: space-evenly;
+	justify-content: center;
 	margin: auto;
 	width: 100%;
 	@media only screen and (max-width: 1400px) {
@@ -79,10 +79,13 @@ const Title = styled.div`
 const TitleUnderline = styled.div`
 	height: 2px;
 	background-color: ${colors.secondary};
-	width: 400px;
+	margin-bottom: 150px;
+	width: 300px;
 `;
 
-const Story = styled.div``;
+const Story = styled.div`
+	width: 80%;
+`;
 
 const CardsContainer = styled.div`
 	align-content: space-evenly;

@@ -22,6 +22,7 @@ const BoardsContainer = styled.div`
 	justify-content: left;
 	margin: 0 auto;
 	overflow: auto;
+	padding-bottom: 75px;
 `;
 
 export default class PinboardCreator extends Component {

@@ -87,6 +87,9 @@ const TitleUnderline = styled.div`
 
 const Story = styled.div`
 	width: 80%;
+	@media only screen and (max-width: 1400px) {
+		width: 100%;
+	}
 `;
 
 const CardsContainer = styled.div`

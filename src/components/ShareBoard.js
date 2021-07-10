@@ -28,7 +28,7 @@ const Background = styled.div`
 	width: 95vw;
 	@media only screen and (max-width: 1400px) {
 		height: 90%;
-		padding: 200px 0;
+		padding: 100px 0;
 		width: 90%;
 	}
 `;
@@ -67,8 +67,7 @@ const StoryContainer = styled.div`
 	margin: auto;
 	width: 100%;
 	@media only screen and (max-width: 1400px) {
-		height: 100vh;
-		justify-content: space-around;
+		display: block;
 	}
 `;
 
@@ -81,6 +80,9 @@ const TitleUnderline = styled.div`
 	background-color: ${colors.secondary};
 	margin-bottom: 150px;
 	width: 300px;
+	@media only screen and (max-width: 1400px) {
+		margin-bottom: 50px;
+	}
 `;
 
 const Story = styled.div`
@@ -98,7 +100,9 @@ const CardsContainer = styled.div`
 	justify-items: center;
 	width: 100%;
 	@media only screen and (max-width: 1400px) {
-		height: 150vh;
+		padding: 100px 0;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 `;
 

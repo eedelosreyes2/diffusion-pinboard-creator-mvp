@@ -46,10 +46,6 @@ const Category = styled.div`
 `;
 
 export class Card extends Component {
-	constructor() {
-		super();
-	}
-
 	setHttp = (link) => {
 		if (link) {
 			if (link.search(/^http[s]?:\/\//) === -1) {

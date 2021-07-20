@@ -150,6 +150,7 @@ export default class ShareBoard extends Component {
 						(contentId) => data.content[contentId]
 					);
 					this.setState({ data, name, board, content });
+					document.title = `${name.split(' ')[0]}'s Diffusion Board`;
 				}
 			})
 			.catch((err) => console.log(err));
@@ -167,7 +168,12 @@ export default class ShareBoard extends Component {
 					<Background>
 						<InnerContainer>
 							<Header>
-								<a href="https://diffusion.me" target="_blank">
+								<a
+									href="https://diffusion.me"
+									target="_blank"
+									without
+									rel="noreferrer"
+								>
 									<LogoImg src={Logo}></LogoImg>
 								</a>
 							</Header>

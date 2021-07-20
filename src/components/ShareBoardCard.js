@@ -9,8 +9,9 @@ const Container = styled.div`
 	color: white;
 	cursor: pointer;
 	display: flex;
-	height: 200px;
+	min-height: 50px;
 	justify-content: center;
+	padding: 20px 10px;
 	position: relative;
 	text-align: center;
 	transform: ${(props) => (props.isHovered ? 'scale(1.05)' : '')};
@@ -55,12 +56,25 @@ export default class ShareBoardCard extends Component {
 	};
 
 	render() {
-		const { quickThoughts, category } = this.props.content;
-		let url = this.props.content.url;
+		let { url, quickThoughts, category } = this.props.content;
 		url = this.setHttp(url);
 
+		let quickThoughtsArr = quickThoughts.split('<div>');
+		let i;
+		for (i = 0; i < quickThoughtsArr.length; i++) {
+			quickThoughtsArr[i] = quickThoughtsArr[i].replaceAll(
+				'&nbsp;',
+				'\n'
+			);
+			quickThoughtsArr[i] = quickThoughtsArr[i].replaceAll('</div>', '');
+			quickThoughtsArr[i] = quickThoughtsArr[i].replaceAll('<br>', '\n');
+			if (quickThoughtsArr[i] === '\n') {
+				quickThoughtsArr[i] = <br />;
+			}
+		}
+
 		return (
-			<a href={url} target="_blank">
+			<a href={url} target="_blank" rel="noreferrer">
 				<Container
 					onMouseEnter={() => this.toggleHover()}
 					onMouseLeave={() => this.toggleHover()}
@@ -77,7 +91,11 @@ export default class ShareBoardCard extends Component {
 										.split('/')[0]
 								: ''}
 						</Url>
-						<QuickThoughts>{quickThoughts}</QuickThoughts>
+						<QuickThoughts>
+							{quickThoughtsArr.map((quickThought, index) => (
+								<div key={index}>{quickThought}</div>
+							))}
+						</QuickThoughts>
 						<Category>{category}</Category>
 					</div>
 				</Container>

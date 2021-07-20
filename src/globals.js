@@ -4,7 +4,7 @@ export const DB_URL =
 export const socials = {
 	diffusion: 'https://diffusion.me/',
 	twitter: 'https://twitter.com/diffusionme',
-	discord: 'https://discord.com/invite/RqrX9w8X',
+	discord: 'https://discord.gg/5HWM8FJjxf',
 	medium: 'https://diffusion.medium.com/',
 };
 

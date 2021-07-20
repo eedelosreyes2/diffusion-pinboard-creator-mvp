@@ -93,6 +93,12 @@ export class Board extends Component {
 		};
 	}
 
+	handleKeyPress = (e) => {
+		if (e.key === 'Enter') {
+			document.activeElement.blur();
+		}
+	};
+
 	handleFlip = () => {
 		this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
 	};
@@ -123,6 +129,7 @@ export class Board extends Component {
 								<ContentEditable
 									id="board-title"
 									html={title}
+									onKeyPress={(e) => this.handleKeyPress(e)}
 									onChange={(e) =>
 										this.props.editBoard(e, id)
 									}

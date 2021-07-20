@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	margin: 0 auto 10px auto;
-	min-height: 150px;
+	padding-top: 30px;
 	width: 100%;
 `;
 
@@ -13,7 +13,7 @@ const CardsContainer = styled.div`
 	display: flex;
 	flex-grow: 1;
 	justify-content: left;
-	min-height: 100px;
+	min-height: ${(props) => (props.contentLength <= 1 ? '10px' : '100px')};
 	overflow: auto;
 `;
 
@@ -25,6 +25,7 @@ export default class NewContentContainer extends Component {
 				(contentId) => this.props.content[contentId]
 			);
 		}
+		console.log(content.length);
 
 		return (
 			<Container>
@@ -32,6 +33,7 @@ export default class NewContentContainer extends Component {
 					{(provided) => {
 						return (
 							<CardsContainer
+								contentLength={content.length}
 								className="hidden-scroll"
 								ref={provided.innerRef}
 								{...provided.innerRef}

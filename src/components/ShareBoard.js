@@ -163,6 +163,17 @@ export default class ShareBoard extends Component {
 				story = 'This is a super cool board!';
 			}
 
+			let storyArr = story.split('<div>');
+			let i;
+			for (i = 0; i < storyArr.length; i++) {
+				storyArr[i] = storyArr[i].replaceAll('&nbsp;', '\n');
+				storyArr[i] = storyArr[i].replaceAll('</div>', '');
+				storyArr[i] = storyArr[i].replaceAll('<br>', '\n');
+				if (storyArr[i] === '\n') {
+					storyArr[i] = <br />;
+				}
+			}
+
 			return (
 				<Container>
 					<Background>
@@ -182,7 +193,11 @@ export default class ShareBoard extends Component {
 									<Title>{this.state.board.title}</Title>
 									<TitleUnderline />
 								</div>
-								<Story>{story}</Story>
+								<Story>
+									{storyArr.map((quickThought, index) => (
+										<div key={index}>{quickThought}</div>
+									))}
+								</Story>
 							</StoryContainer>
 							<CardsContainer>
 								{this.state.content.map((content, index) => {

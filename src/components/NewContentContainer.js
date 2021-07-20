@@ -25,7 +25,6 @@ export default class NewContentContainer extends Component {
 				(contentId) => this.props.content[contentId]
 			);
 		}
-		console.log(content.length);
 
 		return (
 			<Container>

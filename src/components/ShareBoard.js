@@ -109,6 +109,12 @@ const CardsContainer = styled.div`
 	}
 `;
 
+const ShareBoardCardContainer = styled.div`
+	@media only screen and (max-width: 1400px) {
+		margin: 20px;
+	}
+`;
+
 const Footer = styled.div`
 	bottom: 0;
 	align-items: center;
@@ -202,10 +208,12 @@ export default class ShareBoard extends Component {
 							<CardsContainer>
 								{this.state.content.map((content, index) => {
 									return content ? (
-										<ShareBoardCard
-											key={index}
-											content={content}
-										></ShareBoardCard>
+										<ShareBoardCardContainer key={index}>
+											<ShareBoardCard
+												key={index}
+												content={content}
+											/>
+										</ShareBoardCardContainer>
 									) : (
 										''
 									);

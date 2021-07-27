@@ -37,7 +37,7 @@ export default class App extends Component {
 	};
 
 	getCache = () => {
-		const state = JSON.parse(sessionStorage.getItem('state'));
+		const state = JSON.parse(localStorage.getItem('state'));
 		if (state) {
 			const { profileObj, username } = state;
 			if (profileObj) {
@@ -50,7 +50,7 @@ export default class App extends Component {
 	};
 
 	setCache = () => {
-		sessionStorage.setItem('state', JSON.stringify(this.state));
+		localStorage.setItem('state', JSON.stringify(this.state));
 		this.putBoards();
 	};
 

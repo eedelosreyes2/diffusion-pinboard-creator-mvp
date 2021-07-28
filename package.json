@@ -2,7 +2,7 @@
 	"name": "diffusion-pinboard-creator-mvp",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://eedelosreyes2.github.io/diffusion-pinboard-creator-mvp",
+	"homepage": "https://boards.diffusion.me/",
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^11.2.7",

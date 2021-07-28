@@ -6,6 +6,7 @@ export const socials = {
 	twitter: 'https://twitter.com/diffusionme',
 	discord: 'https://discord.gg/5HWM8FJjxf',
 	medium: 'https://diffusion.medium.com/',
+	typeform: 'https://hjv8msq3gnt.typeform.com/to/Gdq3kNQl',
 };
 
 export const fonts = ['Aleo', 'serif'];
@@ -16,3 +17,5 @@ export const colors = {
 	green: '#21eb2f',
 	darkBg: '#1c1c1c',
 };
+
+export const accessCode = 'Curation2021!';

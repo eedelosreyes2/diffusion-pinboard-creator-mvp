@@ -1,10 +1,11 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 // const cors = require("cors")({origin: true});
 
 exports.scraper = functions.https.onRequest((request, response) => {
-  response.send("Scraper!");
+	console.log(response);
+	response.send('Scraper!');
 });
 
 // const cheerio = require("cheerio");

@@ -6,8 +6,7 @@ import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
-import { DB_URL } from './globals';
-import { colors } from './globals';
+import { DB_URL, scraperEndpoint, colors } from './globals';
 import './App.css';
 
 const Container = styled.div`
@@ -56,38 +55,79 @@ export default class App extends Component {
 
 	fetchBoads = async () => {
 		const { profileObj } = this.state;
-		const url = DB_URL + this.state.username + '/data.json';
+		const boardsURL = DB_URL + this.state.username + '/data.json';
+
+		const boardsRequest = axios.get(boardsURL);
+		const metaTagsRequest = axios.get('facebook.com');
 
 		axios
-			.get(url)
-			.then((res) => {
-				const { data } = res;
-				if (data) {
-					const name =
-						profileObj.givenName + ' ' + profileObj.familyName;
-					data.name = name;
-					this.setState({ data });
-				} else {
-					const board0 = {
-						id: 'board0',
-						title: 'Fresh Content',
-						contentIds: [0],
-					};
-					const boardOrder = ['board0'];
-					const initialState = {
-						data: {
-							content: {},
-							boards: {
-								[board0.id]: board0,
-							},
-							boardOrder,
-						},
-					};
+			.all([boardsRequest, boardsRequest]) // needs to be json
+			.then(
+				axios.spread((...responses) => {
+					const boardsResponse = responses[0];
+					const metaTagsResponse = responses[1];
+					console.log(boardsResponse);
+					console.log(metaTagsResponse);
+				})
+			)
+			.catch((errors) => {
+				console.log(errors);
+			});
 
-					this.updateBoards(initialState);
-				}
-			})
-			.catch((err) => console.log(err));
+		// const { data } = boardsResponse;
+		// 	if (data) {
+		// 		const name =
+		// 			profileObj.givenName + ' ' + profileObj.familyName;
+		// 		data.name = name;
+		// 		this.setState({ data });
+		// 	} else {
+		// 		const board0 = {
+		// 			id: 'board0',
+		// 			title: 'Fresh Content',
+		// 			contentIds: [0],
+		// 		};
+		// 		const boardOrder = ['board0'];
+		// 		const initialState = {
+		// 			data: {
+		// 				content: {},
+		// 				boards: {
+		// 					[board0.id]: board0,
+		// 				},
+		// 			boardOrder,
+		// 		},
+		// 	};
+		// 	this.updateBoards(initialState);
+
+		// axios
+		// 	.get(boardsURL)
+		// 	.then((res) => {
+		// 		const { data } = res;
+		// 		if (data) {
+		// 			const name =
+		// 				profileObj.givenName + ' ' + profileObj.familyName;
+		// 			data.name = name;
+		// 			this.setState({ data });
+		// 		} else {
+		// 			const board0 = {
+		// 				id: 'board0',
+		// 				title: 'Fresh Content',
+		// 				contentIds: [0],
+		// 			};
+		// 			const boardOrder = ['board0'];
+		// 			const initialState = {
+		// 				data: {
+		// 					content: {},
+		// 					boards: {
+		// 						[board0.id]: board0,
+		// 					},
+		// 					boardOrder,
+		// 				},
+		// 			};
+
+		// 			this.updateBoards(initialState);
+		// 		}
+		// 	})
+		// 	.catch((err) => console.log(err));
 	};
 
 	putBoards = async () => {

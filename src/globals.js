@@ -1,6 +1,8 @@
 export const DB_URL =
 	'https://diffusion-web-app-mvp-default-rtdb.firebaseio.com/';
 
+export const scraperEndpoint = 'https://us-central1-diffusion-web-app-mvp.cloudfunctions.net/scraper';
+
 export const socials = {
 	diffusion: 'https://diffusion.me/',
 	twitter: 'https://twitter.com/diffusionme',

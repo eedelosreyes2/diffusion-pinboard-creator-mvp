@@ -24,11 +24,13 @@ const H1 = styled.h1`
 const AccessCode = styled.a`
 	color: ${colors.secondary};
 	cursor: pointer;
+	text-decoration: underline;
 `;
 
 const Form = styled.div`
 	display: flex;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+	margin-top: 30px;
 `;
 
 const AccessCodeInput = styled.input`
@@ -53,6 +55,21 @@ const AccessCodeSubmit = styled.button`
 	height: 32px;
 	outline: none;
 	width: 60px;
+`;
+
+const LoginButton = styled.button`
+	background-color: ${colors.secondary};
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-family: aleo;
+	font-size: 20px;
+	font-weight: bolder;
+	margin: 10px;
+	padding: 5px 20px;
+	transition: visibility 5s, opacity 0.5s linear;
+	opacity: ${(props) => (props.isVisible ? 1 : 0)};
 `;
 
 const Footer = styled.div`
@@ -84,20 +101,14 @@ export class LogInComponent extends Component {
 	}
 
 	handleSubmit = () => {
-		// console.log(document.getElementById('access-code').value);
 		const value = document.getElementById('access-code').value;
 
 		if (value === accessCode) {
 			this.setState({ hasAccess: true });
-		} else {
-			console.log('nope');
-			this.setState({ fade: true });
 		}
 	};
 
 	render() {
-		const { fade } = this.state;
-
 		return (
 			<Container>
 				<H1>
@@ -112,7 +123,6 @@ export class LogInComponent extends Component {
 					<AccessCodeSubmit
 						onClick={this.handleSubmit}
 						onAnimationEnd={() => console.log('what')}
-						className={fade ? 'hide' : ''}
 					>
 						<IconContext.Provider
 							value={{
@@ -134,12 +144,12 @@ export class LogInComponent extends Component {
 					onFailure={this.props.responseGoogleLogin}
 					cookiePolicy={'single_host_origin'}
 					render={(renderProps) => (
-						<button
+						<LoginButton
 							onClick={renderProps.onClick}
-							style={{ backgroundColor: 'red' }}
+							isVisible={this.state.hasAccess}
 						>
-							This is my custom Google button
-						</button>
+							Login
+						</LoginButton>
 					)}
 				/>
 				<Footer>

@@ -57,22 +57,22 @@ export default class App extends Component {
 		const { profileObj } = this.state;
 		const boardsURL = DB_URL + this.state.username + '/data.json';
 
-		const boardsRequest = axios.get(boardsURL);
-		const metaTagsRequest = axios.get('facebook.com');
+		// const boardsRequest = axios.get(boardsURL);
+		// const metaTagsRequest = axios.get(scraperEndpoint);
 
-		axios
-			.all([boardsRequest, boardsRequest]) // needs to be json
-			.then(
-				axios.spread((...responses) => {
-					const boardsResponse = responses[0];
-					const metaTagsResponse = responses[1];
-					console.log(boardsResponse);
-					console.log(metaTagsResponse);
-				})
-			)
-			.catch((errors) => {
-				console.log(errors);
-			});
+		// axios
+		// 	.all([boardsRequest, metaTagsRequest]) // needs to be json
+		// 	.then(
+		// 		axios.spread((...responses) => {
+		// 			const boardsResponse = responses[0];
+		// 			const metaTagsResponse = responses[1];
+		// 			console.log(boardsResponse);
+		// 			console.log(metaTagsResponse);
+		// 		})
+		// 	)
+		// 	.catch((errors) => {
+		// 		console.log(errors);
+		// 	});
 
 		// const { data } = boardsResponse;
 		// 	if (data) {
@@ -98,36 +98,36 @@ export default class App extends Component {
 		// 	};
 		// 	this.updateBoards(initialState);
 
-		// axios
-		// 	.get(boardsURL)
-		// 	.then((res) => {
-		// 		const { data } = res;
-		// 		if (data) {
-		// 			const name =
-		// 				profileObj.givenName + ' ' + profileObj.familyName;
-		// 			data.name = name;
-		// 			this.setState({ data });
-		// 		} else {
-		// 			const board0 = {
-		// 				id: 'board0',
-		// 				title: 'Fresh Content',
-		// 				contentIds: [0],
-		// 			};
-		// 			const boardOrder = ['board0'];
-		// 			const initialState = {
-		// 				data: {
-		// 					content: {},
-		// 					boards: {
-		// 						[board0.id]: board0,
-		// 					},
-		// 					boardOrder,
-		// 				},
-		// 			};
+		axios
+			.get(boardsURL)
+			.then((res) => {
+				const { data } = res;
+				if (data) {
+					const name =
+						profileObj.givenName + ' ' + profileObj.familyName;
+					data.name = name;
+					this.setState({ data });
+				} else {
+					const board0 = {
+						id: 'board0',
+						title: 'Fresh Content',
+						contentIds: [0],
+					};
+					const boardOrder = ['board0'];
+					const initialState = {
+						data: {
+							content: {},
+							boards: {
+								[board0.id]: board0,
+							},
+							boardOrder,
+						},
+					};
 
-		// 			this.updateBoards(initialState);
-		// 		}
-		// 	})
-		// 	.catch((err) => console.log(err));
+					this.updateBoards(initialState);
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 
 	putBoards = async () => {

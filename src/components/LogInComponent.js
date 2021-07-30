@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import { Shake } from 'reshake';
 import { IconContext } from 'react-icons/lib';
 import { BsPlay } from 'react-icons/bs';
 import { AiOutlineMediumWorkmark } from 'react-icons/ai';
@@ -96,7 +97,7 @@ export class LogInComponent extends Component {
 		super();
 		this.state = {
 			hasAccess: false,
-			fade: false,
+			isShaking: false,
 		};
 	}
 
@@ -105,6 +106,12 @@ export class LogInComponent extends Component {
 
 		if (value === accessCode) {
 			this.setState({ hasAccess: true });
+		} else {
+			// trigger shake for 1 sec
+			this.setState({ isShaking: true });
+			setTimeout(() => {
+				this.setState({ isShaking: false });
+			}, 300);
 		}
 	};
 
@@ -118,25 +125,38 @@ export class LogInComponent extends Component {
 					</AccessCode>{' '}
 					to curate Diffusion Boards!
 				</H1>
-				<Form id="form">
-					<AccessCodeInput id="access-code"></AccessCodeInput>
-					<AccessCodeSubmit
-						onClick={this.handleSubmit}
-						onAnimationEnd={() => console.log('what')}
-					>
-						<IconContext.Provider
-							value={{
-								size: '2em',
-								style: {
-									color: 'white',
-									paddingTop: '2px',
-								},
-							}}
+				<Shake
+					h={5}
+					v={5}
+					r={3}
+					dur={300}
+					int={10}
+					max={100}
+					fixed={true}
+					fixedStop={false}
+					freez={false}
+					active={this.state.isShaking}
+				>
+					<Form id="form">
+						<AccessCodeInput id="access-code"></AccessCodeInput>
+						<AccessCodeSubmit
+							onClick={this.handleSubmit}
+							onAnimationEnd={() => console.log('what')}
 						>
-							<BsPlay />
-						</IconContext.Provider>
-					</AccessCodeSubmit>
-				</Form>
+							<IconContext.Provider
+								value={{
+									size: '2em',
+									style: {
+										color: 'white',
+										paddingTop: '2px',
+									},
+								}}
+							>
+								<BsPlay />
+							</IconContext.Provider>
+						</AccessCodeSubmit>
+					</Form>
+				</Shake>
 				<GoogleLogin
 					clientId="173875502237-vqno633dqovkrmnot06va4r1iu0m2882.apps.googleusercontent.com"
 					buttonText="Login"

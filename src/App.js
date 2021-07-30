@@ -57,8 +57,8 @@ export default class App extends Component {
 		const { profileObj } = this.state;
 		const boardsURL = DB_URL + this.state.username + '/data.json';
 
-		// const boardsRequest = axios.get(boardsURL);
-		// const metaTagsRequest = axios.get(scraperEndpoint);
+		const boardsRequest = axios.get(boardsURL);
+		// const metaTagsRequest = axios.post('http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper', {name:"dick"});
 
 		// axios
 		// 	.all([boardsRequest, metaTagsRequest]) // needs to be json
@@ -73,6 +73,14 @@ export default class App extends Component {
 		// 	.catch((errors) => {
 		// 		console.log(errors);
 		// 	});
+
+		axios.post('http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper', {
+			Name: 'Fred',
+			Age: '23'
+		  })
+		  .then(function (response) {
+			console.log(response);
+		  })
 
 		// const { data } = boardsResponse;
 		// 	if (data) {

@@ -1,11 +1,33 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
-// const cors = require("cors")({origin: true});
+const cors = require("cors")({origin: true});
 
-exports.scraper = functions.https.onRequest((request, response) => {
-  response.send(JSON.parse(request.body));
-  console.log(request);
+exports.scraper = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    const object = {
+      id: 0,
+      title: "yas bech",
+      count: 0
+    };
+
+    switch (req.method) {
+      case "GET":
+        res.send("This is a GET request.");
+        break;
+      case "POST":
+        const body = req.body;
+        res.send(body);
+        break;
+      case "DELETE":
+        res.send("This is a DELETE request.");
+        break;
+      default:
+        res.send("This is a default request.");
+    }
+  });
+
+  // res.send(JSON.stringify(object));
 });
 
 // const cheerio = require("cheerio");

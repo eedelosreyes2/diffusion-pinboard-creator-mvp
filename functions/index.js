@@ -17,6 +17,7 @@ exports.scraper = functions.https.onRequest((req, res) => {
         break;
       case "POST":
         const body = req.body;
+        body.pee = "poo";
         res.send(body);
         break;
       case "DELETE":

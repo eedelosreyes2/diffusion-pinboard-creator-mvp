@@ -58,53 +58,28 @@ export default class App extends Component {
 		const boardsURL = DB_URL + this.state.username + '/data.json';
 
 		const boardsRequest = axios.get(boardsURL);
-		// const metaTagsRequest = axios.post('http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper', {name:"dick"});
+		const metaTagsRequest = axios.post(
+			'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
+			{
+				Name: 'Fred',
+				Age: '23',
+			}
+		);
 
-		// axios
-		// 	.all([boardsRequest, metaTagsRequest]) // needs to be json
-		// 	.then(
-		// 		axios.spread((...responses) => {
-		// 			const boardsResponse = responses[0];
-		// 			const metaTagsResponse = responses[1];
-		// 			console.log(boardsResponse);
-		// 			console.log(metaTagsResponse);
-		// 		})
-		// 	)
-		// 	.catch((errors) => {
-		// 		console.log(errors);
-		// 	});
+		axios
+			.all([boardsRequest, metaTagsRequest]) // needs to be json
+			.then(
+				axios.spread((...responses) => {
+					const boardsResponse = responses[0];
+					const metaTagsResponse = responses[1];
 
-		axios.post('http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper', {
-			Name: 'Fred',
-			Age: '23'
-		  })
-		  .then(function (response) {
-			console.log(response);
-		  })
-
-		// const { data } = boardsResponse;
-		// 	if (data) {
-		// 		const name =
-		// 			profileObj.givenName + ' ' + profileObj.familyName;
-		// 		data.name = name;
-		// 		this.setState({ data });
-		// 	} else {
-		// 		const board0 = {
-		// 			id: 'board0',
-		// 			title: 'Fresh Content',
-		// 			contentIds: [0],
-		// 		};
-		// 		const boardOrder = ['board0'];
-		// 		const initialState = {
-		// 			data: {
-		// 				content: {},
-		// 				boards: {
-		// 					[board0.id]: board0,
-		// 				},
-		// 			boardOrder,
-		// 		},
-		// 	};
-		// 	this.updateBoards(initialState);
+					console.log(boardsResponse);
+					console.log(metaTagsResponse);
+				})
+			)
+			.catch((errors) => {
+				console.log(errors);
+			});
 
 		axios
 			.get(boardsURL)
@@ -114,6 +89,31 @@ export default class App extends Component {
 					const name =
 						profileObj.givenName + ' ' + profileObj.familyName;
 					data.name = name;
+
+					// loop through content
+					// for each content, check if has metaTitle
+					// 	if not, make await axios call to scraper endpoint
+					//	set metatags to content
+					//	else, do nothing
+					if (data.content) {
+						Object.entries(data.content).map((content) => {
+							if (!content[1].metaTitle) {
+								console.log(content[1].url);
+								axios
+									.post(
+										'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
+										{ url: content[1].url }
+									)
+									.then((res) => {
+										console.log(res.data);
+										// do some some with data
+
+									})
+									.catch((err) => console.log(err));
+							}
+						});
+					}
+
 					this.setState({ data });
 				} else {
 					const board0 = {

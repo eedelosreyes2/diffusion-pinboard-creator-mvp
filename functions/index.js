@@ -5,20 +5,20 @@ const cors = require("cors")({origin: true});
 
 exports.scraper = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    const object = {
-      id: 0,
-      title: "yas bech",
-      count: 0
-    };
+    // const object = {
+    //   id: 0,
+    //   title: "yas bech",
+    //   count: 0,
+    // };
 
     switch (req.method) {
       case "GET":
         res.send("This is a GET request.");
         break;
       case "POST":
-        const body = req.body;
-        body.pee = "poo";
-        res.send(body);
+        // const body = req.body;
+        // body.pee = "poo";
+        res.send("body");
         break;
       case "DELETE":
         res.send("This is a DELETE request.");

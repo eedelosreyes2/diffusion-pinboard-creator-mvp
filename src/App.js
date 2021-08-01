@@ -1,254 +1,3 @@
-// import React, { Component } from 'react';
-// import axios from 'axios';
-// import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-// import { v4 as uuidv4 } from 'uuid';
-// import PinboardCreator from './components/PinboardCreator';
-// import LogInComponent from './components/LogInComponent';
-// import ShareBoard from './components/ShareBoard';
-// import styled from 'styled-components';
-// import { DB_URL, scraperEndpoint, colors } from './globals';
-// import './App.css';
-
-// const Container = styled.div`
-// 	background-color: ${colors.darkBg};
-// 	color: white;
-// `;
-
-// export default class App extends Component {
-// 	constructor() {
-// 		super();
-// 		this.state = { profileObj: null, username: null, data: null };
-// 	}
-
-// 	componentDidMount = () => {
-// 		this.getCache();
-// 		window.addEventListener('load', this.getCache);
-// 		window.addEventListener('beforeunload', this.setCache);
-// 		setInterval(() => {
-// 			this.fetchNewContent();
-// 		}, 1000);
-// 	};
-
-// 	componentWillUnmount = () => {
-// 		this.setCache();
-// 		window.removeEventListener('load', this.getCache);
-// 		window.removeEventListener('beforeunload', this.setCache);
-// 	};
-
-// 	getCache = () => {
-// 		const state = JSON.parse(localStorage.getItem('state'));
-// 		if (state) {
-// 			const { profileObj, username } = state;
-// 			if (profileObj) {
-// 				this.setState({ profileObj, username });
-// 				setTimeout(() => {
-// 					this.fetchBoads();
-// 				}, 1000);
-// 			}
-// 		}
-// 	};
-
-// 	setCache = () => {
-// 		localStorage.setItem('state', JSON.stringify(this.state));
-// 		this.putBoards();
-// 	};
-
-// 	fetchBoads = async () => {
-// 		const { profileObj } = this.state;
-// 		const boardsURL = DB_URL + this.state.username + '/data.json';
-
-// 		// const boardsRequest = axios.get(boardsURL);
-// 		// const metaTagsRequest = axios.post(
-// 		// 	'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
-// 		// 	{
-// 		// 		Name: 'Fred',
-// 		// 		Age: '23',
-// 		// 	}
-// 		// );
-
-// 		// axios
-// 		// 	.all([boardsRequest, metaTagsRequest]) // needs to be json
-// 		// 	.then(
-// 		// 		axios.spread((...responses) => {
-// 		// 			const boardsResponse = responses[0];
-// 		// 			const metaTagsResponse = responses[1];
-
-// 		// 			console.log(boardsResponse);
-// 		// 			console.log(metaTagsResponse);
-// 		// 		})
-// 		// 	)
-// 		// 	.catch((errors) => {
-// 		// 		console.log(errors);
-// 		// 	});
-
-// 		axios
-// 			.get(boardsURL)
-// 			.then((res) => {
-// 				const { data } = res;
-// 				if (data) {
-// 					const name =
-// 						profileObj.givenName + ' ' + profileObj.familyName;
-// 					data.name = name;
-
-// 					// loop through content
-// 					// for each content, check if has metaTitle
-// 					// 	if not, make await axios call to scraper endpoint
-// 					//	set metatags to content
-// 					//	else, do nothing
-// 					// if (data.content) {
-// 					// 	Object.entries(data.content).map((content) => {
-// 					// 		if (!content[1].metaTitle) {
-// 					// 			console.log(content[1].url);
-// 					// 			axios
-// 					// 				.post(
-// 					// 					'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
-// 					// 					{ url: content[1].url }
-// 					// 				)
-// 					// 				.then((res) => {
-// 					// 					console.log(res.data);
-// 					// 					// do some some with data
-
-// 					// 				})
-// 					// 				.catch((err) => console.log(err));
-// 					// 		}
-// 					// 	});
-// 					// }
-
-// 					this.setState({ data });
-// 				} else {
-// 					const board0 = {
-// 						id: 'board0',
-// 						title: 'Fresh Content',
-// 						contentIds: [0],
-// 					};
-// 					const boardOrder = ['board0'];
-// 					const initialState = {
-// 						data: {
-// 							content: {},
-// 							boards: {
-// 								[board0.id]: board0,
-// 							},
-// 							boardOrder,
-// 						},
-// 					};
-
-// 					this.updateBoards(initialState);
-// 				}
-// 			})
-// 			.catch((err) => console.log(err));
-// 	};
-
-// 	putBoards = async () => {
-// 		let url = DB_URL + this.state.username + '/data.json';
-// 		const { data } = this.state;
-
-// 		if (data) {
-// 			data.newContent = null;
-// 			axios.put(url, data, { headers: { 'Content-Type': 'text/plain' } });
-// 		}
-// 	};
-
-// 	fetchNewContent = async () => {
-// 		let url = DB_URL + this.state.username + '/data/newContent.json';
-
-// 		axios.get(url).then((res) => {
-// 			const { data } = res;
-// 			if (data) {
-// 				Object.entries(data).map((newContent) => {
-// 					const { url, quickThoughts, category, date } =
-// 						newContent[1];
-// 					const id = uuidv4();
-// 					const newCard = {
-// 						id,
-// 						url,
-// 						quickThoughts,
-// 						category,
-// 						date,
-// 					};
-// 					const content = {
-// 						...this.state.data.content,
-// 						[newCard.id]: newCard,
-// 					};
-// 					const board0 = {
-// 						...this.state.data.boards.board0,
-// 						contentIds: [
-// 							id,
-// 							...this.state.data.boards.board0.contentIds,
-// 						],
-// 					};
-// 					const boards = {
-// 						...this.state.data.boards,
-// 						board0,
-// 					};
-// 					const newState = {
-// 						...this.state,
-// 						data: {
-// 							...this.state.data,
-// 							content,
-// 							boards,
-// 						},
-// 					};
-// 					this.setState(newState);
-// 					this.putBoards();
-// 				});
-// 			}
-// 		});
-// 	};
-
-// 	updateBoards = (newState) => {
-// 		this.setState(newState, () => {
-// 			this.putBoards();
-// 		});
-// 	};
-
-// 	responseGoogleLogin = (response) => {
-// 		if (response.profileObj) {
-// 			const profileObj = response.profileObj;
-// 			const email = profileObj.email;
-// 			const username = email.replace(/[^a-zA-Z0-9 ]/g, '');
-// 			this.setState({ username });
-// 			this.setState({ profileObj });
-// 			this.fetchBoads();
-// 		}
-// 	};
-
-// 	responseGoogleLogout = (response) => {
-// 		this.setState({ profileObj: null, username: null });
-// 	};
-
-// 	render() {
-// 		const { profileObj, username, data } = this.state;
-
-// 		return (
-// 			<Router basename="/">
-// 				<Switch>
-// 					<Route path="/u">
-// 						<ShareBoard />
-// 					</Route>
-// 					{profileObj ? (
-// 						<Route path="/">
-// 							<Container>
-// 								<PinboardCreator
-// 									profileObj={profileObj}
-// 									username={username}
-// 									data={data}
-// 									updateBoards={this.updateBoards}
-// 									responseGoogleLogout={
-// 										this.responseGoogleLogout
-// 									}
-// 								/>
-// 							</Container>
-// 						</Route>
-// 					) : (
-// 						<LogInComponent
-// 							responseGoogleLogin={this.responseGoogleLogin}
-// 						/>
-// 					)}
-// 				</Switch>
-// 			</Router>
-// 		);
-// 	}
-// }
 import React, { Component } from 'react';
 import axios from 'axios';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
@@ -257,198 +6,432 @@ import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
-import { DB_URL } from './globals';
-import { colors } from './globals';
+import { DB_URL, scraperEndpoint, colors } from './globals';
 import './App.css';
 
 const Container = styled.div`
-	background-color: ${colors.darkBg};
-	color: white;
+  background-color: ${colors.darkBg};
+  color: white;
 `;
 
 export default class App extends Component {
-	constructor() {
-		super();
-		this.state = { profileObj: null, username: null, data: null };
-	}
+  constructor() {
+    super();
+    this.state = { profileObj: null, username: null, data: null };
+  }
 
-	componentDidMount = () => {
-		this.getCache();
-		window.addEventListener('load', this.getCache);
-		window.addEventListener('beforeunload', this.setCache);
-		setInterval(() => {
-			this.fetchNewContent();
-		}, 1000);
-	};
+  componentDidMount = () => {
+    this.getCache();
+    window.addEventListener('load', this.getCache);
+    window.addEventListener('beforeunload', this.setCache);
+    setInterval(() => {
+      this.fetchNewContent();
+    }, 1000);
+  };
 
-	componentWillUnmount = () => {
-		this.setCache();
-		window.removeEventListener('load', this.getCache);
-		window.removeEventListener('beforeunload', this.setCache);
-	};
+  componentWillUnmount = () => {
+    this.setCache();
+    window.removeEventListener('load', this.getCache);
+    window.removeEventListener('beforeunload', this.setCache);
+  };
 
-	getCache = () => {
-		const state = JSON.parse(localStorage.getItem('state'));
-		if (state) {
-			const { profileObj, username } = state;
-			if (profileObj) {
-				this.setState({ profileObj, username });
-				setTimeout(() => {
-					this.fetchBoads();
-				}, 1000);
-			}
-		}
-	};
+  getCache = () => {
+    const state = JSON.parse(localStorage.getItem('state'));
+    if (state) {
+      const { profileObj, username } = state;
+      if (profileObj) {
+        this.setState({ profileObj, username });
+        setTimeout(() => {
+          this.fetchBoads();
+        }, 1000);
+      }
+    }
+  };
 
-	setCache = () => {
-		localStorage.setItem('state', JSON.stringify(this.state));
-		this.putBoards();
-	};
+  setCache = () => {
+    localStorage.setItem('state', JSON.stringify(this.state));
+    this.putBoards();
+  };
 
-	fetchBoads = async () => {
-		const { profileObj } = this.state;
-		const url = DB_URL + this.state.username + '/data.json';
+  fetchBoads = async () => {
+    const { profileObj } = this.state;
+    const boardsURL = DB_URL + this.state.username + '/data.json';
 
-		axios
-			.get(url)
-			.then((res) => {
-				const { data } = res;
-				if (data) {
-					const name =
-						profileObj.givenName + ' ' + profileObj.familyName;
-					data.name = name;
-					this.setState({ data });
-				} else {
-					const board0 = {
-						id: 'board0',
-						title: 'Fresh Content',
-						contentIds: [0],
-					};
-					const boardOrder = ['board0'];
-					const initialState = {
-						data: {
-							content: {},
-							boards: {
-								[board0.id]: board0,
-							},
-							boardOrder,
-						},
-					};
+    // const boardsRequest = axios.get(boardsURL);
+    // const metaTagsRequest = axios.post(
+    // 	'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
+    // 	{
+    // 		Name: 'Fred',
+    // 		Age: '23',
+    // 	}
+    // );
 
-					this.updateBoards(initialState);
-				}
-			})
-			.catch((err) => console.log(err));
-	};
+    // axios
+    // 	.all([boardsRequest, metaTagsRequest]) // needs to be json
+    // 	.then(
+    // 		axios.spread((...responses) => {
+    // 			const boardsResponse = responses[0];
+    // 			const metaTagsResponse = responses[1];
 
-	putBoards = async () => {
-		let url = DB_URL + this.state.username + '/data.json';
-		const { data } = this.state;
+    // 			console.log(boardsResponse);
+    // 			console.log(metaTagsResponse);
+    // 		})
+    // 	)
+    // 	.catch((errors) => {
+    // 		console.log(errors);
+    // 	});
 
-		if (data) {
-			data.newContent = null;
-			axios.put(url, data, { headers: { 'Content-Type': 'text/plain' } });
-		}
-	};
+    axios
+      .get(boardsURL)
+      .then((res) => {
+        const { data } = res;
+        if (data) {
+          const name = profileObj.givenName + ' ' + profileObj.familyName;
+          data.name = name;
 
-	fetchNewContent = async () => {
-		let url = DB_URL + this.state.username + '/data/newContent.json';
+          // loop through content
+          // for each content, check if has metaTitle
+          // 	if not, make await axios call to scraper endpoint
+          //	set metatags to content
+          //	else, do nothing
+          if (data.content) {
+            Object.entries(data.content).map((content) => {
+              if (!content[1].metaTitle) {
+                console.log(content[1].url);
+                axios
+                  .post(
+					  scraperEndpoint,
+                    // 'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
+                    { url: content[1].url }
+                  )
+                  .then((res) => {
+                    console.log(res);
+                    // do some some with data
+                  })
+                  .catch((err) => console.log(err));
+              }
+            });
+          }
 
-		axios.get(url).then((res) => {
-			const { data } = res;
-			if (data) {
-				Object.entries(data).map((newContent) => {
-					const { url, quickThoughts, category, date } =
-						newContent[1];
-					const id = uuidv4();
-					const newCard = {
-						id,
-						url,
-						quickThoughts,
-						category,
-						date,
-					};
-					const content = {
-						...this.state.data.content,
-						[newCard.id]: newCard,
-					};
-					const board0 = {
-						...this.state.data.boards.board0,
-						contentIds: [
-							id,
-							...this.state.data.boards.board0.contentIds,
-						],
-					};
-					const boards = {
-						...this.state.data.boards,
-						board0,
-					};
-					const newState = {
-						...this.state,
-						data: {
-							...this.state.data,
-							content,
-							boards,
-						},
-					};
-					this.setState(newState);
-					this.putBoards();
-				});
-			}
-		});
-	};
+          this.setState({ data });
+        } else {
+          const board0 = {
+            id: 'board0',
+            title: 'Fresh Content',
+            contentIds: [0],
+          };
+          const boardOrder = ['board0'];
+          const initialState = {
+            data: {
+              content: {},
+              boards: {
+                [board0.id]: board0,
+              },
+              boardOrder,
+            },
+          };
 
-	updateBoards = (newState) => {
-		this.setState(newState, () => {
-			this.putBoards();
-		});
-	};
+          this.updateBoards(initialState);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
-	responseGoogleLogin = (response) => {
-		if (response.profileObj) {
-			const profileObj = response.profileObj;
-			const email = profileObj.email;
-			const username = email.replace(/[^a-zA-Z0-9 ]/g, '');
-			this.setState({ username });
-			this.setState({ profileObj });
-			this.fetchBoads();
-		}
-	};
+  putBoards = async () => {
+    let url = DB_URL + this.state.username + '/data.json';
+    const { data } = this.state;
 
-	responseGoogleLogout = (response) => {
-		this.setState({ profileObj: null, username: null });
-	};
+    if (data) {
+      data.newContent = null;
+      axios.put(url, data, { headers: { 'Content-Type': 'text/plain' } });
+    }
+  };
 
-	render() {
-		const { profileObj, username, data } = this.state;
+  fetchNewContent = async () => {
+    let url = DB_URL + this.state.username + '/data/newContent.json';
 
-		return (
-			<Router basename="/">
-				<Switch>
-					<Route path="/u">
-						<ShareBoard />
-					</Route>
-					{profileObj ? (
-						<Route path="/">
-							<Container>
-								<PinboardCreator
-									profileObj={profileObj}
-									username={username}
-									data={data}
-									updateBoards={this.updateBoards}
-									responseGoogleLogout={
-										this.responseGoogleLogout
-									}
-								/>
-							</Container>
-						</Route>
-					) : (
-						<LogInComponent
-							responseGoogleLogin={this.responseGoogleLogin}
-						/>
-					)}
-				</Switch>
-			</Router>
-		);
-	}
+    axios.get(url).then((res) => {
+      const { data } = res;
+      if (data) {
+        Object.entries(data).map((newContent) => {
+          const { url, quickThoughts, category, date } = newContent[1];
+          const id = uuidv4();
+          const newCard = {
+            id,
+            url,
+            quickThoughts,
+            category,
+            date,
+          };
+          const content = {
+            ...this.state.data.content,
+            [newCard.id]: newCard,
+          };
+          const board0 = {
+            ...this.state.data.boards.board0,
+            contentIds: [id, ...this.state.data.boards.board0.contentIds],
+          };
+          const boards = {
+            ...this.state.data.boards,
+            board0,
+          };
+          const newState = {
+            ...this.state,
+            data: {
+              ...this.state.data,
+              content,
+              boards,
+            },
+          };
+          this.setState(newState);
+          this.putBoards();
+        });
+      }
+    });
+  };
+
+  updateBoards = (newState) => {
+    this.setState(newState, () => {
+      this.putBoards();
+    });
+  };
+
+  responseGoogleLogin = (response) => {
+    if (response.profileObj) {
+      const profileObj = response.profileObj;
+      const email = profileObj.email;
+      const username = email.replace(/[^a-zA-Z0-9 ]/g, '');
+      this.setState({ username });
+      this.setState({ profileObj });
+      this.fetchBoads();
+    }
+  };
+
+  responseGoogleLogout = (response) => {
+    this.setState({ profileObj: null, username: null });
+  };
+
+  render() {
+    const { profileObj, username, data } = this.state;
+
+    return (
+      <Router basename="/">
+        <Switch>
+          <Route path="/u">
+            <ShareBoard />
+          </Route>
+          {profileObj ? (
+            <Route path="/">
+              <Container>
+                <PinboardCreator
+                  profileObj={profileObj}
+                  username={username}
+                  data={data}
+                  updateBoards={this.updateBoards}
+                  responseGoogleLogout={this.responseGoogleLogout}
+                />
+              </Container>
+            </Route>
+          ) : (
+            <LogInComponent responseGoogleLogin={this.responseGoogleLogin} />
+          )}
+        </Switch>
+      </Router>
+    );
+  }
 }
+
+// import React, { Component } from 'react';
+// import axios from 'axios';
+// import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+// import { v4 as uuidv4 } from 'uuid';
+// import PinboardCreator from './components/PinboardCreator';
+// import LogInComponent from './components/LogInComponent';
+// import ShareBoard from './components/ShareBoard';
+// import styled from 'styled-components';
+// import { DB_URL } from './globals';
+// import { colors } from './globals';
+// import './App.css';
+
+// const Container = styled.div`
+//   background-color: ${colors.darkBg};
+//   color: white;
+// `;
+
+// export default class App extends Component {
+//   constructor() {
+//     super();
+//     this.state = { profileObj: null, username: null, data: null };
+//   }
+
+//   componentDidMount = () => {
+//     this.getCache();
+//     window.addEventListener('load', this.getCache);
+//     window.addEventListener('beforeunload', this.setCache);
+//     setInterval(() => {
+//       this.fetchNewContent();
+//     }, 1000);
+//   };
+
+//   componentWillUnmount = () => {
+//     this.setCache();
+//     window.removeEventListener('load', this.getCache);
+//     window.removeEventListener('beforeunload', this.setCache);
+//   };
+
+//   getCache = () => {
+//     const state = JSON.parse(localStorage.getItem('state'));
+//     if (state) {
+//       const { profileObj, username } = state;
+//       if (profileObj) {
+//         this.setState({ profileObj, username });
+//         setTimeout(() => {
+//           this.fetchBoads();
+//         }, 1000);
+//       }
+//     }
+//   };
+
+//   setCache = () => {
+//     localStorage.setItem('state', JSON.stringify(this.state));
+//     this.putBoards();
+//   };
+
+//   fetchBoads = async () => {
+//     const { profileObj } = this.state;
+//     const url = DB_URL + this.state.username + '/data.json';
+
+//     axios
+//       .get(url)
+//       .then((res) => {
+//         const { data } = res;
+//         if (data) {
+//           const name = profileObj.givenName + ' ' + profileObj.familyName;
+//           data.name = name;
+//           this.setState({ data });
+//         } else {
+//           const board0 = {
+//             id: 'board0',
+//             title: 'Fresh Content',
+//             contentIds: [0],
+//           };
+//           const boardOrder = ['board0'];
+//           const initialState = {
+//             data: {
+//               content: {},
+//               boards: {
+//                 [board0.id]: board0,
+//               },
+//               boardOrder,
+//             },
+//           };
+
+//           this.updateBoards(initialState);
+//         }
+//       })
+//       .catch((err) => console.log(err));
+//   };
+
+//   putBoards = async () => {
+//     let url = DB_URL + this.state.username + '/data.json';
+//     const { data } = this.state;
+
+//     if (data) {
+//       data.newContent = null;
+//       axios.put(url, data, { headers: { 'Content-Type': 'text/plain' } });
+//     }
+//   };
+
+//   fetchNewContent = async () => {
+//     let url = DB_URL + this.state.username + '/data/newContent.json';
+
+//     axios.get(url).then((res) => {
+//       const { data } = res;
+//       if (data) {
+//         Object.entries(data).map((newContent) => {
+//           const { url, quickThoughts, category, date } = newContent[1];
+//           const id = uuidv4();
+//           const newCard = {
+//             id,
+//             url,
+//             quickThoughts,
+//             category,
+//             date,
+//           };
+//           const content = {
+//             ...this.state.data.content,
+//             [newCard.id]: newCard,
+//           };
+//           const board0 = {
+//             ...this.state.data.boards.board0,
+//             contentIds: [id, ...this.state.data.boards.board0.contentIds],
+//           };
+//           const boards = {
+//             ...this.state.data.boards,
+//             board0,
+//           };
+//           const newState = {
+//             ...this.state,
+//             data: {
+//               ...this.state.data,
+//               content,
+//               boards,
+//             },
+//           };
+//           this.setState(newState);
+//           this.putBoards();
+//         });
+//       }
+//     });
+//   };
+
+//   updateBoards = (newState) => {
+//     this.setState(newState, () => {
+//       this.putBoards();
+//     });
+//   };
+
+//   responseGoogleLogin = (response) => {
+//     if (response.profileObj) {
+//       const profileObj = response.profileObj;
+//       const email = profileObj.email;
+//       const username = email.replace(/[^a-zA-Z0-9 ]/g, '');
+//       this.setState({ username });
+//       this.setState({ profileObj });
+//       this.fetchBoads();
+//     }
+//   };
+
+//   responseGoogleLogout = (response) => {
+//     this.setState({ profileObj: null, username: null });
+//   };
+
+//   render() {
+//     const { profileObj, username, data } = this.state;
+
+//     return (
+//       <Router basename="/">
+//         <Switch>
+//           <Route path="/u">
+//             <ShareBoard />
+//           </Route>
+//           {profileObj ? (
+//             <Route path="/">
+//               <Container>
+//                 <PinboardCreator
+//                   profileObj={profileObj}
+//                   username={username}
+//                   data={data}
+//                   updateBoards={this.updateBoards}
+//                   responseGoogleLogout={this.responseGoogleLogout}
+//                 />
+//               </Container>
+//             </Route>
+//           ) : (
+//             <LogInComponent responseGoogleLogin={this.responseGoogleLogin} />
+//           )}
+//         </Switch>
+//       </Router>
+//     );
+//   }
+// }

@@ -6,7 +6,7 @@ import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
-import { DB_URL, scraperEndpoint, colors } from './globals';
+import { DB_URL, scraperEndpoint, localScraperEndpoint, colors } from './globals';
 import './App.css';
 
 const Container = styled.div`
@@ -57,30 +57,6 @@ export default class App extends Component {
     const { profileObj } = this.state;
     const boardsURL = DB_URL + this.state.username + '/data.json';
 
-    // const boardsRequest = axios.get(boardsURL);
-    // const metaTagsRequest = axios.post(
-    // 	'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
-    // 	{
-    // 		Name: 'Fred',
-    // 		Age: '23',
-    // 	}
-    // );
-
-    // axios
-    // 	.all([boardsRequest, metaTagsRequest]) // needs to be json
-    // 	.then(
-    // 		axios.spread((...responses) => {
-    // 			const boardsResponse = responses[0];
-    // 			const metaTagsResponse = responses[1];
-
-    // 			console.log(boardsResponse);
-    // 			console.log(metaTagsResponse);
-    // 		})
-    // 	)
-    // 	.catch((errors) => {
-    // 		console.log(errors);
-    // 	});
-
     axios
       .get(boardsURL)
       .then((res) => {
@@ -98,12 +74,10 @@ export default class App extends Component {
             Object.entries(data.content).map((content) => {
               if (!content[1].metaTitle) {
                 console.log(content[1].url);
-                axios
-                  .post(
-					  scraperEndpoint,
-                    // 'http://localhost:5001/diffusion-web-app-mvp/us-central1/scraper',
-                    { url: content[1].url }
-                  )
+                axios.post(
+                    // scraperEndpoint,
+                    localScraperEndpoint, 
+                    { url: content[1].url })
                   .then((res) => {
                     console.log(res);
                     // do some some with data

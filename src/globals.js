@@ -4,6 +4,9 @@ export const DB_URL =
 
 export const scraperEndpoint =
 	'https://us-central1-diffusion-web-app-mvp.cloudfunctions.net/scraper';
+export const localScraperEndpoint = 
+	"http://localhost:5000/diffusion-board-creator/us-central1/scraper";
+
 
 export const socials = {
 	diffusion: 'https://diffusion.me/',

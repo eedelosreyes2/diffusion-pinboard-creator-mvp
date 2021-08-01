@@ -10,7 +10,7 @@
       "port": 5000
     },
     "database": {
-      "port": 9002
+      "port": 9003
     },
     "ui": {
       "enabled": true

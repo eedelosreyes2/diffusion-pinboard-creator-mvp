@@ -65,24 +65,27 @@ export default class App extends Component {
           const name = profileObj.givenName + ' ' + profileObj.familyName;
           data.name = name;
 
-          // loop through content
-          // for each content, check if has metaTitle
-          // 	if not, make await axios call to scraper endpoint
-          //	set metatags to content
-          //	else, do nothing
           if (data.content) {
             Object.entries(data.content).map((content) => {
               if (!content[1].metaTitle) {
-                console.log(content[1].url);
                 axios.post(
                     // scraperEndpoint,
                     localScraperEndpoint, 
                     { url: content[1].url })
                   .then((res) => {
-                    console.log(res);
-                    // do some some with data
+                    const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+                    content[1] = {
+                      ...content[1],
+                      metaTitle,
+                      metaFavicon,
+                      metaImagebase64
+                    };
+                    console.log(content[1].id);
+
+                    data.content[content[1].id] = content[1];
+                    console.log(data.content[content[1].id])
                   })
-                  .catch((err) => console.log(err));
+                  .catch((err) => console.log(content[1].url, err));
               }
             });
           }
@@ -109,6 +112,10 @@ export default class App extends Component {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  editContent = (content) => {
+    this.data.content[content.id] = content;
   };
 
   putBoards = async () => {

@@ -59,6 +59,7 @@ export class Card extends Component {
 		const { id, quickThoughts, category } = this.props.content;
 		const url = this.setHttp(this.props.content.url);
 
+		console.log(this.props.content)
 		return (
 			<Draggable draggableId={id} index={this.props.index}>
 				{(provided, snapshot) => {
@@ -69,6 +70,7 @@ export class Card extends Component {
 							isDragging={snapshot.isDragging}
 						>
 							<Handle {...provided.dragHandleProps} />
+							<p>{this.props.content.metaTitle}</p>
 							<Url as="a" href={url} target="__blank">
 								{url
 									? url

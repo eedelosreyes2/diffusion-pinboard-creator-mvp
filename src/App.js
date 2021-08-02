@@ -6,7 +6,12 @@ import PinboardCreator from './components/PinboardCreator';
 import LogInComponent from './components/LogInComponent';
 import ShareBoard from './components/ShareBoard';
 import styled from 'styled-components';
-import { DB_URL, scraperEndpoint, localScraperEndpoint, colors } from './globals';
+import {
+  DB_URL,
+  scraperEndpoint,
+  localScraperEndpoint,
+  colors,
+} from './globals';
 import './App.css';
 
 const Container = styled.div`
@@ -65,25 +70,23 @@ export default class App extends Component {
           const name = profileObj.givenName + ' ' + profileObj.familyName;
           data.name = name;
 
+          // Fetch meta tags
           if (data.content) {
             Object.entries(data.content).map((content) => {
-              if (!content[1].metaTitle) {
-                axios.post(
-                    // scraperEndpoint,
-                    localScraperEndpoint, 
-                    { url: content[1].url })
+              if (!content[1].isScraped) {
+                axios
+                  .post(localScraperEndpoint, { url: content[1].url })
                   .then((res) => {
-                    const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+                    const { metaTitle, metaFavicon, metaImagebase64 } =
+                      res.data;
                     content[1] = {
                       ...content[1],
                       metaTitle,
                       metaFavicon,
-                      metaImagebase64
+                      metaImagebase64,
+                      isScraped: true,
                     };
-                    console.log(content[1].id);
-
                     data.content[content[1].id] = content[1];
-                    console.log(data.content[content[1].id])
                   })
                   .catch((err) => console.log(content[1].url, err));
               }
@@ -114,10 +117,6 @@ export default class App extends Component {
       .catch((err) => console.log(err));
   };
 
-  editContent = (content) => {
-    this.data.content[content.id] = content;
-  };
-
   putBoards = async () => {
     let url = DB_URL + this.state.username + '/data.json';
     const { data } = this.state;
@@ -144,6 +143,22 @@ export default class App extends Component {
             category,
             date,
           };
+
+          // Fetch meta tags
+          axios
+            .post(localScraperEndpoint, { url })
+            .then((res) => {
+              const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+              newCard = {
+                ...newCard,
+                metaTitle,
+                metaFavicon,
+                metaImagebase64,
+                isScraped: true,
+              };
+            })
+            .catch((err) => console.log(err));
+
           const content = {
             ...this.state.data.content,
             [newCard.id]: newCard,

@@ -117,8 +117,10 @@ export default class ShareBoardCard extends Component {
             ) : (
               <NoImage />
             )}
-            <Url>
-              {url
+            <Url as="a" href={url} target="__blank">
+              {metaTitle
+                ? metaTitle
+                : url
                 ? url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0]
                 : ''}
             </Url>

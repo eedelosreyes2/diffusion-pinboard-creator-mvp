@@ -48,7 +48,7 @@ const Url = styled.div`
 
 const QuickThoughts = styled.div`
   display: flex;
-  margin: 20px auto;
+  margin: 10px auto;
   width: 90%;
 `;
 
@@ -109,13 +109,11 @@ export class Card extends Component {
                 </IconContext.Provider>
               </Handle>
               <a href={url} target="__blank">
-                <Image
-                  src={
-                    metaImagebase64
-                      ? `data:image/png;base64,${metaImagebase64}`
-                      : 'images/Logo_1_256x256.png'
-                  }
-                />
+                {metaImagebase64 ? (
+                  <Image src={`data:image/png;base64,${metaImagebase64}`} />
+                ) : (
+                  ''
+                )}
               </a>
               <Url as="a" href={url} target="__blank">
                 {metaTitle

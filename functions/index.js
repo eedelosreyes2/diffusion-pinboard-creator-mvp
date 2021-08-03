@@ -25,14 +25,14 @@ exports.scraper = functions.https.onRequest((req, res) => {
             const page = await browser.newPage();
             await page.goto(url, {"waitUntil" : "networkidle0"});
             await page.screenshot({
-              path: "imagebase64.png",
+              path: "/tmp/imagebase64.png",
               omitBackground: true
             });
             await browser.close();
           };
 
           getScreenshot().then(() => {
-            const imagebase64 = fs.readFileSync("imagebase64.png", {encoding:"base64"});
+            const imagebase64 = fs.readFileSync("/tmp/imagebase64.png", {encoding:"base64"});
   
             const data = {
               url,

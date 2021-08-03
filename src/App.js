@@ -72,23 +72,23 @@ export default class App extends Component {
 
           // Fetch meta tags
           if (data.content) {
-            Object.entries(data.content).map((content) => {
-              if (!content[1].isScraped) {
+            Object.entries(data.content).map((contentObj) => {
+              let content = contentObj[1];
+              if (!content.metaTitle) {
                 axios
-                  .post(localScraperEndpoint, { url: content[1].url })
+                  .post(scraperEndpoint, { url: content.url })
                   .then((res) => {
                     const { metaTitle, metaFavicon, metaImagebase64 } =
                       res.data;
-                    content[1] = {
-                      ...content[1],
+                    content = {
+                      ...content,
                       metaTitle,
                       metaFavicon,
                       metaImagebase64,
-                      isScraped: true,
                     };
-                    data.content[content[1].id] = content[1];
+                    data.content[content.id] = content;
                   })
-                  .catch((err) => console.log(content[1].url, err));
+                  .catch((err) => console.log(content.url, err));
               }
             });
           }

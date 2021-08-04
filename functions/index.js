@@ -1,9 +1,23 @@
 const functions = require("firebase-functions");
 const axios = require("axios");
-const cors = require("cors")({ origin: true });
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+
+const cors = require("cors")({
+  origin: true,
+  allowedHeaders: [
+    "Access-Control-Allow-Origin",
+    "Access-Control-Allow-Methods",
+    "Content-Type",
+    "Origin",
+    "X-Requested-With",
+    "Accept",
+    "Authorization"
+  ],
+  methods: ["POST", "OPTIONS"],
+  credentials: true,
+});
 
 exports.scraper = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
@@ -46,6 +60,11 @@ exports.scraper = functions.https.onRequest((req, res) => {
             };
   
             return res.status(200).send(data);
+          })
+          .catch((err) => {
+            return res.status(500).json({
+              error: err
+            });
           });
         })
         .catch((err) => {

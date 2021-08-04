@@ -29,9 +29,9 @@ export default class App extends Component {
     this.getCache();
     window.addEventListener('load', this.getCache);
     window.addEventListener('beforeunload', this.setCache);
-    setInterval(() => {
-      this.fetchNewContent();
-    }, 1000);
+    // setInterval(() => {
+    this.fetchNewContent();
+    // }, 1000);
   };
 
   componentWillUnmount = () => {
@@ -76,7 +76,17 @@ export default class App extends Component {
               let content = contentObj[1];
               if (!content.metaTitle) {
                 axios
-                  .post(scraperEndpoint, { url: content.url })
+                  .post(
+                    scraperEndpoint,
+                    { url: content.url },
+                    {
+                      headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                      },
+                    }
+                  )
                   .then((res) => {
                     const { metaTitle, metaFavicon, metaImagebase64 } =
                       res.data;

@@ -195,6 +195,21 @@ export default class PinboardCreator extends Component {
       quickThoughts,
       category,
     };
+
+    // // Fetch meta tags
+    // axios
+    //   .post(localScraperEndpoint, { url })
+    //   .then((res) => {
+    //     const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+    //     newCard = {
+    //       ...newCard,
+    //       metaTitle,
+    //       metaFavicon,
+    //       metaImagebase64,
+    //     };
+    //   })
+    //   .catch((err) => console.log(err));
+
     const content = {
       ...this.props.data.content,
       [newCard.id]: newCard,
@@ -261,8 +276,13 @@ export default class PinboardCreator extends Component {
 
   editCard = (e, contentId) => {
     const content = this.props.data.content[contentId];
+    console.log(e.blob);
 
-    if (e.currentTarget.id === 'card-quick-thoughts') {
+    if (typeof e === 'string') {
+      console.log(e);
+      content.metaImagebase64 = '';
+      content.customImage = e;
+    } else if (e.currentTarget.id === 'card-quick-thoughts') {
       content.quickThoughts = e.currentTarget.innerHTML;
     } else if (e.currentTarget.id === 'card-category') {
       content.category = e.currentTarget.innerHTML;

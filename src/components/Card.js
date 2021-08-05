@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import ContentEditable from 'react-contenteditable';
+import Popup from 'reactjs-popup';
+import ImageUploader from 'react-images-upload';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { MdInsertPhoto } from 'react-icons/md';
 import styled from 'styled-components';
 import { colors } from '../globals';
+import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
   background-color: ${colors.darkBg};
@@ -29,14 +33,57 @@ const Handle = styled.div`
   width: 100%;
 `;
 
-const iconStyle = {
-  top: 0,
-};
-
 const Image = styled.img`
-  height: 180px;
+  height: 150px;
+  pointer-events: none;
   width: 100%;
 `;
+
+const InsertImage = styled.div`
+  align-items: center;
+  background-color: grey;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  opacity: 50%;
+  right: 10px;
+  top: 30px;
+  position: absolute;
+  width: 25px;
+`;
+
+const InsertImageModalContainer = styled.div`
+  align-items: center;
+  background-color: ${colors.darkBg};
+  border: 2px solid ${colors.primary};
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 200px;
+  height: 60px;
+`;
+
+const arrowStyle = { color: colors.primary };
+
+const InsertImageButton = styled.div`
+  align-items: center;
+  background-color: grey;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-family: aleo;
+  height: 70%;
+  justify-content: center;
+  width: 40%;
+`;
+
+const imageUploadButtonStyle = {
+  background: 'none',
+  fontFamily: 'aleo',
+};
 
 const Url = styled.div`
   color: ${colors.primary};
@@ -83,6 +130,8 @@ export class Card extends Component {
     return link;
   };
 
+  handleURL = () => {};
+
   render() {
     const {
       id,
@@ -91,8 +140,18 @@ export class Card extends Component {
       metaTitle,
       metaFavicon,
       metaImagebase64,
+      customImage,
     } = this.props.content;
     const url = this.setHttp(this.props.content.url);
+
+    let imgSrc = '';
+    if (metaImagebase64) {
+      imgSrc = `data:image/png;base64,${metaImagebase64}`;
+    } else if (customImage) {
+      imgSrc = customImage;
+    } else {
+      imgSrc = Logo;
+    }
 
     return (
       <Draggable draggableId={id} index={this.props.index}>
@@ -108,13 +167,40 @@ export class Card extends Component {
                   <HiOutlineDotsHorizontal />
                 </IconContext.Provider>
               </Handle>
-              <a href={url} target="__blank">
-                {metaImagebase64 ? (
-                  <Image src={`data:image/png;base64,${metaImagebase64}`} />
-                ) : (
-                  ''
-                )}
-              </a>
+              <Image src={imgSrc}></Image>
+              <Popup
+                trigger={
+                  <InsertImage onClick={this.handleInsertImage}>
+                    <MdInsertPhoto />
+                  </InsertImage>
+                }
+                position="left"
+                {...{ arrowStyle }}
+              >
+                <InsertImageModalContainer>
+                  <InsertImageButton>
+                    <ImageUploader
+                      id="image-uploader"
+                      withIcon={false}
+                      withLabel={false}
+                      withPreview={false}
+                      buttonText="Upload"
+                      fileContainerStyle={{ background: 'none' }}
+                      buttonStyles={imageUploadButtonStyle}
+                      onChange={(image) => {
+                        console.log(image[0]);
+                        this.props.editCard(URL.createObjectURL(image[0]), id);
+                      }}
+                      imgExtension={['.jpg', '.gif', '.png', '.gif', '.svg']}
+                      maxFileSize={1048576}
+                      fileSizeError=" File size is too big!"
+                    ></ImageUploader>
+                  </InsertImageButton>
+                  <InsertImageButton onClick={this.handleURL}>
+                    URL
+                  </InsertImageButton>
+                </InsertImageModalContainer>
+              </Popup>
               <Url as="a" href={url} target="__blank">
                 {metaTitle
                   ? metaTitle

@@ -275,19 +275,34 @@ export default class PinboardCreator extends Component {
   };
 
   editCard = (e, contentId) => {
+    console.log(contentId);
     const content = this.props.data.content[contentId];
-    console.log(e.blob);
 
-    if (typeof e === 'string') {
-      console.log(e);
+    if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
+      content.quickThoughts = e.currentTarget.innerHTML;
+    } else if (e.currentTarget && e.currentTarget.id === 'card-category') {
+      content.category = e.currentTarget.innerHTML;
+    } else {
       content.metaImagebase64 = '';
       content.customImage = e;
-    } else if (e.currentTarget.id === 'card-quick-thoughts') {
-      content.quickThoughts = e.currentTarget.innerHTML;
-    } else if (e.currentTarget.id === 'card-category') {
-      content.category = e.currentTarget.innerHTML;
+      console.log(content.customImage);
     }
-    this.props.updateBoards(this.state);
+
+    const newState = {
+      ...this.props,
+      data: {
+        ...this.props.data,
+        boards: {
+          ...this.props.data.boards,
+        },
+        content: {
+          ...this.props.data.content,
+          [contentId]: content,
+        },
+      },
+    };
+
+    this.props.updateBoards(newState);
   };
 
   render() {

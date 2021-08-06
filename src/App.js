@@ -197,6 +197,7 @@ export default class App extends Component {
   };
 
   updateBoards = (newState) => {
+    console.log(newState);
     this.setState(newState, () => {
       this.putBoards();
     });

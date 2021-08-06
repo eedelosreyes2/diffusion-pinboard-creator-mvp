@@ -148,6 +148,7 @@ export class Card extends Component {
     if (metaImagebase64) {
       imgSrc = `data:image/png;base64,${metaImagebase64}`;
     } else if (customImage) {
+      console.log(customImage);
       imgSrc = customImage;
     } else {
       imgSrc = Logo;
@@ -167,7 +168,7 @@ export class Card extends Component {
                   <HiOutlineDotsHorizontal />
                 </IconContext.Provider>
               </Handle>
-              <Image src={imgSrc}></Image>
+              <Image id={id + `image`} src={imgSrc}></Image>
               <Popup
                 trigger={
                   <InsertImage onClick={this.handleInsertImage}>
@@ -188,8 +189,13 @@ export class Card extends Component {
                       fileContainerStyle={{ background: 'none' }}
                       buttonStyles={imageUploadButtonStyle}
                       onChange={(image) => {
-                        console.log(image[0]);
-                        this.props.editCard(URL.createObjectURL(image[0]), id);
+                        const preview = document.getElementById(id + `image`);
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                          preview.src = reader.result;
+                          this.props.editCard(reader.result, id);
+                        };
+                        reader.readAsDataURL(image[0]);
                       }}
                       imgExtension={['.jpg', '.gif', '.png', '.gif', '.svg']}
                       maxFileSize={1048576}

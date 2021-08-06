@@ -49,7 +49,6 @@ const Header = styled.div`
   display: flex;
   height: 90px;
   justify-content: center;
-  // position: absolute;
   top: 0;
   width: 100%;
 `;
@@ -60,18 +59,17 @@ const LogoImg = styled.img`
 `;
 
 const StoryContainer = styled.div`
-  // background-color: red;
   display: flex;
   flex-direction: column;
   height: 75%;
   justify-content: center;
   margin: auto;
-  // padding: 50px 0 0 50px;
   padding-top: 100px;
   width: 80%;
   @media only screen and (max-width: 1400px) {
     display: block;
     padding: 0;
+    width: 100%;
   }
 `;
 

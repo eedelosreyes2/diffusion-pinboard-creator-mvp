@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '../globals';
+import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
   align-items: center;
@@ -9,7 +10,7 @@ const Container = styled.div`
   color: white;
   cursor: pointer;
   display: flex;
-  min-height: 50px;
+  min-height: 250px;
   justify-content: center;
   padding-bottom: 40px;
   position: relative;
@@ -90,8 +91,18 @@ export default class ShareBoardCard extends Component {
       metaTitle,
       metaFavicon,
       metaImagebase64,
+      customImage,
     } = this.props.content;
     const url = this.setHttp(this.props.content.url);
+
+    let imgSrc = '';
+    if (metaImagebase64) {
+      imgSrc = `data:image/png;base64,${metaImagebase64}`;
+    } else if (customImage) {
+      imgSrc = customImage;
+    } else {
+      imgSrc = Logo;
+    }
 
     let quickThoughtsArr = quickThoughts.split('<div>');
     let i;
@@ -112,11 +123,7 @@ export default class ShareBoardCard extends Component {
           isHovered={this.state.isHovered}
         >
           <div>
-            {metaImagebase64 ? (
-              <Image src={`data:image/png;base64,${metaImagebase64}`} />
-            ) : (
-              <NoImage />
-            )}
+            <Image src={imgSrc} />
             <Url as="a" href={url} target="__blank">
               {metaTitle
                 ? metaTitle

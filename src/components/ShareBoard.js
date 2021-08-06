@@ -4,7 +4,7 @@ import ShareBoardCard from './ShareBoardCard';
 import styled from 'styled-components';
 import { DB_URL } from '../globals';
 import { colors } from '../globals';
-import Logo from '../images/Logo.png';
+import Logo from '../images/Logo_cool.png';
 
 const Container = styled.div`
   align-items: center;
@@ -28,14 +28,14 @@ const Background = styled.div`
   width: 95vw;
   @media only screen and (max-width: 1400px) {
     height: 90%;
-    padding: 100px 0;
+    padding: 0;
     width: 90%;
   }
 `;
 
 const InnerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   margin: auto;
   width: 95%;
@@ -47,38 +47,44 @@ const InnerContainer = styled.div`
 const Header = styled.div`
   align-items: center;
   display: flex;
-  height: 75px;
+  height: 90px;
   justify-content: center;
-  position: absolute;
+  // position: absolute;
   top: 0;
   width: 100%;
 `;
 
 const LogoImg = styled.img`
   cursor: pointer;
-  height: 40px;
+  height: 50px;
 `;
 
 const StoryContainer = styled.div`
+  // background-color: red;
   display: flex;
   flex-direction: column;
   height: 75%;
   justify-content: center;
   margin: auto;
-  width: 100%;
+  // padding: 50px 0 0 50px;
+  padding-top: 100px;
+  width: 80%;
   @media only screen and (max-width: 1400px) {
     display: block;
+    padding: 0;
   }
 `;
 
 const Title = styled.div`
   font-size: 60px;
+  overflow-wrap: break-word;
+  text-overflow: wrap;
 `;
 
 const TitleUnderline = styled.div`
   height: 2px;
   background-color: ${colors.secondary};
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   width: 300px;
   @media only screen and (max-width: 1400px) {
     margin-bottom: 50px;
@@ -99,31 +105,33 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   height: 90%;
   margin: auto;
-  padding-bottom: 100px;
-  padding-top: 100px;
+  padding: 50px 0 100px 0;
   justify-content: space-evenly;
   justify-items: center;
-  width: 100%;
+  width: 70%;
   @media only screen and (max-width: 1400px) {
-    padding: 100px 0;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
   }
 `;
 
 const ShareBoardCardContainer = styled.div`
+  margin: 10px;
   @media only screen and (max-width: 1400px) {
     margin: 20px;
   }
 `;
 
 const Footer = styled.div`
-  bottom: 0;
   align-items: center;
+  bottom: 0;
   display: flex;
   height: 150px;
   justify-content: center;
+  left: 0;
   position: absolute;
+  right: 0;
   width: 100%;
 `;
 

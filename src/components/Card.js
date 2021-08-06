@@ -121,6 +121,13 @@ const Favicon = styled.img`
 `;
 
 export class Card extends Component {
+  constructor() {
+    super();
+    this.state = {
+      popupIsDisabled: false,
+    };
+  }
+
   setHttp = (link) => {
     if (link) {
       if (link.search(/^http[s]?:\/\//) === -1) {
@@ -130,7 +137,26 @@ export class Card extends Component {
     return link;
   };
 
-  handleURL = () => {};
+  handleUpload = (image, id) => {
+    const preview = document.getElementById(id + `image`);
+    const reader = new FileReader();
+    reader.onload = () => {
+      preview.src = reader.result;
+      this.props.editCard(reader.result, id);
+    };
+    reader.readAsDataURL(image[0]);
+  };
+
+  handleURL = (id) => {
+    const url = prompt('Enter the URL of the image: ');
+    if (url) {
+      if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
+        this.props.editCard(url, id);
+      } else {
+        alert('Image not found at given URL.');
+      }
+    }
+  };
 
   render() {
     const {
@@ -148,7 +174,6 @@ export class Card extends Component {
     if (metaImagebase64) {
       imgSrc = `data:image/png;base64,${metaImagebase64}`;
     } else if (customImage) {
-      console.log(customImage);
       imgSrc = customImage;
     } else {
       imgSrc = Logo;
@@ -189,20 +214,14 @@ export class Card extends Component {
                       fileContainerStyle={{ background: 'none' }}
                       buttonStyles={imageUploadButtonStyle}
                       onChange={(image) => {
-                        const preview = document.getElementById(id + `image`);
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                          preview.src = reader.result;
-                          this.props.editCard(reader.result, id);
-                        };
-                        reader.readAsDataURL(image[0]);
+                        this.handleUpload(image, id);
                       }}
                       imgExtension={['.jpg', '.gif', '.png', '.gif', '.svg']}
                       maxFileSize={1048576}
                       fileSizeError=" File size is too big!"
                     ></ImageUploader>
                   </InsertImageButton>
-                  <InsertImageButton onClick={this.handleURL}>
+                  <InsertImageButton onClick={() => this.handleURL(id)}>
                     URL
                   </InsertImageButton>
                 </InsertImageModalContainer>

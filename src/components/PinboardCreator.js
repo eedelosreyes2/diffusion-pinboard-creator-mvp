@@ -184,6 +184,17 @@ export default class PinboardCreator extends Component {
     }
   };
 
+  editBoard = (e, boardId) => {
+    const board = this.props.data.boards[boardId];
+
+    if (e.currentTarget.id === 'board-title') {
+      board.title = e.currentTarget.innerHTML;
+    } else if (e.currentTarget.id === 'board-story') {
+      board.story = e.currentTarget.innerHTML;
+    }
+    this.props.updateBoards(this.state);
+  };
+
   createContent = () => {
     const url = prompt('Enter the url: ');
     const quickThoughts = prompt('Enter Quick Thoughts: ');
@@ -263,20 +274,9 @@ export default class PinboardCreator extends Component {
     }
   };
 
-  editBoard = (e, boardId) => {
-    const board = this.props.data.boards[boardId];
-
-    if (e.currentTarget.id === 'board-title') {
-      board.title = e.currentTarget.innerHTML;
-    } else if (e.currentTarget.id === 'board-story') {
-      board.story = e.currentTarget.innerHTML;
-    }
-    this.props.updateBoards(this.state);
-  };
-
   editCard = (e, contentId) => {
-    console.log(contentId);
     const content = this.props.data.content[contentId];
+    console.log(e);
 
     if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
       content.quickThoughts = e.currentTarget.innerHTML;
@@ -285,7 +285,6 @@ export default class PinboardCreator extends Component {
     } else {
       content.metaImagebase64 = '';
       content.customImage = e;
-      console.log(content.customImage);
     }
 
     const newState = {

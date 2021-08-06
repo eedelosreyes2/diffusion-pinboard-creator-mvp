@@ -145,7 +145,7 @@ export class Board extends Component {
                 <Front
                   id={id}
                   content={this.props.content}
-                  editCard={this.props.editCard}
+                  editContent={this.props.editContent}
                 />
               )}
 
@@ -187,7 +187,7 @@ class Front extends Component {
                         key={content.id}
                         content={content}
                         index={index}
-                        editCard={this.props.editCard}
+                        editContent={this.props.editContent}
                       />
                     ) : (
                       ''

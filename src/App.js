@@ -29,9 +29,9 @@ export default class App extends Component {
     this.getCache();
     window.addEventListener('load', this.getCache);
     window.addEventListener('beforeunload', this.setCache);
-    // setInterval(() => {
-    this.fetchNewContent();
-    // }, 1000);
+    setInterval(() => {
+      this.fetchNewContent();
+    }, 1000);
   };
 
   componentWillUnmount = () => {
@@ -139,7 +139,6 @@ export default class App extends Component {
 
   fetchNewContent = async () => {
     let url = DB_URL + this.state.username + '/data/newContent.json';
-
     axios.get(url).then((res) => {
       const { data } = res;
       if (data) {
@@ -155,19 +154,19 @@ export default class App extends Component {
           };
 
           // Fetch meta tags
-          axios
-            .post(localScraperEndpoint, { url })
-            .then((res) => {
-              const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
-              newCard = {
-                ...newCard,
-                metaTitle,
-                metaFavicon,
-                metaImagebase64,
-                isScraped: true,
-              };
-            })
-            .catch((err) => console.log(err));
+          // axios
+          //   .post(localScraperEndpoint, { url })
+          //   .then((res) => {
+          //     const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+          //     newCard = {
+          //       ...newCard,
+          //       metaTitle,
+          //       metaFavicon,
+          //       metaImagebase64,
+          //       isScraped: true,
+          //     };
+          //   })
+          //   .catch((err) => console.log(err));
 
           const content = {
             ...this.state.data.content,

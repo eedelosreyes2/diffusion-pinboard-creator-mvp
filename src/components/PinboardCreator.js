@@ -197,8 +197,14 @@ export default class PinboardCreator extends Component {
 
   createContent = () => {
     const url = prompt('Enter the url: ');
+    if (!url) return;
+
     const quickThoughts = prompt('Enter Quick Thoughts: ');
+    if (quickThoughts == null) return;
+
     const category = prompt('Enter category: '); // this would be from a dropdownlist
+    if (category == null) return;
+
     const id = uuidv4();
     let newCard = {
       id,

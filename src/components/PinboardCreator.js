@@ -134,8 +134,10 @@ export default class PinboardCreator extends Component {
   };
 
   createBoard = () => {
-    const id = uuidv4();
     const title = prompt('What is the title of the board?');
+    if (!title || title == null) return;
+
+    const id = uuidv4();
     const story = 'Click here to add a story to this board!';
     const newBoard = {
       id,

@@ -224,6 +224,20 @@ export default class PinboardCreator extends Component {
           metaFavicon,
           metaImagebase64,
         };
+
+        const content = {
+          ...this.props.data.content,
+          [newCard.id]: newCard,
+        };
+        const newState = {
+          ...this.props,
+          data: {
+            ...this.props.data,
+            content,
+          },
+        };
+        this.props.updateBoards(newState);
+        console.log(newCard);
       })
       .catch((err) => console.log(err));
 
@@ -282,7 +296,6 @@ export default class PinboardCreator extends Component {
 
   editCard = (e, contentId) => {
     const content = this.props.data.content[contentId];
-    console.log(e);
 
     if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
       content.quickThoughts = e.currentTarget.innerHTML;

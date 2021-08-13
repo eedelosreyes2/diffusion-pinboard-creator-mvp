@@ -6,7 +6,7 @@ import Header from './Header';
 import NewContentContainer from './NewContentContainer';
 import Boards from './Boards';
 import styled from 'styled-components';
-import { localScraperEndpoint, scraperEndpoint } from '../globals';
+import { scraperEndpoint } from '../globals';
 
 const Container = styled.div`
   display: flex;
@@ -167,6 +167,13 @@ export default class PinboardCreator extends Component {
         `Are you sure you want to delete ${boardTitle} along with all of its content?`
       )
     ) {
+      let i;
+      const boardContent = this.props.data.boards[boardId].contentIds;
+      for (i = 0; i < Object.keys(boardContent).length - 1; i++) {
+        const id = boardContent[i];
+        delete this.props.data.content[id];
+      }
+
       delete this.props.data.boards[boardId];
       const newBoardOrder = Array.from(this.props.data.boardOrder).filter(
         (e) => e !== boardId
@@ -213,7 +220,7 @@ export default class PinboardCreator extends Component {
       category,
     };
 
-    // // Fetch meta tags
+    // Fetch meta tags
     axios
       .post(scraperEndpoint, { url })
       .then((res) => {
@@ -237,7 +244,6 @@ export default class PinboardCreator extends Component {
           },
         };
         this.props.updateBoards(newState);
-        console.log(newCard);
       })
       .catch((err) => console.log(err));
 

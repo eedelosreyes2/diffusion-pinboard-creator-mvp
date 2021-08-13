@@ -3,7 +3,7 @@ export const DB_URL =
 // 'https://diffusion-web-app-mvp-default-rtdb.firebaseio.com/';
 
 export const scraperEndpoint =
-	'https://us-central1-diffusion-web-app-mvp.cloudfunctions.net/scraper';
+	'https://us-central1-diffusion-board-creator.cloudfunctions.net/scraper';
 export const localScraperEndpoint = 
 	"http://localhost:5000/diffusion-board-creator/us-central1/scraper";
 

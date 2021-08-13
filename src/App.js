@@ -154,19 +154,19 @@ export default class App extends Component {
           };
 
           // Fetch meta tags
-          // axios
-          //   .post(localScraperEndpoint, { url })
-          //   .then((res) => {
-          //     const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
-          //     newCard = {
-          //       ...newCard,
-          //       metaTitle,
-          //       metaFavicon,
-          //       metaImagebase64,
-          //       isScraped: true,
-          //     };
-          //   })
-          //   .catch((err) => console.log(err));
+          axios
+            .post(scraperEndpoint, { url })
+            .then((res) => {
+              const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+              newCard = {
+                ...newCard,
+                metaTitle,
+                metaFavicon,
+                metaImagebase64,
+                isScraped: true,
+              };
+            })
+            .catch((err) => console.log(err));
 
           const content = {
             ...this.state.data.content,

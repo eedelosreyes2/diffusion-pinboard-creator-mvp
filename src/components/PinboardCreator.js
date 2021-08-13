@@ -6,7 +6,7 @@ import Header from './Header';
 import NewContentContainer from './NewContentContainer';
 import Boards from './Boards';
 import styled from 'styled-components';
-import { localScraperEndpoint } from '../globals';
+import { localScraperEndpoint, scraperEndpoint } from '../globals';
 
 const Container = styled.div`
   display: flex;
@@ -214,18 +214,18 @@ export default class PinboardCreator extends Component {
     };
 
     // // Fetch meta tags
-    // axios
-    //   .post(localScraperEndpoint, { url })
-    //   .then((res) => {
-    //     const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
-    //     newCard = {
-    //       ...newCard,
-    //       metaTitle,
-    //       metaFavicon,
-    //       metaImagebase64,
-    //     };
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .post(scraperEndpoint, { url })
+      .then((res) => {
+        const { metaTitle, metaFavicon, metaImagebase64 } = res.data;
+        newCard = {
+          ...newCard,
+          metaTitle,
+          metaFavicon,
+          metaImagebase64,
+        };
+      })
+      .catch((err) => console.log(err));
 
     const content = {
       ...this.props.data.content,

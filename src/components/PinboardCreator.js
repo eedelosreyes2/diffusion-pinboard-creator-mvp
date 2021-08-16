@@ -39,7 +39,7 @@ const Button = styled.div`
   display: flex;
   font-weight: bold;
   height: 175px;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-right: 10px;
   padding: 5px;
   text-align: center;

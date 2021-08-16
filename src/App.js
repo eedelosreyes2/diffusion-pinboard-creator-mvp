@@ -222,7 +222,9 @@ export default class App extends Component {
   };
 
   responseGoogleLogout = (response) => {
-    this.setState({ profileObj: null, username: null });
+    if (window.confirm('Logout?')) {
+      this.setState({ profileObj: null, username: null });
+    }
   };
 
   render() {

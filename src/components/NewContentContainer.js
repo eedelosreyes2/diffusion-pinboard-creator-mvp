@@ -4,7 +4,6 @@ import Card from './Card';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  align-items: center;
   display: flex;
   margin: 0 auto 10px auto;
   padding-top: 30px;
@@ -20,6 +19,7 @@ const Button = styled.div`
   display: flex;
   font-weight: bold;
   height: 175px;
+  margin-top: 5px;
   margin-right: 10px;
   padding: 5px;
   text-align: center;

@@ -4,9 +4,25 @@ import Card from './Card';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  align-items: center;
+  display: flex;
   margin: 0 auto 10px auto;
   padding-top: 30px;
   width: 100%;
+`;
+
+const Button = styled.div`
+  align-items: center;
+  background-color: rgba(110, 110, 110, 0.25);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  height: 175px;
+  margin-right: 10px;
+  padding: 5px;
+  text-align: center;
 `;
 
 const CardsContainer = styled.div`
@@ -28,6 +44,7 @@ export default class NewContentContainer extends Component {
 
     return (
       <Container>
+        <Button onClick={this.props.createContent}>+</Button>
         <Droppable droppableId="board0" direction="horizontal">
           {(provided) => {
             return (

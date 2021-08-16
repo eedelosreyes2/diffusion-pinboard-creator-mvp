@@ -17,7 +17,9 @@ const Container = styled.div`
   width: 95%;
 `;
 
-const ScrollContainer = styled.div``;
+const ScrollContainer = styled.div`
+  display: flex;
+`;
 
 const BoardsContainer = styled.div`
   display: flex;
@@ -25,6 +27,22 @@ const BoardsContainer = styled.div`
   margin: 0 auto;
   overflow: auto;
   padding-bottom: 75px;
+  width: 100%;
+`;
+
+const Button = styled.div`
+  align-items: center;
+  background-color: rgba(110, 110, 110, 0.25);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  height: 175px;
+  margin-top: 40px;
+  margin-right: 10px;
+  padding: 5px;
+  text-align: center;
 `;
 
 export default class PinboardCreator extends Component {
@@ -134,7 +152,9 @@ export default class PinboardCreator extends Component {
   };
 
   createBoard = () => {
-    const title = prompt('What is the title of the board?');
+    const title = prompt(
+      'Create a new Board!\nWhat is the title of the board?'
+    );
     if (!title || title == null) return;
 
     const id = uuidv4();
@@ -205,7 +225,7 @@ export default class PinboardCreator extends Component {
   };
 
   createContent = () => {
-    let url = prompt('Enter the url: ');
+    let url = prompt('Create a new Content Card!\nEnter the url: ');
     if (!url) return;
 
     if (url.search(/^http[s]?:\/\//) === -1) {
@@ -383,10 +403,12 @@ export default class PinboardCreator extends Component {
                 <NewContentContainer
                   board0={data.boards.board0}
                   content={data.content}
+                  createContent={this.createContent}
                   editCard={this.editCard}
                   deleteContent={this.deleteContent}
                 ></NewContentContainer>
                 <ScrollContainer>
+                  <Button onClick={this.createBoard}>+</Button>
                   <BoardsContainer
                     className="hidden-scroll"
                     ref={provided.innerRef}

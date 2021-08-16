@@ -205,8 +205,12 @@ export default class PinboardCreator extends Component {
   };
 
   createContent = () => {
-    const url = prompt('Enter the url: ');
+    let url = prompt('Enter the url: ');
     if (!url) return;
+
+    if (url.search(/^http[s]?:\/\//) === -1) {
+      url = 'https://' + url;
+    }
 
     const quickThoughts = prompt('Enter Quick Thoughts: ');
     if (quickThoughts == null) return;

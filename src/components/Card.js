@@ -6,6 +6,7 @@ import ImageUploader from 'react-images-upload';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { MdInsertPhoto } from 'react-icons/md';
+import { FiTrash } from 'react-icons/fi';
 import styled from 'styled-components';
 import { colors } from '../globals';
 import Logo from '../images/Logo_zoom_out.png';
@@ -111,7 +112,7 @@ const Category = styled.div`
   position: absolute;
 `;
 
-const Favicon = styled.img`
+const DeleteContainer = styled.div`
   bottom: 0;
   height: 20px;
   margin: 10px;
@@ -168,6 +169,7 @@ export class Card extends Component {
       metaImagebase64,
       customImage,
     } = this.props.content;
+    const { boardId } = this.props;
     const url = this.setHttp(this.props.content.url);
 
     let imgSrc = '';
@@ -251,7 +253,13 @@ export class Card extends Component {
                   disabled={false}
                 />
               </Category>
-              {metaFavicon ? <Favicon src={metaFavicon} /> : ''}
+              <DeleteContainer>
+                <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
+                  <FiTrash
+                    onClick={() => this.props.deleteContent(id, boardId)}
+                  />
+                </IconContext.Provider>
+              </DeleteContainer>
             </Container>
           );
         }}

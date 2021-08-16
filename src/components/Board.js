@@ -146,6 +146,7 @@ export class Board extends Component {
                   id={id}
                   content={this.props.content}
                   editContent={this.props.editContent}
+                  deleteContent={this.props.deleteContent}
                 />
               )}
 
@@ -188,6 +189,8 @@ class Front extends Component {
                         content={content}
                         index={index}
                         editContent={this.props.editContent}
+                        deleteContent={this.props.deleteContent}
+                        boardId={id}
                       />
                     ) : (
                       ''
@@ -232,7 +235,9 @@ class Footer extends Component {
     return (
       <FooterContainer boardId={id}>
         <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-          <FiTrash onClick={() => this.props.deleteBoard(id, title)} />
+          <Link to={url} target="_blank" rel="noopener noreferrer">
+            <FiShare />
+          </Link>
         </IconContext.Provider>
         <IconContext.Provider
           value={{
@@ -243,9 +248,7 @@ class Footer extends Component {
           <BsArrowClockwise onClick={this.props.handleFlip} />
         </IconContext.Provider>
         <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-          <Link to={url} target="_blank" rel="noopener noreferrer">
-            <FiShare />
-          </Link>
+          <FiTrash onClick={() => this.props.deleteBoard(id, title)} />
         </IconContext.Provider>
       </FooterContainer>
     );

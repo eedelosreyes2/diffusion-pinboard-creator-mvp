@@ -3,7 +3,14 @@ import Board from './Board';
 
 export default class Boards extends Component {
   render() {
-    const { data, username, deleteBoard, editBoard, editContent } = this.props;
+    const {
+      data,
+      username,
+      deleteBoard,
+      editBoard,
+      editContent,
+      deleteContent,
+    } = this.props;
 
     return (
       <>
@@ -28,6 +35,7 @@ export default class Boards extends Component {
                 deleteBoard={deleteBoard}
                 editBoard={editBoard}
                 editContent={editContent}
+                deleteContent={deleteContent}
               />
             );
           }

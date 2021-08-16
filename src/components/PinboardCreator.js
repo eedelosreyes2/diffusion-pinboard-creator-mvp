@@ -62,10 +62,10 @@ export default class PinboardCreator extends Component {
     const finish = this.props.data.boards[destination.droppableId]; // Finish Board
 
     // Dragging Content into Trash
-    if (destination.droppableId === 'trash') {
-      this.deleteContent(draggableId, start, source);
-      return;
-    }
+    // if (destination.droppableId === 'trash') {
+    //   this.deleteContent(draggableId, start, source);
+    //   return;
+    // }
 
     // If more than 5 in finish board, do not drop Content
     if (
@@ -272,33 +272,59 @@ export default class PinboardCreator extends Component {
     this.props.updateBoards(newState);
   };
 
-  deleteContent = (draggableId, start, source) => {
+  deleteContent = (contentId, boardId) => {
     if (
       window.confirm(
-        `Are you sure you want to delete content from ${this.props.data.content[draggableId].url} ?`
+        `Are you sure you want to delete content from ${this.props.data.content[contentId].url} ?`
       )
     ) {
-      delete this.props.data.content[draggableId];
-      const startContentIds = Array.from(start.contentIds);
-      startContentIds.splice(source.index, 1);
+      const boardContent = this.props.data.boards[boardId].contentIds;
+      const index = boardContent.indexOf(contentId);
+      boardContent.splice(index, 1);
 
-      const newStart = {
-        ...start,
-        contentIds: startContentIds,
+      const newBoard = {
+        ...this.props.data.boards[boardId],
+        contentIds: boardContent,
+      };
+
+      const newBoards = {
+        ...this.props.data.boards,
+        newBoard,
       };
 
       const newState = {
         ...this.props,
         data: {
           ...this.props.data,
-          boards: {
-            ...this.props.data.boards,
-            [newStart.id]: newStart,
-          },
+          boards: newBoards,
         },
       };
 
+      delete this.props.data.content[contentId];
+
       this.props.updateBoards(newState);
+
+      // delete this.props.data.content[draggableId];
+      // const startContentIds = Array.from(start.contentIds);
+      // startContentIds.splice(source.index, 1);
+
+      // const newStart = {
+      //   ...start,
+      //   contentIds: startContentIds,
+      // };
+
+      // const newState = {
+      //   ...this.props,
+      //   data: {
+      //     ...this.props.data,
+      //     boards: {
+      //       ...this.props.data.boards,
+      //       [newStart.id]: newStart,
+      //     },
+      //   },
+      // };
+
+      // this.props.updateBoards(newState);
     }
   };
 
@@ -354,6 +380,7 @@ export default class PinboardCreator extends Component {
                   board0={data.boards.board0}
                   content={data.content}
                   editCard={this.editCard}
+                  deleteContent={this.deleteContent}
                 ></NewContentContainer>
                 <ScrollContainer>
                   <BoardsContainer
@@ -367,6 +394,7 @@ export default class PinboardCreator extends Component {
                       deleteBoard={this.deleteBoard}
                       editBoard={this.editBoard}
                       editCard={this.editCard}
+                      deleteContent={this.deleteContent}
                     />
                     {provided.placeholder}
                   </BoardsContainer>

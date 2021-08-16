@@ -1,25 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Aleo&display=swap');
 
 :root {
-	--primary-color: #00b1d2;
-	--secondary-color: #fddb27;
+  --primary-color: #00b1d2;
+  --secondary-color: #fddb27;
 }
 
 body {
-	font-family: 'Aleo', serif;
-	margin: auto;
-	text-align: left;
+  font-family: 'Aleo', serif;
+  margin: auto;
+  text-align: left;
 }
 
 .hidden-scroll {
-	overflow: 'scroll';
+  overflow: 'scroll';
 }
 
 .hidden-scroll::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 a {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
+}
+
+[contenteditable='true']:empty:before {
+  color: #aaa;
+  content: attr(placeholder);
+  cursor: text;
+  display: block;
 }

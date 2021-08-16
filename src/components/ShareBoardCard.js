@@ -136,7 +136,7 @@ export default class ShareBoardCard extends Component {
                 <div key={index}>{quickThought}</div>
               ))}
             </QuickThoughts>
-            <Category>{category}</Category>
+            {category ? <Category>{category}</Category> : ''}
             {metaFavicon ? <Favicon src={metaFavicon} /> : ''}
           </div>
         </Container>

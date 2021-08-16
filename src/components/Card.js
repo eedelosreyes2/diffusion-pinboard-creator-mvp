@@ -243,6 +243,7 @@ export class Card extends Component {
                   html={quickThoughts}
                   onChange={(e) => this.props.editCard(e, id)}
                   disabled={false}
+                  placeholder={'...'}
                 />
               </QuickThoughts>
               <Category>
@@ -251,6 +252,7 @@ export class Card extends Component {
                   html={category}
                   onChange={(e) => this.props.editCard(e, id)}
                   disabled={false}
+                  placeholder={'Category'}
                 />
               </Category>
               <DeleteContainer>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LogOutComponent from './LogOutComponent';
 import { IconContext } from 'react-icons/lib';
+import { FiHelpCircle } from 'react-icons/fi';
 import { IoExtensionPuzzleOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 import { chromeExtensionUrl } from '../globals';
@@ -37,6 +38,12 @@ const ButtonsContainer = styled.div`
 `;
 
 export default class Header extends Component {
+  handleHelpClick = () => {
+    alert(
+      'Click on the Buttons with + on the left to create Content Cards and Boards!'
+    );
+  };
+
   render() {
     const { givenName } = this.props.profileObj;
 
@@ -63,6 +70,18 @@ export default class Header extends Component {
               <IoExtensionPuzzleOutline />
             </IconContext.Provider>
           </a>
+          <IconContext.Provider
+            value={{
+              size: '2em',
+              style: {
+                cursor: 'pointer',
+                paddingTop: '2px',
+                marginRight: '27px',
+              },
+            }}
+          >
+            <FiHelpCircle onClick={this.handleHelpClick} />
+          </IconContext.Provider>
           <LogOutComponent
             responseGoogleLogout={this.props.responseGoogleLogout}
           />

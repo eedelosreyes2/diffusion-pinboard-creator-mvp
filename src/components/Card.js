@@ -95,16 +95,16 @@ const Url = styled.div`
 `;
 
 const QuickThoughts = styled.div`
-  display: flex;
-  margin: 10px auto;
+  display: inline-block;
+  margin: 10px;
   width: 90%;
+  word-wrap: break-word;
 `;
 
 const Category = styled.div`
   border: 1px solid ${colors.secondary};
   border-radius: 5px;
   bottom: 0;
-  display: inline-block;
   font-size: 12px;
   margin: 10px;
   min-width: 10px;
@@ -143,7 +143,7 @@ export class Card extends Component {
     const reader = new FileReader();
     reader.onload = () => {
       preview.src = reader.result;
-      this.props.editCard(reader.result, id);
+      this.props.editContent(reader.result, id);
     };
     reader.readAsDataURL(image[0]);
   };
@@ -152,10 +152,20 @@ export class Card extends Component {
     const url = prompt('Enter the URL of the image: ');
     if (url) {
       if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
-        this.props.editCard(url, id);
+        this.props.editContent(url, id);
       } else {
         alert('Image not found at given URL.');
       }
+    }
+  };
+
+  handleQuickThoughtsChange = (e, id) => {
+    if (e.currentTarget.innerHTML.length >= 279) {
+      console.log(e.currentTarget.innerHTML);
+      e.currentTarget.innerHTML = e.currentTarget.innerHTML.substring(0, 279);
+      this.props.editContent(e, id);
+      alert("You've hit the 280 character limit!");
+      document.activeElement.blur();
     }
   };
 
@@ -241,7 +251,8 @@ export class Card extends Component {
                 <ContentEditable
                   id="card-quick-thoughts"
                   html={quickThoughts}
-                  onChange={(e) => this.props.editCard(e, id)}
+                  onBlur={(e) => this.props.editContent(e, id)}
+                  onChange={(e) => this.handleQuickThoughtsChange(e, id)}
                   disabled={false}
                   placeholder={'...'}
                 />
@@ -250,7 +261,7 @@ export class Card extends Component {
                 <ContentEditable
                   id="card-category"
                   html={category}
-                  onChange={(e) => this.props.editCard(e, id)}
+                  onChange={(e) => this.props.editContent(e, id)}
                   disabled={false}
                   placeholder={'Category'}
                 />

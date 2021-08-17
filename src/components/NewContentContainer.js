@@ -60,7 +60,7 @@ export default class NewContentContainer extends Component {
                       key={content.id}
                       content={content}
                       index={index}
-                      editCard={this.props.editCard}
+                      editContent={this.props.editContent}
                       deleteContent={this.props.deleteContent}
                       boardId="board0"
                     />

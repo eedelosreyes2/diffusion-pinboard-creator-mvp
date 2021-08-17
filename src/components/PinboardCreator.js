@@ -352,7 +352,7 @@ export default class PinboardCreator extends Component {
     }
   };
 
-  editCard = (e, contentId) => {
+  editContent = (e, contentId) => {
     const content = this.props.data.content[contentId];
 
     if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
@@ -404,7 +404,7 @@ export default class PinboardCreator extends Component {
                   board0={data.boards.board0}
                   content={data.content}
                   createContent={this.createContent}
-                  editCard={this.editCard}
+                  editContent={this.editContent}
                   deleteContent={this.deleteContent}
                 ></NewContentContainer>
                 <ScrollContainer>
@@ -419,7 +419,7 @@ export default class PinboardCreator extends Component {
                       data={data}
                       deleteBoard={this.deleteBoard}
                       editBoard={this.editBoard}
-                      editCard={this.editCard}
+                      editContent={this.editContent}
                       deleteContent={this.deleteContent}
                     />
                     {provided.placeholder}

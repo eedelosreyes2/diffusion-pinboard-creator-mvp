@@ -161,7 +161,6 @@ export class Card extends Component {
 
   handleQuickThoughtsChange = (e, id) => {
     if (e.currentTarget.innerHTML.length >= 279) {
-      console.log(e.currentTarget.innerHTML);
       e.currentTarget.innerHTML = e.currentTarget.innerHTML.substring(0, 279);
       this.props.editContent(e, id);
       alert("You've hit the 280 character limit!");

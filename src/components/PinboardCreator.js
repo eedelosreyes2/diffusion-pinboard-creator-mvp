@@ -236,8 +236,9 @@ export default class PinboardCreator extends Component {
     const quickThoughts = prompt('Enter Quick Thoughts: ');
     if (quickThoughts == null) return;
 
-    const category = prompt('Enter category: '); // this would be from a dropdownlist
-    if (category == null) return;
+    // const category = prompt('Enter category: '); // this would be from a dropdownlist
+    // if (category == null) return;
+    const category = '';
 
     const id = uuidv4();
     let newCard = {

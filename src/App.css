@@ -8,11 +8,13 @@
 body {
   font-family: 'Aleo', serif;
   margin: auto;
+  scrollbar-width: none;
   text-align: left;
 }
 
 .hidden-scroll {
   overflow: 'scroll';
+  scrollbar-width: none;
 }
 
 .hidden-scroll::-webkit-scrollbar {

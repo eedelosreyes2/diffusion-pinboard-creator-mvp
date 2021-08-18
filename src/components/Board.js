@@ -13,11 +13,11 @@ import { colors } from '../globals';
 const Container = styled.div`
   background-color: ${colors.primary};
   border: 2px solid ${colors.primary};
-  border-radius: 10px;
+  border-radius: 7.5px;
   display: flex;
   flex-direction: column;
   margin: 20px 5px;
-  min-height: 255px;
+  min-height: 420px;
   position: relative;
 `;
 

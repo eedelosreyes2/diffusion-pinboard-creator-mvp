@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import ReactTooltip from 'react-tooltip';
 import Header from './Header';
 import NewContentContainer from './NewContentContainer';
 import Boards from './Boards';
@@ -408,7 +409,17 @@ export default class PinboardCreator extends Component {
                   deleteContent={this.deleteContent}
                 ></NewContentContainer>
                 <ScrollContainer>
-                  <Button onClick={this.createBoard}>+</Button>
+                  <Button onClick={this.createBoard} data-tip data-for="board">
+                    +
+                  </Button>
+                  <ReactTooltip
+                    id="board"
+                    place="right"
+                    type="info"
+                    effect="solid"
+                  >
+                    <span>Add new Board</span>
+                  </ReactTooltip>
                   <BoardsContainer
                     className="hidden-scroll"
                     ref={provided.innerRef}

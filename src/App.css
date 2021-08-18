@@ -30,3 +30,9 @@ a {
   cursor: text;
   display: block;
 }
+
+.__react_component_tooltip.show {
+  font-family: 'Aleo';
+  opacity: 1 !important;
+  padding-top: 10px;
+}

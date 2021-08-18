@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import ReactTooltip from 'react-tooltip';
 import Card from './Card';
 import styled from 'styled-components';
 
@@ -44,7 +45,12 @@ export default class NewContentContainer extends Component {
 
     return (
       <Container>
-        <Button onClick={this.props.createContent}>+</Button>
+        <Button onClick={this.props.createContent} data-tip data-for="content">
+          +
+        </Button>
+        <ReactTooltip id="content" place="right" type="info" effect="solid">
+          <span>Add new Content</span>
+        </ReactTooltip>
         <Droppable droppableId="board0" direction="horizontal">
           {(provided) => {
             return (

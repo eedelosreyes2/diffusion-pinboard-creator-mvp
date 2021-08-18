@@ -359,7 +359,7 @@ export default class PinboardCreator extends Component {
     if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
       content.quickThoughts = e.currentTarget.innerHTML;
     } else if (e.currentTarget && e.currentTarget.id === 'card-category') {
-      content.category = e.currentTarget.innerHTML;
+      content.category = e.currentTarget.value;
     } else {
       content.metaImagebase64 = '';
       content.customImage = e;

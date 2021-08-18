@@ -28,3 +28,13 @@ export const colors = {
 };
 
 export const accessCode = 'Curation2021!';
+
+export const categories = [
+  '',
+  'Creativity',
+  'Entrepreneurship',
+  'Fashion',
+  'Lifestyle',
+  'Music',
+  'Random',
+];

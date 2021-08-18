@@ -8,7 +8,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { MdInsertPhoto } from 'react-icons/md';
 import { FiTrash } from 'react-icons/fi';
 import styled from 'styled-components';
-import { colors } from '../globals';
+import { categories, colors } from '../globals';
 import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
@@ -101,14 +101,16 @@ const QuickThoughts = styled.div`
   word-wrap: break-word;
 `;
 
-const Category = styled.div`
+const Category = styled.select`
   border: 1px solid ${colors.secondary};
   border-radius: 5px;
   bottom: 0;
+  display: flex;
   font-size: 12px;
+  left: 0;
   margin: 10px;
-  min-width: 10px;
-  padding: 2px 5px;
+  outline: none;
+  padding: 1px;
   position: absolute;
 `;
 
@@ -256,14 +258,19 @@ export class Card extends Component {
                   placeholder={'...'}
                 />
               </QuickThoughts>
-              <Category>
-                <ContentEditable
-                  id="card-category"
-                  html={category}
-                  onChange={(e) => this.props.editContent(e, id)}
-                  disabled={false}
-                  placeholder={'Category'}
-                />
+              <Category
+                id="card-category"
+                onChange={(e) => this.props.editContent(e, id)}
+                defaultValue={category}
+                style={{ width: `${4 * category.length + 30}pt` }}
+              >
+                {categories.map((category) => {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                })}
               </Category>
               <DeleteContainer>
                 <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>

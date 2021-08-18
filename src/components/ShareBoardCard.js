@@ -10,6 +10,7 @@ const Container = styled.div`
   color: white;
   cursor: pointer;
   display: flex;
+  margin: 10px;
   min-height: 250px;
   justify-content: center;
   padding-bottom: 50px;

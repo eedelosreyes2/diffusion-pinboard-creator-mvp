@@ -8,40 +8,13 @@ import Logo from '../images/Logo_cool.png';
 
 const Container = styled.div`
   align-items: center;
-  background-color: ${colors.primary};
+  background-color: ${colors.darkBg};
   color: white;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   justify-content: center;
-  width: 100vw;
-  @media only screen and (max-width: 1400px) {
-    height: 100%;
-    width: 100%;
-  }
-`;
-
-const Background = styled.div`
-  background-color: ${colors.darkBg};
-  border-radius: 10px;
-  min-height: 95vh;
-  position: relative;
-  width: 95vw;
-  @media only screen and (max-width: 1400px) {
-    height: 90%;
-    padding: 0;
-    width: 90%;
-  }
-`;
-
-const InnerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: auto;
-  width: 95%;
-  @media only screen and (max-width: 1400px) {
-    flex-direction: column;
-  }
+  width: 100%;
 `;
 
 const Header = styled.div`
@@ -49,7 +22,7 @@ const Header = styled.div`
   display: flex;
   height: 90px;
   justify-content: center;
-  top: 0;
+  padding-top: 30px;
   width: 100%;
 `;
 
@@ -62,15 +35,10 @@ const StoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 75%;
-  justify-content: center;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 50px;
+  text-align: center;
   width: 80%;
-  @media only screen and (max-width: 1400px) {
-    display: block;
-    padding: 0;
-    width: 100%;
-  }
 `;
 
 const Title = styled.div`
@@ -82,14 +50,13 @@ const Title = styled.div`
 const TitleUnderline = styled.div`
   height: 2px;
   background-color: ${colors.secondary};
-  margin-bottom: 50px;
-  width: 300px;
-  @media only screen and (max-width: 1400px) {
-    margin-bottom: 50px;
-  }
+  margin: auto;
+  margin-bottom: 20px;
+  width: 100px;
 `;
 
 const Story = styled.div`
+  margin: auto;
   width: 80%;
   @media only screen and (max-width: 1400px) {
     width: 100%;
@@ -114,27 +81,11 @@ const CardsContainer = styled.div`
   }
 `;
 
-const ShareBoardCardContainer = styled.div`
-  margin: 10px;
-  @media only screen and (max-width: 1400px) {
-    margin: 20px;
-  }
-`;
-
 const Footer = styled.div`
-  align-items: center;
-  bottom: 0;
-  display: flex;
-  height: 150px;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  right: 0;
+  height: 75px;
+  line-height: 75px;
+  text-align: center;
   width: 100%;
-`;
-
-const Author = styled.div`
-  margin-top: 100px;
 `;
 
 export default class ShareBoard extends Component {
@@ -190,47 +141,39 @@ export default class ShareBoard extends Component {
 
       return (
         <Container>
-          <Background>
-            <InnerContainer>
-              <Header>
-                <a
-                  href="https://diffusion.me"
-                  target="_blank"
-                  without
-                  rel="noreferrer"
-                >
-                  <LogoImg src={Logo}></LogoImg>
-                </a>
-              </Header>
-              <StoryContainer>
-                <div>
-                  <Title>{this.state.board.title}</Title>
-                  <TitleUnderline />
-                </div>
-                <Story>
-                  {storyArr.map((quickThought, index) => (
-                    <div key={index}>{quickThought}</div>
-                  ))}
-                </Story>
-              </StoryContainer>
-              <CardsContainer>
-                {this.state.content.map((content, index) => {
-                  return content ? (
-                    <ShareBoardCardContainer key={index}>
-                      <ShareBoardCard key={index} content={content} />
-                    </ShareBoardCardContainer>
-                  ) : (
-                    ''
-                  );
-                })}
-              </CardsContainer>
-              <Footer>
-                <Author>
-                  diffused by <b>{this.state.name}</b>
-                </Author>
-              </Footer>
-            </InnerContainer>
-          </Background>
+          <Header>
+            <a
+              href="https://diffusion.me"
+              target="_blank"
+              without
+              rel="noreferrer"
+            >
+              <LogoImg src={Logo}></LogoImg>
+            </a>
+          </Header>
+          <StoryContainer>
+            <div>
+              <Title>{this.state.board.title}</Title>
+              <TitleUnderline />
+            </div>
+            <Story>
+              {storyArr.map((quickThought, index) => (
+                <div key={index}>{quickThought}</div>
+              ))}
+            </Story>
+          </StoryContainer>
+          <CardsContainer>
+            {this.state.content.map((content, index) => {
+              return content ? (
+                <ShareBoardCard key={index} content={content} />
+              ) : (
+                ''
+              );
+            })}
+          </CardsContainer>
+          <Footer>
+            curated by <b>{this.state.name}</b>
+          </Footer>
         </Container>
       );
     }

@@ -102,9 +102,11 @@ const QuickThoughts = styled.div`
 `;
 
 const Category = styled.select`
+  background-color: ${colors.darkBg};
   border: 1px solid ${colors.secondary};
   border-radius: 5px;
   bottom: 0;
+  color: white;
   display: flex;
   font-size: 12px;
   left: 0;

@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   min-height: 250px;
   justify-content: center;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   position: relative;
   transform: ${(props) => (props.isHovered ? 'scale(1.05)' : '')};
   transition: all 0.2s ease-in-out;
@@ -22,9 +22,7 @@ const Container = styled.div`
 const Image = styled.img`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width: 100%;
-`;
-const NoImage = styled.div`
+  height: 100%;
   width: 300px;
 `;
 
@@ -38,9 +36,10 @@ const Url = styled.div`
 `;
 
 const QuickThoughts = styled.div`
-  display: flex;
-  margin: auto;
-  width: 90%;
+  display: inline-block;
+  padding-left: 15px;
+  width: 275px;
+  word-wrap: break-word;
 `;
 
 const Category = styled.div`
@@ -49,7 +48,8 @@ const Category = styled.div`
   bottom: 0;
   display: inline-block;
   font-size: 12px;
-  margin: 10px;
+  left: 0;
+  margin: 15px;
   min-width: 10px;
   padding: 2px 5px;
   position: absolute;

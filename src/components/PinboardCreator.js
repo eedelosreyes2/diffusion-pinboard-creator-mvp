@@ -279,15 +279,21 @@ export default class PinboardCreator extends Component {
       ...this.props.data.content,
       [newCard.id]: newCard,
     };
+
+    let contentIds;
+    if (boardId === 'board0') {
+      contentIds = [id, ...this.props.data.boards[boardId].contentIds];
+    } else {
+      contentIds = [...this.props.data.boards[boardId].contentIds, id];
+    }
     const board = {
       ...this.props.data.boards[boardId],
-      contentIds: [id, ...this.props.data.boards[boardId].contentIds],
+      contentIds,
     };
     const boards = {
       ...this.props.data.boards,
       [boardId]: board,
     };
-
     const newState = {
       ...this.props,
       data: {

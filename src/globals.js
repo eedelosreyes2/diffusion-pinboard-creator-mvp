@@ -25,6 +25,7 @@ export const colors = {
   secondary: '#fddb27',
   green: '#21eb2f',
   darkBg: '#1a1a1a',
+  darkGrey: ' #242727',
 };
 
 export const accessCode = 'Curation2021!';

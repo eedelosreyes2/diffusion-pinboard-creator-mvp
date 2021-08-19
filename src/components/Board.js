@@ -51,9 +51,8 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 5px auto;
-  max-width: 262px;
-  min-width: 262px;
+  margin: auto;
+  width: 262px;
 `;
 
 const StoryContainer = styled.div`
@@ -70,6 +69,22 @@ const Story = styled.div`
   margin: auto;
   text-align: center;
   width: 100%;
+`;
+
+const AddContentButton = styled.div`
+  align-items: center;
+  background-color: ${colors.darkGrey};
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  height: 15px;
+  margin: 10px auto;
+  padding: 5px;
+  text-align: center;
+  width: 90%;
 `;
 
 const FooterContainer = styled.div`
@@ -143,7 +158,9 @@ export class Board extends Component {
               ) : (
                 <Front
                   id={id}
+                  index={this.props.index}
                   content={this.props.content}
+                  createContent={this.props.createContent}
                   editContent={this.props.editContent}
                   deleteContent={this.props.deleteContent}
                 />
@@ -173,34 +190,44 @@ class Front extends Component {
     const { id, content } = this.props;
 
     return (
-      <Droppable droppableId={id}>
-        {(provided) => {
-          return (
-            <CardsContainer
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {content
-                ? content.map((content, index) =>
-                    content ? (
-                      <Card
-                        key={content.id}
-                        content={content}
-                        index={index}
-                        editContent={this.props.editContent}
-                        deleteContent={this.props.deleteContent}
-                        boardId={id}
-                      />
-                    ) : (
-                      ''
+      <>
+        <Droppable droppableId={id}>
+          {(provided) => {
+            return (
+              <CardsContainer
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {content
+                  ? content.map((content, index) =>
+                      content ? (
+                        <Card
+                          key={content.id}
+                          content={content}
+                          index={index}
+                          editContent={this.props.editContent}
+                          deleteContent={this.props.deleteContent}
+                          boardId={id}
+                        />
+                      ) : (
+                        ''
+                      )
                     )
-                  )
-                : ''}
-              {provided.placeholder}
-            </CardsContainer>
-          );
-        }}
-      </Droppable>
+                  : ''}
+
+                {provided.placeholder}
+              </CardsContainer>
+            );
+          }}
+        </Droppable>
+        {content.length < 5 ? (
+          <AddContentButton onClick={() => this.props.createContent(id)}>
+            +
+          </AddContentButton>
+        ) : (
+          ''
+        )}
+      </>
     );
   }
 }

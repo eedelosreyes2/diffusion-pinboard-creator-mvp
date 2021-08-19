@@ -7,7 +7,7 @@ import Header from './Header';
 import NewContentContainer from './NewContentContainer';
 import Boards from './Boards';
 import styled from 'styled-components';
-import { scraperEndpoint } from '../globals';
+import { scraperEndpoint, colors } from '../globals';
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ const BoardsContainer = styled.div`
 
 const Button = styled.div`
   align-items: center;
-  background-color: rgba(110, 110, 110, 0.25);
+  background-color: ${colors.darkGrey};
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -225,7 +225,7 @@ export default class PinboardCreator extends Component {
     this.props.updateBoards(this.state);
   };
 
-  createContent = () => {
+  createContent = (boardId) => {
     let url = prompt('Create a new Content Card!\nEnter the url: ');
     if (!url) return;
 
@@ -279,14 +279,15 @@ export default class PinboardCreator extends Component {
       ...this.props.data.content,
       [newCard.id]: newCard,
     };
-    const board0 = {
-      ...this.props.data.boards.board0,
-      contentIds: [id, ...this.props.data.boards.board0.contentIds],
+    const board = {
+      ...this.props.data.boards[boardId],
+      contentIds: [id, ...this.props.data.boards[boardId].contentIds],
     };
     const boards = {
       ...this.props.data.boards,
-      board0,
+      [boardId]: board,
     };
+
     const newState = {
       ...this.props,
       data: {
@@ -431,6 +432,7 @@ export default class PinboardCreator extends Component {
                       data={data}
                       deleteBoard={this.deleteBoard}
                       editBoard={this.editBoard}
+                      createContent={this.createContent}
                       editContent={this.editContent}
                       deleteContent={this.deleteContent}
                     />

@@ -8,6 +8,7 @@ export default class Boards extends Component {
       username,
       deleteBoard,
       editBoard,
+      createContent,
       editContent,
       deleteContent,
     } = this.props;
@@ -34,6 +35,7 @@ export default class Boards extends Component {
                 content={content}
                 deleteBoard={deleteBoard}
                 editBoard={editBoard}
+                createContent={createContent}
                 editContent={editContent}
                 deleteContent={deleteContent}
               />

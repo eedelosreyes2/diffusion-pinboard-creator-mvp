@@ -3,6 +3,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import ReactTooltip from 'react-tooltip';
 import Card from './Card';
 import styled from 'styled-components';
+import { colors } from '../globals';
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Container = styled.div`
 
 const Button = styled.div`
   align-items: center;
-  background-color: rgba(110, 110, 110, 0.25);
+  background-color: ${colors.darkGrey};
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -32,9 +33,25 @@ const CardsContainer = styled.div`
   justify-content: left;
   min-height: ${(props) => (props.contentLength <= 1 ? '10px' : '100px')};
   overflow: auto;
+  position: relative;
+`;
+
+const ScrollCotainer = styled.div`
+  background-color: grey;
+  height: 100%;
+  width: 50px;
+  position: absolute;
+  opacity: ${(props) => (props.isHovered ? 0.75 : 0.25)};
+  left: 0;
+  z-index: 100;
 `;
 
 export default class NewContentContainer extends Component {
+  constructor() {
+    super();
+    this.state = { leftScrollHovered: false, rightScrollHovered: false };
+  }
+
   render() {
     let content = [];
     if (this.props.content) {
@@ -43,9 +60,15 @@ export default class NewContentContainer extends Component {
       );
     }
 
+    let { leftScrollHovered, rightScrollHovered } = this.state;
+
     return (
       <Container>
-        <Button onClick={this.props.createContent} data-tip data-for="content">
+        <Button
+          onClick={() => this.props.createContent('board0')}
+          data-tip
+          data-for="content"
+        >
           +
         </Button>
         <ReactTooltip id="content" place="right" type="info" effect="solid">
@@ -60,6 +83,17 @@ export default class NewContentContainer extends Component {
                 ref={provided.innerRef}
                 {...provided.innerRef}
               >
+                {/* add hoverable divs */}
+                {/* <ScrollCotainer
+                  isHovered={leftScrollHovered}
+                  onMouseEnter={() =>
+                    this.setState({ leftScrollHovered: true })
+                  }
+                  onMouseLeave={() =>
+                    this.setState({ leftScrollHovered: false })
+                  }
+                ></ScrollCotainer> */}
+
                 {content.map((content, index) => {
                   return content ? (
                     <Card
@@ -74,6 +108,16 @@ export default class NewContentContainer extends Component {
                     ''
                   );
                 })}
+
+                {/* <ScrollCotainer
+                  isHovered={leftScrollHovered}
+                  onMouseEnter={() =>
+                    this.setState({ leftScrollHovered: true })
+                  }
+                  onMouseLeave={() =>
+                    this.setState({ leftScrollHovered: false })
+                  }
+                ></ScrollCotainer> */}
                 {provided.placeholder}
               </CardsContainer>
             );

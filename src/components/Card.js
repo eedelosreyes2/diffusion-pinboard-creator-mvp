@@ -163,15 +163,6 @@ export class Card extends Component {
     }
   };
 
-  handleQuickThoughtsChange = (e, id) => {
-    if (e.currentTarget.innerHTML.length >= 279) {
-      e.currentTarget.innerHTML = e.currentTarget.innerHTML.substring(0, 279);
-      this.props.editContent(e, id);
-      alert("You've hit the 280 character limit!");
-      document.activeElement.blur();
-    }
-  };
-
   render() {
     const {
       id,
@@ -193,6 +184,7 @@ export class Card extends Component {
     } else {
       imgSrc = Logo;
     }
+    console.log(quickThoughts);
 
     return (
       <Draggable draggableId={id} index={this.props.index}>
@@ -255,7 +247,6 @@ export class Card extends Component {
                   id="card-quick-thoughts"
                   html={quickThoughts}
                   onBlur={(e) => this.props.editContent(e, id)}
-                  onChange={(e) => this.handleQuickThoughtsChange(e, id)}
                   disabled={false}
                   placeholder={'...'}
                 />

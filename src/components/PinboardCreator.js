@@ -365,7 +365,7 @@ export default class PinboardCreator extends Component {
     const content = this.props.data.content[contentId];
 
     if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
-      content.quickThoughts = e.currentTarget.innerHTML;
+      content.quickThoughts = e.currentTarget.innerText;
     } else if (e.currentTarget && e.currentTarget.id === 'card-category') {
       content.category = e.currentTarget.value;
     } else {

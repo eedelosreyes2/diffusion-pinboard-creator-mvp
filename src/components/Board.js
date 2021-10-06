@@ -238,6 +238,7 @@ class Back extends Component {
       <StoryContainer>
         <Story>
           <ContentEditable
+            style={{ minHeight: '5em' }}
             id="board-story"
             html={this.props.story}
             onChange={(e) => this.props.editBoard(e, this.props.boardId)}

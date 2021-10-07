@@ -8,7 +8,7 @@ import Logo from '../images/Logo_cool.png';
 
 const Container = styled.div`
   align-items: center;
-  background-color: ${colors.darkBg};
+  background-color: ${colors.grey50};
   color: white;
   display: flex;
   flex-direction: column;

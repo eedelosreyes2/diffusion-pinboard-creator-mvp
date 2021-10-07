@@ -10,7 +10,7 @@ import { DB_URL, scraperEndpoint, colors } from './globals';
 import './App.css';
 
 const Container = styled.div`
-  background-color: ${colors.darkBg};
+  background-color: ${colors.grey50};
   color: white;
 `;
 

@@ -24,8 +24,11 @@ export const colors = {
   primary: '#00b1d2',
   secondary: '#fddb27',
   green: '#21eb2f',
-  darkBg: '#1a1a1a',
   darkGrey: ' #242727',
+  grey50: '#F9FAFB',
+  grey100:'#F3F4F6',
+  grey500: '#6B7280',
+  grey900: '#111827'
 };
 
 export const accessCode = 'Curation2021!';

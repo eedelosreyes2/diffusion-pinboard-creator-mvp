@@ -6,25 +6,24 @@ import ImageUploader from 'react-images-upload';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { MdInsertPhoto } from 'react-icons/md';
-import { FiTrash } from 'react-icons/fi';
+import { IoMdTrash } from 'react-icons/io';
 import styled from 'styled-components';
 import { categories, colors } from '../globals';
 import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
-  background-color: ${colors.darkBg};
-  border: 1px solid #636363;
-  border-radius: 5px;
+  background-color: white;
+  border-radius:8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
   margin: 5px;
-  min-height: 50px;
-  max-width: 250px;
-  min-width: 250px;
+  color: ${colors.grey500};
+  width: 300px;
   padding-bottom: 40px;
   position: relative;
 `;
 
 const Handle = styled.div`
-  background-color: #636363;
+  background-color: #F3F4F6;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   height: 20px;
@@ -42,13 +41,14 @@ const Image = styled.img`
 
 const InsertImage = styled.div`
   align-items: center;
-  background-color: grey;
+  background-color: ${colors.grey50};
+  backdrop-filter: blur(40px);
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   height: 25px;
   justify-content: center;
-  opacity: 50%;
+  opacity: 80%;
   right: 10px;
   top: 30px;
   position: absolute;
@@ -57,7 +57,7 @@ const InsertImage = styled.div`
 
 const InsertImageModalContainer = styled.div`
   align-items: center;
-  background-color: ${colors.darkBg};
+  background-color: ${colors.grey50};
   border: 2px solid ${colors.primary};
   border-radius: 10px;
   display: flex;
@@ -102,18 +102,19 @@ const QuickThoughts = styled.div`
 `;
 
 const Category = styled.select`
-  background-color: ${colors.darkBg};
-  border: 1px solid ${colors.secondary};
+  background-color: ${colors.grey50};
+  border: none;
   border-radius: 5px;
   bottom: 0;
-  color: white;
+  color: ${colors.grey500};
   display: flex;
   font-size: 12px;
   left: 0;
+  padding: 4px 8px;
   margin: 10px;
   outline: none;
-  padding: 1px;
   position: absolute;
+  min-width:80px;
 `;
 
 const DeleteContainer = styled.div`
@@ -196,7 +197,12 @@ export class Card extends Component {
               isDragging={snapshot.isDragging}
             >
               <Handle {...provided.dragHandleProps}>
-                <IconContext.Provider value={{}}>
+                <IconContext.Provider 
+                    value={{
+                      style:{
+                        color:colors.grey500
+                      }
+                    }}>
                   <HiOutlineDotsHorizontal />
                 </IconContext.Provider>
               </Handle>
@@ -204,7 +210,16 @@ export class Card extends Component {
               <Popup
                 trigger={
                   <InsertImage onClick={this.handleInsertImage}>
-                    <MdInsertPhoto />
+                   
+                    <IconContext.Provider
+                        value={{
+                          style: {
+                            color:colors.grey900
+                          },
+                        }}
+                      >
+                        <MdInsertPhoto />
+                    </IconContext.Provider>
                   </InsertImage>
                 }
                 position="left"
@@ -255,7 +270,7 @@ export class Card extends Component {
                 id="card-category"
                 onChange={(e) => this.props.editContent(e, id)}
                 defaultValue={category}
-                style={{ width: `${4 * category.length + 30}pt` }}
+                style={{ width: `${4 * category.length + 32}pt` }}
               >
                 {categories.map((category) => {
                   return (
@@ -266,8 +281,8 @@ export class Card extends Component {
                 })}
               </Category>
               <DeleteContainer>
-                <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-                  <FiTrash
+                <IconContext.Provider value={{ style: { cursor: 'pointer', color: '#9CA3AF' } }}>
+                  <IoMdTrash
                     onClick={() => this.props.deleteContent(id, boardId)}
                   />
                 </IconContext.Provider>

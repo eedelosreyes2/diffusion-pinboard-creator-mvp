@@ -26,7 +26,7 @@ const LogoContainer = styled.img`
 `;
 
 const H1 = styled.h1`
-  color: white;
+  color: #6B7280;
   font-size: 25px;
   margin: auto;
   margin-left: 35px;
@@ -74,6 +74,7 @@ export default class Header extends Component {
             value={{
               size: '2em',
               style: {
+                color: '#6B7280',
                 cursor: 'pointer',
                 paddingTop: '2px',
                 marginRight: '27px',

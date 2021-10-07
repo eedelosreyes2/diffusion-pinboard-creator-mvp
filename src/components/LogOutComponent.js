@@ -15,7 +15,7 @@ export class LogOutComponent extends Component {
         render={(renderProps) => (
           <div onClick={renderProps.onClick}>
             <IconContext.Provider
-              value={{ size: '2.2em', style: { cursor: 'pointer' } }}
+              value={{ size: '2.2em', style: { color: '#6B7280',cursor: 'pointer' } }}
             >
               <IoLogOutOutline />
             </IconContext.Provider>

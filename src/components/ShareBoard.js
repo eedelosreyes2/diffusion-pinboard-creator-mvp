@@ -9,7 +9,6 @@ import Logo from '../images/Logo_cool.png';
 const Container = styled.div`
   align-items: center;
   background-color: ${colors.grey50};
-  color: white;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -45,19 +44,30 @@ const Title = styled.div`
   font-size: 60px;
   overflow-wrap: break-word;
   text-overflow: wrap;
+  font-color:${colors.grey900};
+  font-weight:bold;
+  font-size:40px;
+  line-height:130%;
 `;
 
 const TitleUnderline = styled.div`
+  display:none;
   height: 2px;
-  background-color: ${colors.secondary};
+  background-color: ${colors.grey100};
   margin: auto;
   margin-bottom: 20px;
   width: 100px;
 `;
 
 const Story = styled.div`
-  margin: auto;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top:24px;
   width: 80%;
+  // color: ${colors.grey400};
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
   @media only screen and (max-width: 1400px) {
     width: 100%;
   }

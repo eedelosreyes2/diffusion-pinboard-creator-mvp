@@ -53,7 +53,7 @@ export default class Header extends Component {
           <a href="https://diffusion.me" target="_blank" rel="noreferrer">
             <LogoContainer src={Logo} />
           </a>
-          <H1>{`${givenName}'s Boards`}</H1>
+          <H1>{`What's up, ${givenName} 🤟`}</H1>
         </InfoContainer>
         <ButtonsContainer>
           <a href={chromeExtensionUrl} target="_blank" rel="noreferrer">

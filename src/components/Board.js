@@ -5,14 +5,15 @@ import ContentEditable from 'react-contenteditable';
 import Card from './Card';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-import { FiTrash, FiShare } from 'react-icons/fi';
+import {  FiShare } from 'react-icons/fi';
+import { IoMdTrash } from 'react-icons/io';
 import { BsArrowClockwise } from 'react-icons/bs';
 import styled from 'styled-components';
 import { colors } from '../globals';
 
 const Container = styled.div`
-  background-color: ${colors.primary};
-  border: 2px solid ${colors.primary};
+  // background-color: ${colors.grey100};
+  border: 2px dashed #D1D5DB;
   border-radius: 7.5px;
   display: flex;
   flex-direction: column;
@@ -22,13 +23,13 @@ const Container = styled.div`
 `;
 
 const Handle = styled.div`
-  background-color: ${colors.primary};
+  background-color: #E5E7EB;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  color: white;
+  color: ${colors.grey500};
   height: 10px;
   margin: 0 auto;
-  padding-bottom: 5px;
+  padding-bottom: 16px;
   position: absoulte;
   text-align: center;
   top: 0;
@@ -40,10 +41,12 @@ const iconStyle = {
 };
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 20px;
+  font-weight:bold;
   margin-top: 10px;
   text-align: center;
-  max-width: 262px;
+  color:${colors.grey900};
+  padding:16px 0px;
 `;
 
 const CardsContainer = styled.div`
@@ -52,20 +55,20 @@ const CardsContainer = styled.div`
   flex-direction: column;
   height: 100%;
   margin: auto;
-  width: 262px;
+  width: 332px;
 `;
 
 const StoryContainer = styled.div`
   display: flex;
   height: 100%;
   margin: 5px auto;
-  max-width: 262px;
-  min-width: 262px;
+  width: 332px;
 `;
 
 const Story = styled.div`
   height: 75%;
-  padding: 25px 5px;
+  color: ${colors.grey500};
+  padding: 16px 16px;
   margin: auto;
   text-align: center;
   width: 100%;
@@ -73,7 +76,7 @@ const Story = styled.div`
 
 const AddContentButton = styled.div`
   align-items: center;
-  background-color: ${colors.darkGrey};
+  background-color: ${colors.primary};
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -92,7 +95,7 @@ const FooterContainer = styled.div`
 	bottom: 0;
 	display: flex;
 	flex-direction: row;
-	height: 35px;
+	padding:16px 0px;
 	justify-content: space-evenly;
 	left: 0,
 	position: absolute;
@@ -238,7 +241,12 @@ class Back extends Component {
       <StoryContainer>
         <Story>
           <ContentEditable
-            style={{ minHeight: '5em' }}
+            style={{ 
+              minHeight: '5em',
+              padding:'12px', 
+              border: '2px solid #E5E7EB', 
+              borderRadius: '4px'
+            }}
             id="board-story"
             html={this.props.story}
             onChange={(e) => this.props.editBoard(e, this.props.boardId)}
@@ -270,12 +278,13 @@ class Footer extends Component {
           value={{
             size: '2em',
             style: flipIconStyle,
+            color: colors.grey500
           }}
         >
           <BsArrowClockwise onClick={this.props.handleFlip} />
         </IconContext.Provider>
-        <IconContext.Provider value={{ style: { cursor: 'pointer' } }}>
-          <FiTrash onClick={() => this.props.deleteBoard(id, title)} />
+        <IconContext.Provider value={{ style: { cursor: 'pointer', color: colors.grey500} }}>
+          <IoMdTrash onClick={() => this.props.deleteBoard(id, title)} />
         </IconContext.Provider>
       </FooterContainer>
     );

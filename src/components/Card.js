@@ -15,7 +15,12 @@ const Container = styled.div`
   background-color: white;
   border-radius:8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
-  margin: 5px;
+
+  // todo: the If rendering is not working here
+  margin-right: ${boardId => boardId === 'board0'? '16px' : '0px'};
+  margin-left:${boardId => boardId === 'board0'? '0px' : '16px'};
+  margin-bottom:${boardId => boardId === 'board0'? '0px' : '16px'};
+
   color: ${colors.grey500};
   width: 300px;
   padding-bottom: 40px;
@@ -58,7 +63,8 @@ const InsertImage = styled.div`
 const InsertImageModalContainer = styled.div`
   align-items: center;
   background-color: ${colors.grey50};
-  border: 2px solid ${colors.primary};
+  
+  border: none;
   border-radius: 10px;
   display: flex;
   justify-content: space-evenly;
@@ -66,16 +72,15 @@ const InsertImageModalContainer = styled.div`
   height: 60px;
 `;
 
-const arrowStyle = { color: colors.primary };
+const arrowStyle = { color: colors.grey50 };
 
 const InsertImageButton = styled.div`
   align-items: center;
-  background-color: grey;
-  border-radius: 5px;
-  color: white;
+  background-color: #E5E7EB;
+  border-radius: 4px;
+  color: ${colors.grey500};
   cursor: pointer;
   display: flex;
-  font-family: aleo;
   height: 70%;
   justify-content: center;
   width: 40%;
@@ -83,28 +88,38 @@ const InsertImageButton = styled.div`
 
 const imageUploadButtonStyle = {
   background: 'none',
-  fontFamily: 'aleo',
+  color: colors.grey500
 };
 
 const Url = styled.div`
-  color: ${colors.primary};
+  color: ${colors.grey900};
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
   display: flex;
-  margin: 10px auto;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 16px;
   text-decoration: none;
   width: 90%;
 `;
 
 const QuickThoughts = styled.div`
   display: inline-block;
-  margin: 10px;
+  margin-left: 16px;
+  margin-bottom: 16px;
   width: 90%;
   word-wrap: break-word;
+  color: ${colors.grey400};
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
 `;
 
 const Category = styled.select`
   background-color: ${colors.grey50};
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   bottom: 0;
   color: ${colors.grey500};
   display: flex;
@@ -185,7 +200,8 @@ export class Card extends Component {
     } else {
       imgSrc = Logo;
     }
-    console.log(quickThoughts);
+    // console.log(quickThoughts);
+    console.log(quickThoughts,boardId);
 
     return (
       <Draggable draggableId={id} index={this.props.index}>
@@ -195,6 +211,7 @@ export class Card extends Component {
               {...provided.draggableProps}
               ref={provided.innerRef}
               isDragging={snapshot.isDragging}
+              boardId={boardId}
             >
               <Handle {...provided.dragHandleProps}>
                 <IconContext.Provider 

@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Button = styled.div`
   align-items: center;
-  background-color: ${colors.darkGrey};
+  background-color: ${colors.primary};
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -34,6 +34,8 @@ const CardsContainer = styled.div`
   min-height: ${(props) => (props.contentLength <= 1 ? '10px' : '100px')};
   overflow: auto;
   position: relative;
+  padding-left:8px;
+  padding-bottom:8px;
 `;
 
 const ScrollCotainer = styled.div`

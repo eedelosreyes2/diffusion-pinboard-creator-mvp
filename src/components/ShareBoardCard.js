@@ -5,9 +5,10 @@ import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
   align-items: center;
-  border: 2px solid grey;
-  border-radius: 10px;
-  color: white;
+  background-color: white;
+  border-radius:8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+  color: ${colors.grey500};
   cursor: pointer;
   display: flex;
   margin: 10px;
@@ -28,31 +29,41 @@ const Image = styled.img`
 `;
 
 const Url = styled.div`
-  color: ${colors.primary};
+  color: ${colors.grey900};
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
   display: flex;
-  font-size: 20px;
-  margin: 10px auto;
+  margin-left:16px;
+  margin-top: 16px;
+  margin-bottom:16px;
   text-decoration: none;
   width: 90%;
 `;
 
 const QuickThoughts = styled.div`
   display: inline-block;
-  padding-left: 15px;
+  padding-left: 16px;
+  margin-bottom:16px;
   width: 275px;
   word-wrap: break-word;
+  color: ${colors.grey400};
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
 `;
 
 const Category = styled.div`
-  border: 1px solid ${colors.secondary};
-  border-radius: 5px;
+  background-color: ${colors.grey50};
+  border: none;
+  border-radius: 4px;
   bottom: 0;
   display: inline-block;
   font-size: 12px;
   left: 0;
   margin: 15px;
   min-width: 10px;
-  padding: 2px 5px;
+  padding: 4px 8px;
   position: absolute;
 `;
 
@@ -138,7 +149,7 @@ export default class ShareBoardCard extends Component {
               ))}
             </QuickThoughts>
             {category ? <Category>{category}</Category> : ''}
-            {metaFavicon ? <Favicon src={metaFavicon} /> : ''}
+            {/* {metaFavicon ? <Favicon src={metaFavicon} /> : ''} */}
           </div>
         </Container>
       </a>

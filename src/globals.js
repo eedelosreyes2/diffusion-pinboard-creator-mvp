@@ -27,6 +27,7 @@ export const colors = {
   darkGrey: ' #242727',
   grey50: '#F9FAFB',
   grey100:'#F3F4F6',
+  grey400:'#9CA3AF',
   grey500: '#6B7280',
   grey900: '#111827'
 };

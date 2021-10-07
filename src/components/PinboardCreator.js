@@ -33,7 +33,7 @@ const BoardsContainer = styled.div`
 
 const Button = styled.div`
   align-items: center;
-  background-color: ${colors.darkGrey};
+  background-color: ${colors.primary};
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -218,9 +218,9 @@ export default class PinboardCreator extends Component {
     const board = this.props.data.boards[boardId];
 
     if (e.currentTarget.id === 'board-title') {
-      board.title = e.currentTarget.innerHTML;
+      board.title = e.currentTarget.innerText;
     } else if (e.currentTarget.id === 'board-story') {
-      board.story = e.currentTarget.innerHTML;
+      board.story = e.currentTarget.innerText;
     }
     this.props.updateBoards(this.state);
   };

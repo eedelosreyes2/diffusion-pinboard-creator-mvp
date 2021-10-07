@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Aleo&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Aleo&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 
 :root {
   --primary-color: #00b1d2;
@@ -6,7 +8,7 @@
 }
 
 body {
-  font-family: 'Aleo', serif;
+  font-family: 'Inter', serif;
   margin: auto;
   scrollbar-width: none;
   text-align: left;

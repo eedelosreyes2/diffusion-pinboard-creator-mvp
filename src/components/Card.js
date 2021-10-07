@@ -13,22 +13,23 @@ import Logo from '../images/Logo_zoom_out.png';
 
 const Container = styled.div`
   background-color: white;
-  border-radius:8px;
+  border-radius: 8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 
   // todo: the If rendering is not working here
-  margin-right: ${boardId => boardId === 'board0'? '16px' : '0px'};
-  margin-left:${boardId => boardId === 'board0'? '0px' : '16px'};
-  margin-bottom:${boardId => boardId === 'board0'? '0px' : '16px'};
+  margin-right: ${(boardId) => (boardId === 'board0' ? '16px' : '0px')};
+  margin-left: ${(boardId) => (boardId === 'board0' ? '0px' : '16px')};
+  margin-bottom: ${(boardId) => (boardId === 'board0' ? '0px' : '16px')};
 
   color: ${colors.grey500};
+  min-width: 300px;
   width: 300px;
   padding-bottom: 40px;
   position: relative;
 `;
 
 const Handle = styled.div`
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   height: 20px;
@@ -63,7 +64,7 @@ const InsertImage = styled.div`
 const InsertImageModalContainer = styled.div`
   align-items: center;
   background-color: ${colors.grey50};
-  
+
   border: none;
   border-radius: 10px;
   display: flex;
@@ -76,7 +77,7 @@ const arrowStyle = { color: colors.grey50 };
 
 const InsertImageButton = styled.div`
   align-items: center;
-  background-color: #E5E7EB;
+  background-color: #e5e7eb;
   border-radius: 4px;
   color: ${colors.grey500};
   cursor: pointer;
@@ -88,7 +89,7 @@ const InsertImageButton = styled.div`
 
 const imageUploadButtonStyle = {
   background: 'none',
-  color: colors.grey500
+  color: colors.grey500,
 };
 
 const Url = styled.div`
@@ -129,7 +130,7 @@ const Category = styled.select`
   margin: 10px;
   outline: none;
   position: absolute;
-  min-width:80px;
+  min-width: 80px;
 `;
 
 const DeleteContainer = styled.div`
@@ -201,7 +202,7 @@ export class Card extends Component {
       imgSrc = Logo;
     }
     // console.log(quickThoughts);
-    console.log(quickThoughts,boardId);
+    console.log(quickThoughts, boardId);
 
     return (
       <Draggable draggableId={id} index={this.props.index}>
@@ -214,12 +215,13 @@ export class Card extends Component {
               boardId={boardId}
             >
               <Handle {...provided.dragHandleProps}>
-                <IconContext.Provider 
-                    value={{
-                      style:{
-                        color:colors.grey500
-                      }
-                    }}>
+                <IconContext.Provider
+                  value={{
+                    style: {
+                      color: colors.grey500,
+                    },
+                  }}
+                >
                   <HiOutlineDotsHorizontal />
                 </IconContext.Provider>
               </Handle>
@@ -227,15 +229,14 @@ export class Card extends Component {
               <Popup
                 trigger={
                   <InsertImage onClick={this.handleInsertImage}>
-                   
                     <IconContext.Provider
-                        value={{
-                          style: {
-                            color:colors.grey900
-                          },
-                        }}
-                      >
-                        <MdInsertPhoto />
+                      value={{
+                        style: {
+                          color: colors.grey900,
+                        },
+                      }}
+                    >
+                      <MdInsertPhoto />
                     </IconContext.Provider>
                   </InsertImage>
                 }
@@ -298,7 +299,9 @@ export class Card extends Component {
                 })}
               </Category>
               <DeleteContainer>
-                <IconContext.Provider value={{ style: { cursor: 'pointer', color: '#9CA3AF' } }}>
+                <IconContext.Provider
+                  value={{ style: { cursor: 'pointer', color: '#9CA3AF' } }}
+                >
                   <IoMdTrash
                     onClick={() => this.props.deleteContent(id, boardId)}
                   />

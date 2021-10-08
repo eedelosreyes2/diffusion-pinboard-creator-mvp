@@ -15,13 +15,9 @@ const Container = styled.div`
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
-
-  // todo: the If rendering is not working here
-  margin-right: ${(boardId) => (boardId === 'board0' ? '16px' : '0px')};
-  margin-left: ${(boardId) => (boardId === 'board0' ? '0px' : '16px')};
-  margin-bottom: ${(boardId) => (boardId === 'board0' ? '0px' : '16px')};
-
   color: ${colors.grey500};
+  margin: ${(props) =>
+    props.boardId === 'board0' ? '0 16px 0 0' : '0 0 16px 16px'};
   min-width: 300px;
   width: 300px;
   padding-bottom: 40px;
@@ -201,8 +197,6 @@ export class Card extends Component {
     } else {
       imgSrc = Logo;
     }
-    // console.log(quickThoughts);
-    console.log(quickThoughts, boardId);
 
     return (
       <Draggable draggableId={id} index={this.props.index}>

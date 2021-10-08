@@ -26,10 +26,10 @@ export const colors = {
   green: '#21eb2f',
   darkGrey: ' #242727',
   grey50: '#F9FAFB',
-  grey100:'#F3F4F6',
-  grey400:'#9CA3AF',
+  grey100: '#F3F4F6',
+  grey400: '#9CA3AF',
   grey500: '#6B7280',
-  grey900: '#111827'
+  grey900: '#111827',
 };
 
 export const accessCode = 'Curation2021!';

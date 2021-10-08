@@ -5,15 +5,15 @@ import ContentEditable from 'react-contenteditable';
 import Card from './Card';
 import { IconContext } from 'react-icons/lib';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-import {  FiShare } from 'react-icons/fi';
+import { FiShare } from 'react-icons/fi';
 import { IoMdTrash } from 'react-icons/io';
 import { BsArrowClockwise } from 'react-icons/bs';
 import styled from 'styled-components';
 import { colors } from '../globals';
 
 const Container = styled.div`
-  // background-color: ${colors.grey100};
-  border: 2px dashed #D1D5DB;
+  background-color: ${colors.grey50};
+  border: 2px dashed #d1d5db;
   border-radius: 7.5px;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ const Container = styled.div`
 `;
 
 const Handle = styled.div`
-  background-color: #E5E7EB;
+  background-color: #e5e7eb;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   color: ${colors.grey500};
@@ -42,11 +42,11 @@ const iconStyle = {
 
 const Title = styled.div`
   font-size: 20px;
-  font-weight:bold;
+  font-weight: bold;
   margin-top: 10px;
   text-align: center;
-  color:${colors.grey900};
-  padding:16px 0px;
+  color: ${colors.grey900};
+  padding: 16px 0px;
 `;
 
 const CardsContainer = styled.div`
@@ -241,11 +241,11 @@ class Back extends Component {
       <StoryContainer>
         <Story>
           <ContentEditable
-            style={{ 
+            style={{
               minHeight: '5em',
-              padding:'12px', 
-              border: '2px solid #E5E7EB', 
-              borderRadius: '4px'
+              padding: '12px',
+              border: '2px solid #E5E7EB',
+              borderRadius: '4px',
             }}
             id="board-story"
             html={this.props.story}
@@ -278,12 +278,14 @@ class Footer extends Component {
           value={{
             size: '2em',
             style: flipIconStyle,
-            color: colors.grey500
+            color: colors.grey500,
           }}
         >
           <BsArrowClockwise onClick={this.props.handleFlip} />
         </IconContext.Provider>
-        <IconContext.Provider value={{ style: { cursor: 'pointer', color: colors.grey500} }}>
+        <IconContext.Provider
+          value={{ style: { cursor: 'pointer', color: colors.grey500 } }}
+        >
           <IoMdTrash onClick={() => this.props.deleteBoard(id, title)} />
         </IconContext.Provider>
       </FooterContainer>

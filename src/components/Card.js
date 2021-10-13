@@ -162,6 +162,7 @@ export class Card extends Component {
       preview.src = reader.result;
       this.props.editContent(reader.result, id);
     };
+
     reader.readAsDataURL(image[0]);
   };
 
@@ -248,7 +249,9 @@ export class Card extends Component {
                       fileContainerStyle={{ background: 'none' }}
                       buttonStyles={imageUploadButtonStyle}
                       onChange={(image) => {
-                        this.handleUpload(image, id);
+                        setTimeout(() => {
+                          this.handleUpload(image, id);
+                        }, 1000);
                       }}
                       imgExtension={['.jpg', '.gif', '.png', '.gif', '.svg']}
                       maxFileSize={1048576}

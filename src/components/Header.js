@@ -26,7 +26,7 @@ const LogoContainer = styled.img`
 `;
 
 const H1 = styled.h1`
-  color: #6B7280;
+  color: #6b7280;
   font-size: 25px;
   margin: auto;
   margin-left: 35px;
@@ -83,9 +83,9 @@ export default class Header extends Component {
           >
             <FiHelpCircle onClick={this.handleHelpClick} />
           </IconContext.Provider>
-          <LogOutComponent
+          {/* <LogOutComponent
             responseGoogleLogout={this.props.responseGoogleLogout}
-          />
+          /> */}
         </ButtonsContainer>
       </Container>
     );

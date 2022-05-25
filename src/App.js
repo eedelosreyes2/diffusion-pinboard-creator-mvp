@@ -17,7 +17,15 @@ const Container = styled.div`
 export default class App extends Component {
   constructor() {
     super();
-    this.state = { profileObj: null, username: null, data: null };
+    this.state = {
+      profileObj: {
+        email: 'elijah@diffusion.me',
+        givenName: 'User',
+        googleId: '107843568739163028446',
+      },
+      username: null,
+      data: null,
+    };
   }
 
   componentDidMount = () => {
@@ -236,21 +244,21 @@ export default class App extends Component {
           <Route path="/u">
             <ShareBoard />
           </Route>
-          {profileObj ? (
-            <Route path="/">
-              <Container>
-                <PinboardCreator
-                  profileObj={profileObj}
-                  username={username}
-                  data={data}
-                  updateBoards={this.updateBoards}
-                  responseGoogleLogout={this.responseGoogleLogout}
-                />
-              </Container>
-            </Route>
-          ) : (
+          {/* {profileObj ? ( */}
+          <Route path="/">
+            <Container>
+              <PinboardCreator
+                profileObj={profileObj}
+                username={username}
+                data={data}
+                updateBoards={this.updateBoards}
+                responseGoogleLogout={this.responseGoogleLogout}
+              />
+            </Container>
+          </Route>
+          {/* ) : (
             <LogInComponent responseGoogleLogin={this.responseGoogleLogin} />
-          )}
+          )} */}
         </Switch>
       </Router>
     );

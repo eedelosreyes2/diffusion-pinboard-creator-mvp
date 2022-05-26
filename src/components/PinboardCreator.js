@@ -46,6 +46,11 @@ const Button = styled.div`
   text-align: center;
 `;
 
+const Footer = styled.div`
+  position: absolute;
+  bottom: 25px;
+`;
+
 export default class PinboardCreator extends Component {
   handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -445,6 +450,16 @@ export default class PinboardCreator extends Component {
                     {provided.placeholder}
                   </BoardsContainer>
                 </ScrollContainer>
+                <Footer>
+                  Created by{' '}
+                  <a
+                    href="https://elijahdr.vercel.app/"
+                    target="_blank"
+                    style={{ color: colors.primary }}
+                  >
+                    Elijah
+                  </a>
+                </Footer>
               </Container>
             )}
           </Droppable>

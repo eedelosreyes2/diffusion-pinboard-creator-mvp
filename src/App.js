@@ -21,6 +21,7 @@ export default class App extends Component {
       profileObj: {
         email: 'elijah@diffusion.me',
         givenName: 'User',
+        familyName: 'New',
         googleId: '107843568739163028446',
       },
       username: null,

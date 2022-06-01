@@ -14,6 +14,16 @@ const Container = styled.div`
   color: white;
 `;
 
+const MobileContainer = styled.div`
+  color: ${colors.primary};
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 450px;
+  padding-top: 50px;
+  text-align: center;
+`;
+
 export default class App extends Component {
   constructor() {
     super();
@@ -247,15 +257,18 @@ export default class App extends Component {
           </Route>
           {/* {profileObj ? ( */}
           <Route path="/">
-            <Container>
-              <PinboardCreator
-                profileObj={profileObj}
-                username={username}
-                data={data}
-                updateBoards={this.updateBoards}
-                responseGoogleLogout={this.responseGoogleLogout}
-              />
-            </Container>
+            {window.innerWidth > 768 ? 
+              <Container>
+                <PinboardCreator
+                  profileObj={profileObj}
+                  username={username}
+                  data={data}
+                  updateBoards={this.updateBoards}
+                  responseGoogleLogout={this.responseGoogleLogout}
+                />
+              </Container>
+            : 
+            <MobileContainer><h3>Sorry, the Diffusion Board Creator is currently only available for Desktop</h3></MobileContainer>}
           </Route>
           {/* ) : (
             <LogInComponent responseGoogleLogin={this.responseGoogleLogin} />

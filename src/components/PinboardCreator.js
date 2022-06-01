@@ -47,6 +47,7 @@ const Button = styled.div`
 `;
 
 const Footer = styled.div`
+  color: #6b7280;
   position: absolute;
   bottom: 25px;
 `;

@@ -17,6 +17,7 @@ const Container = styled.div`
 const MobileContainer = styled.div`
   color: ${colors.primary};
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: auto;
   max-width: 450px;
@@ -268,7 +269,12 @@ export default class App extends Component {
                 />
               </Container>
             : 
-            <MobileContainer><h3>Sorry, the Diffusion Board Creator is currently only available for Desktop</h3></MobileContainer>}
+            <MobileContainer>
+              <h3>Sorry, the Diffusion Board Creator is currently only available for Desktop</h3>
+              <p style={{color: '#6b7280'}}>Check out my {' '} 
+                <a href='https://elijahdr.vercel.app' target='_blank' style={{color: colors.primary, fontWeight: 'bold'}}>other projects</a>
+              </p>
+            </MobileContainer>}
           </Route>
           {/* ) : (
             <LogInComponent responseGoogleLogin={this.responseGoogleLogin} />

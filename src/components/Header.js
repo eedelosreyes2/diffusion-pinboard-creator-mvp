@@ -50,9 +50,9 @@ export default class Header extends Component {
     return (
       <Container>
         <InfoContainer>
-          <a href="https://diffusion.me" target="_blank" rel="noreferrer">
+          {/* <a href="https://diffusion.me" target="_blank" rel="noreferrer"> */}
             <LogoContainer src={Logo} />
-          </a>
+          {/* </a> */}
           <H1>{`What's up, ${givenName} 🤟`}</H1>
         </InfoContainer>
         <ButtonsContainer>

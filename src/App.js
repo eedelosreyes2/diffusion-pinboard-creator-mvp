@@ -122,8 +122,6 @@ export default class App extends Component {
 
     //       this.setState({ data });
     //     } else {
-    let localBoards = localStorage.getItem("diffusion-boards");
-    console.log(localBoards);
 
     const board0 = {
       id: "board0",
@@ -142,6 +140,9 @@ export default class App extends Component {
     };
 
     this.updateBoards(initialState);
+
+    let localBoards = localStorage.getItem("state");
+    this.updateBoards(JSON.parse(localBoards));
     //   }
     // })
     // .catch((err) => console.log(err));
@@ -150,13 +151,12 @@ export default class App extends Component {
   putBoards = async () => {
     // let url = DB_URL + this.state.username + '/data.json';
     // const { data } = this.state;
-
     // if (data) {
     //   data.newContent = null;
     //   axios.put(url, data, { headers: { 'Content-Type': 'text/plain' } });
     // }
     // console.log(this.state);
-    localStorage.setItem("diffusion-boards", JSON.stringify(this.state.data));
+    // localStorage.setItem("diffusion-boards", JSON.stringify(this.state.data));
   };
 
   fetchNewContent = async () => {

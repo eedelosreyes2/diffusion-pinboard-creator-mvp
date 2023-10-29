@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import ReactTooltip from 'react-tooltip';
-import Header from './Header';
-import NewContentContainer from './NewContentContainer';
-import Boards from './Boards';
-import styled from 'styled-components';
-import { scraperEndpoint, colors } from '../globals';
+import React, { Component } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import ReactTooltip from "react-tooltip";
+import Header from "./Header";
+import NewContentContainer from "./NewContentContainer";
+import Boards from "./Boards";
+import styled from "styled-components";
+import { scraperEndpoint, colors } from "../globals";
 
 const Container = styled.div`
   display: flex;
@@ -50,6 +50,8 @@ const Footer = styled.div`
   color: #6b7280;
   position: absolute;
   bottom: 25px;
+  right: 50px;
+  font-weight: bold;
 `;
 
 export default class PinboardCreator extends Component {
@@ -65,7 +67,7 @@ export default class PinboardCreator extends Component {
       return;
 
     // BOARDS
-    if (type === 'board') {
+    if (type === "board") {
       const newBoardOrder = Array.from(this.props.data.boardOrder);
       newBoardOrder.splice(source.index, 1);
       newBoardOrder.splice(destination.index, 0, draggableId);
@@ -96,9 +98,9 @@ export default class PinboardCreator extends Component {
     if (
       start !== finish &&
       finish.contentIds.length > 5 &&
-      destination.droppableId !== 'board0'
+      destination.droppableId !== "board0"
     ) {
-      alert('You can only have up to 5 pieces of Content in a Board!');
+      alert("You can only have up to 5 pieces of Content in a Board!");
       return;
     }
 
@@ -160,12 +162,12 @@ export default class PinboardCreator extends Component {
 
   createBoard = () => {
     const title = prompt(
-      'Create a new Board!\nWhat is the title of the board?'
+      "Create a new Board!\nWhat is the title of the board?"
     );
     if (!title || title == null) return;
 
     const id = uuidv4();
-    const story = 'Click here to add a story to this board!';
+    const story = "Click here to add a story to this board!";
     const newBoard = {
       id,
       title,
@@ -223,28 +225,28 @@ export default class PinboardCreator extends Component {
   editBoard = (e, boardId) => {
     const board = this.props.data.boards[boardId];
 
-    if (e.currentTarget.id === 'board-title') {
+    if (e.currentTarget.id === "board-title") {
       board.title = e.currentTarget.innerText;
-    } else if (e.currentTarget.id === 'board-story') {
+    } else if (e.currentTarget.id === "board-story") {
       board.story = e.currentTarget.innerText;
     }
     this.props.updateBoards(this.state);
   };
 
   createContent = (boardId) => {
-    let url = prompt('Create a new Content Card!\nEnter the url: ');
+    let url = prompt("Create a new Content Card!\nEnter the url: ");
     if (!url) return;
 
     if (url.search(/^http[s]?:\/\//) === -1) {
-      url = 'https://' + url;
+      url = "https://" + url;
     }
 
-    const quickThoughts = prompt('Enter Quick Thoughts: ');
+    const quickThoughts = prompt("Enter Quick Thoughts: ");
     if (quickThoughts == null) return;
 
     // const category = prompt('Enter category: '); // this would be from a dropdownlist
     // if (category == null) return;
-    const category = '';
+    const category = "";
 
     const id = uuidv4();
     let newCard = {
@@ -287,7 +289,7 @@ export default class PinboardCreator extends Component {
     };
 
     let contentIds;
-    if (boardId === 'board0') {
+    if (boardId === "board0") {
       contentIds = [id, ...this.props.data.boards[boardId].contentIds];
     } else {
       contentIds = [...this.props.data.boards[boardId].contentIds, id];
@@ -370,12 +372,12 @@ export default class PinboardCreator extends Component {
   editContent = (e, contentId) => {
     const content = this.props.data.content[contentId];
 
-    if (e.currentTarget && e.currentTarget.id === 'card-quick-thoughts') {
+    if (e.currentTarget && e.currentTarget.id === "card-quick-thoughts") {
       content.quickThoughts = e.currentTarget.innerText;
-    } else if (e.currentTarget && e.currentTarget.id === 'card-category') {
+    } else if (e.currentTarget && e.currentTarget.id === "card-category") {
       content.category = e.currentTarget.value;
     } else {
-      content.metaImagebase64 = '';
+      content.metaImagebase64 = "";
       content.customImage = e;
     }
 
@@ -452,7 +454,7 @@ export default class PinboardCreator extends Component {
                   </BoardsContainer>
                 </ScrollContainer>
                 <Footer>
-                  Created by{' '}
+                  Created by{" "}
                   <a
                     href="https://elijahdr.vercel.app/"
                     target="_blank"

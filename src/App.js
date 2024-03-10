@@ -142,7 +142,9 @@ export default class App extends Component {
     this.updateBoards(initialState);
 
     let localBoards = localStorage.getItem("state");
-    this.updateBoards(JSON.parse(localBoards));
+    if (localBoards) {
+      this.updateBoards(JSON.parse(localBoards));
+    }
     //   }
     // })
     // .catch((err) => console.log(err));
